@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7F0B7335-5E0A-4DD7-A2FB-3BA18D66CFD1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XandaPOS</RootNamespace>
+    <AssemblyName>XandaPOS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MasterdataController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\api\apexcharts\apexcharts.js" />
+    <Content Include="Content\assets\api\apexcharts\scriptcharts.js" />
+    <Content Include="Content\assets\api\datatable\jquery.dataTables.min.css" />
+    <Content Include="Content\assets\api\datatable\jquery.dataTables.min.js" />
+    <Content Include="Content\assets\api\datatable\sort_asc.png" />
+    <Content Include="Content\assets\api\datatable\sort_both.png" />
+    <Content Include="Content\assets\api\datatable\sort_desc.png" />
+    <Content Include="Content\assets\api\datepicker\compressed\legacy.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\picker.date.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\picker.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\picker.time.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\classic.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\classic.date.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\classic.time.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\default.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\default.date.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\default.time.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\themes\rtl.css" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ar.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\bg_BG.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\bs_BA.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ca_ES.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\cs_CZ.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\da_DK.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\de_DE.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\el_GR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\es_ES.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\et_EE.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\eu_ES.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\fa_IR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\fi_FI.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\fr_FR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ge_GEO.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\gl_ES.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\he_IL.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\hi_IN.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\hr_HR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\hu_HU.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\id_ID.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\is_IS.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\it_IT.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ja_JP.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\km_KH.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ko_KR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\lt_LT.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\lv_LV.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\nb_NO.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ne_NP.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\nl_NL.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\no_NO.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\pl_PL.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\pt_BR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\pt_PT.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ro_RO.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\ru_RU.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\sk_SK.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\sl_SI.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\sr_RS_cy.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\sr_RS_lt.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\sv_SE.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\th_TH.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\tr_TR.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\uk_UA.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\vi_VN.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\zh_CN.js" />
+    <Content Include="Content\assets\api\datepicker\compressed\translations\zh_TW.js" />
+    <Content Include="Content\assets\api\datepicker\legacy.js" />
+    <Content Include="Content\assets\api\datepicker\picker.date.js" />
+    <Content Include="Content\assets\api\datepicker\picker.js" />
+    <Content Include="Content\assets\api\datepicker\picker.time.js" />
+    <Content Include="Content\assets\api\datepicker\themes\classic.css" />
+    <Content Include="Content\assets\api\datepicker\themes\classic.date.css" />
+    <Content Include="Content\assets\api\datepicker\themes\classic.time.css" />
+    <Content Include="Content\assets\api\datepicker\themes\default.css" />
+    <Content Include="Content\assets\api\datepicker\themes\default.date.css" />
+    <Content Include="Content\assets\api\datepicker\themes\default.time.css" />
+    <Content Include="Content\assets\api\datepicker\themes\rtl.css" />
+    <Content Include="Content\assets\api\datepicker\translations\ar.js" />
+    <Content Include="Content\assets\api\datepicker\translations\bg_BG.js" />
+    <Content Include="Content\assets\api\datepicker\translations\bs_BA.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ca_ES.js" />
+    <Content Include="Content\assets\api\datepicker\translations\cs_CZ.js" />
+    <Content Include="Content\assets\api\datepicker\translations\da_DK.js" />
+    <Content Include="Content\assets\api\datepicker\translations\de_DE.js" />
+    <Content Include="Content\assets\api\datepicker\translations\el_GR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\es_ES.js" />
+    <Content Include="Content\assets\api\datepicker\translations\et_EE.js" />
+    <Content Include="Content\assets\api\datepicker\translations\eu_ES.js" />
+    <Content Include="Content\assets\api\datepicker\translations\fa_IR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\fi_FI.js" />
+    <Content Include="Content\assets\api\datepicker\translations\fr_FR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ge_GEO.js" />
+    <Content Include="Content\assets\api\datepicker\translations\gl_ES.js" />
+    <Content Include="Content\assets\api\datepicker\translations\he_IL.js" />
+    <Content Include="Content\assets\api\datepicker\translations\hi_IN.js" />
+    <Content Include="Content\assets\api\datepicker\translations\hr_HR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\hu_HU.js" />
+    <Content Include="Content\assets\api\datepicker\translations\id_ID.js" />
+    <Content Include="Content\assets\api\datepicker\translations\is_IS.js" />
+    <Content Include="Content\assets\api\datepicker\translations\it_IT.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ja_JP.js" />
+    <Content Include="Content\assets\api\datepicker\translations\km_KH.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ko_KR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\lt_LT.js" />
+    <Content Include="Content\assets\api\datepicker\translations\lv_LV.js" />
+    <Content Include="Content\assets\api\datepicker\translations\nb_NO.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ne_NP.js" />
+    <Content Include="Content\assets\api\datepicker\translations\nl_NL.js" />
+    <Content Include="Content\assets\api\datepicker\translations\pl_PL.js" />
+    <Content Include="Content\assets\api\datepicker\translations\pt_BR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\pt_PT.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ro_RO.js" />
+    <Content Include="Content\assets\api\datepicker\translations\ru_RU.js" />
+    <Content Include="Content\assets\api\datepicker\translations\sk_SK.js" />
+    <Content Include="Content\assets\api\datepicker\translations\sl_SI.js" />
+    <Content Include="Content\assets\api\datepicker\translations\sr_RS_cy.js" />
+    <Content Include="Content\assets\api\datepicker\translations\sr_RS_lt.js" />
+    <Content Include="Content\assets\api\datepicker\translations\sv_SE.js" />
+    <Content Include="Content\assets\api\datepicker\translations\th_TH.js" />
+    <Content Include="Content\assets\api\datepicker\translations\tr_TR.js" />
+    <Content Include="Content\assets\api\datepicker\translations\uk_UA.js" />
+    <Content Include="Content\assets\api\datepicker\translations\vi_VN.js" />
+    <Content Include="Content\assets\api\datepicker\translations\zh_CN.js" />
+    <Content Include="Content\assets\api\datepicker\translations\zh_TW.js" />
+    <Content Include="Content\assets\api\daterange-picker\daterangepicker.css" />
+    <Content Include="Content\assets\api\daterange-picker\daterangepicker.min.js" />
+    <Content Include="Content\assets\api\daterange-picker\moment.min.js" />
+    <Content Include="Content\assets\api\dropzone\dropzone.css" />
+    <Content Include="Content\assets\api\dropzone\dropzone.js" />
+    <Content Include="Content\assets\api\editor\classic.ckeditor.js" />
+    <Content Include="Content\assets\api\editor\inline.ckeditor.js" />
+    <Content Include="Content\assets\api\jqueryvalidate\jquery.validate.min.js" />
+    <Content Include="Content\assets\api\mcustomscrollbar\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Content\assets\api\mcustomscrollbar\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\assets\api\multiple-select\multiple-select.min.css" />
+    <Content Include="Content\assets\api\multiple-select\multiple-select.min.js" />
+    <Content Include="Content\assets\api\pace\pace-theme-center-simple.css" />
+    <Content Include="Content\assets\api\pace\pace-theme-flat-top.css" />
+    <Content Include="Content\assets\api\pace\pace.js" />
+    <Content Include="Content\assets\api\quill\quill.min.js" />
+    <Content Include="Content\assets\api\select2\select2.min.css" />
+    <Content Include="Content\assets\api\select2\select2.min.js" />
+    <Content Include="Content\assets\css\animate.css" />
+    <Content Include="Content\assets\css\drag-and-drop.min.css" />
+    <Content Include="Content\assets\css\dragula.min.css" />
+    <Content Include="Content\assets\css\style.css" />
+    <Content Include="Content\assets\css\sweetalert.css" />
+    <Content Include="Content\assets\images\carousel\element-banner1-left.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner1-right.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner2-center.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner2-left.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner2-right.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner3-1.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner3-2.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner3-3.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner4-1.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner4-2.jpg" />
+    <Content Include="Content\assets\images\carousel\element-banner4-3.jpg" />
+    <Content Include="Content\assets\images\carousel\full-banner.jpg" />
+    <Content Include="Content\assets\images\carousel\Product-1.jpg" />
+    <Content Include="Content\assets\images\carousel\Product-2.jpg" />
+    <Content Include="Content\assets\images\carousel\Product-3.jpg" />
+    <Content Include="Content\assets\images\carousel\Product-4.jpg" />
+    <Content Include="Content\assets\images\carousel\slide1.jpg" />
+    <Content Include="Content\assets\images\carousel\slide2.jpg" />
+    <Content Include="Content\assets\images\carousel\slide3.jpg" />
+    <Content Include="Content\assets\images\loadergif.gif" />
+    <Content Include="Content\assets\images\misc\bg-login.png" />
+    <Content Include="Content\assets\images\misc\bg-login1.png" />
+    <Content Include="Content\assets\images\misc\down-arrow.png" />
+    <Content Include="Content\assets\images\misc\k.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_01_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_02_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_03_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_04_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_05_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\03_06_product-page.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\1-4.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\10-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\11-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\12-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\13-1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\14-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\15-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\16-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\1_preview-600x1147-1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\2-1024x575.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\2-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\3-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\4-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\5-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\6-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\7-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\8-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\8a3dcc61de8db4f6c5d8142fd7d0f80b.min.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\9-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\admin.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\anchor%281%29.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\anchor.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\android.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\ask.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-10.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-11.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-12.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-13.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-14.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-15.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-17.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-18.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-3.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-4.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-5.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-6.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-7.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-8.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\banner-9.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\bframe%281%29.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\bframe.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\bootstrap.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\coming.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\default_avatar.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\external.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\fb_login.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\featiured.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\flash.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\font-awesome.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-10.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-3.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-4.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-5.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-6.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-7.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-8.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\footer-9.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\formidableforms.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\future.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\google_login.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-10.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-3.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-4.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-5.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-6.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-7.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-8.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\header-9.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\hr.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\hr_white.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\inventory.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\ionic.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\jqueryui.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\language.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel-1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_1-1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_1.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_3.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_admin.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\laravel_commerce.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\large-banner.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\les_bot.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\les_side.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\lightbox.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\logo_themes_coder_colored.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\logo_themes_coder_white.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\main-image1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\minerva-kb.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\onesign1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\order_limit.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\payment.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\php.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\popup.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\r1-400.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\react_1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\responsive.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\rtl-2.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\sale.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\sass-1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\saved_resource%281%29.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\saved_resource%282%29.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\saved_resource.html" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\seo_friendly.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\seo_friendly_stat.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\shipp.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Shop-page-2.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Shop-page-left-side-wit-banner.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Shop-page-list-view.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Shop-page-right-side-wit-banner.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Shop-page-without-side-bar.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\Simple.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\stock1.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\style.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\style.min%281%29.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\style.min.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\styles.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\styles__ltr.css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\style_and_themes.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\support.png" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\variable.jpg" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\woo_2.jpg" />
+    <Content Include="Content\assets\images\misc\logo.png" />
+    <Content Include="Content\assets\images\profiles\biller.png" />
+    <Content Include="Content\assets\images\profiles\profile1.png" />
+    <Content Include="Content\assets\images\profiles\profile2.png" />
+    <Content Include="Content\assets\images\social\fb.png" />
+    <Content Include="Content\assets\images\social\gp.png" />
+    <Content Include="Content\assets\images\social\pn.png" />
+    <Content Include="Content\assets\images\social\tw.png" />
+    <Content Include="Content\assets\images\svg\flags\226-united-states.svg" />
+    <Content Include="Content\assets\images\svg\flags\arabicflag.png" />
+    <Content Include="Content\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\assets\js\drag-drop.min.js" />
+    <Content Include="Content\assets\js\dragula.min.js" />
+    <Content Include="Content\assets\js\jquery.nestable.js" />
+    <Content Include="Content\assets\js\plugin.bundle.min-jquery-old.js" />
+    <Content Include="Content\assets\js\plugin.bundle.min.js" />
+    <Content Include="Content\assets\js\roles-permission.js" />
+    <Content Include="Content\assets\js\script-slick.js" />
+    <Content Include="Content\assets\js\script.bundle.js" />
+    <Content Include="Content\assets\js\slick.js" />
+    <Content Include="Content\assets\js\slick.min.js" />
+    <Content Include="Content\assets\js\sweetalert.js" />
+    <Content Include="Content\assets\js\sweetalert1.js" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\css\ajax-loader.gif" />
+    <Content Include="Content\css\blank.gif" />
+    <Content Include="Content\css\blue.css" />
+    <Content Include="Content\css\fancybox_loading%402x.gif" />
+    <Content Include="Content\css\fancybox_loading.gif" />
+    <Content Include="Content\css\fancybox_overlay.png" />
+    <Content Include="Content\css\fancybox_sprite%402x.png" />
+    <Content Include="Content\css\fancybox_sprite.png" />
+    <Content Include="Content\css\fonts\slick.svg" />
+    <Content Include="Content\css\green.css" />
+    <Content Include="Content\css\navy-blue.css" />
+    <Content Include="Content\css\pink.css" />
+    <Content Include="Content\css\red.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\rtl.css" />
+    <Content Include="Content\css\style-one.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\yellow.css" />
+    <Content Include="Content\fonts\Poppins-Bold.svg" />
+    <Content Include="Content\fonts\Poppins-Light.svg" />
+    <Content Include="Content\fonts\Poppins-Medium.svg" />
+    <Content Include="Content\fonts\Poppins-Regular.svg" />
+    <Content Include="Content\fonts\Poppins-Thin.svg" />
+    <Content Include="Content\images\about-us\14_01_about us2.jpg" />
+    <Content Include="Content\images\about-us\14_01_about-us1.jpg" />
+    <Content Include="Content\images\about-us\14_01_about-us2.jpg" />
+    <Content Include="Content\images\about-us\14_01_about-us3.jpg" />
+    <Content Include="Content\images\about-us\abouts-detial.jpg" />
+    <Content Include="Content\images\about-us\abouts-detial2.jpg" />
+    <Content Include="Content\images\about-us\abouts.jpg" />
+    <Content Include="Content\images\about-us\full-width.jpg" />
+    <Content Include="Content\images\about-us\full-width1.jpg" />
+    <Content Include="Content\images\about-us\profile.png" />
+    <Content Include="Content\images\about-us\profile1.png" />
+    <Content Include="Content\images\about-us\profile2.png" />
+    <Content Include="Content\images\about-us\signature.png" />
+    <Content Include="Content\images\banners\banner-1.jpg" />
+    <Content Include="Content\images\banners\banner_image_1.jpg" />
+    <Content Include="Content\images\banners\banner_image_1.png" />
+    <Content Include="Content\images\banners\banner_image_2.jpg" />
+    <Content Include="Content\images\banners\banner_image_2.png" />
+    <Content Include="Content\images\banners\banner_image_3.jpg" />
+    <Content Include="Content\images\banners\banner_image_3.png" />
+    <Content Include="Content\images\banners\element-banner1-left.jpg" />
+    <Content Include="Content\images\banners\element-banner1-right.jpg" />
+    <Content Include="Content\images\banners\element-banner2-center.jpg" />
+    <Content Include="Content\images\banners\element-banner2-left.jpg" />
+    <Content Include="Content\images\banners\element-banner2-right.jpg" />
+    <Content Include="Content\images\banners\element-banner3-1.jpg" />
+    <Content Include="Content\images\banners\element-banner3-2.jpg" />
+    <Content Include="Content\images\banners\element-banner3-3.jpg" />
+    <Content Include="Content\images\banners\element-banner3-4.jpg" />
+    <Content Include="Content\images\banners\element-banner4-1.jpg" />
+    <Content Include="Content\images\banners\element-banner4-2.jpg" />
+    <Content Include="Content\images\banners\element-banner4-3.jpg" />
+    <Content Include="Content\images\banners\element-banner4-4.jpg" />
+    <Content Include="Content\images\banners\element-banner4-5.jpg" />
+    <Content Include="Content\images\banners\element-banner5-center.jpg" />
+    <Content Include="Content\images\banners\element-banner5-left.jpg" />
+    <Content Include="Content\images\banners\element-banner5-right.jpg" />
+    <Content Include="Content\images\banners\element-banner6.jpg" />
+    <Content Include="Content\images\banners\full-banner.jpg" />
+    <Content Include="Content\images\banners\furniture-bg.jpg" />
+    <Content Include="Content\images\banners\side-banner1.jpg" />
+    <Content Include="Content\images\banners\side-banner2.jpg" />
+    <Content Include="Content\images\blogs\blog_post_1.jpg" />
+    <Content Include="Content\images\blogs\blog_post_2.jpg" />
+    <Content Include="Content\images\blogs\blog_post_3.jpg" />
+    <Content Include="Content\images\blogs\blog_post_4.jpg" />
+    <Content Include="Content\images\blogs\f_blog_post_1.jpg" />
+    <Content Include="Content\images\blogs\Recent-posts-image1.jpg" />
+    <Content Include="Content\images\blogs\Recent-posts-image2.jpg" />
+    <Content Include="Content\images\blogs\Recent-posts-image3.jpg" />
+    <Content Include="Content\images\brands\boss.jpg" />
+    <Content Include="Content\images\brands\brands-content.jpg" />
+    <Content Include="Content\images\brands\brands_1.jpg" />
+    <Content Include="Content\images\brands\brands_2.jpg" />
+    <Content Include="Content\images\brands\brands_3.jpg" />
+    <Content Include="Content\images\brands\Gucci.jpg" />
+    <Content Include="Content\images\brands\lacoste.jpg" />
+    <Content Include="Content\images\brands\nike.jpg" />
+    <Content Include="Content\images\brands\pandora.jpg" />
+    <Content Include="Content\images\brands\zara.jpg" />
+    <Content Include="Content\images\colors\blue.png" />
+    <Content Include="Content\images\colors\colors.png" />
+    <Content Include="Content\images\colors\default.png" />
+    <Content Include="Content\images\colors\green.png" />
+    <Content Include="Content\images\colors\navy-blue.png" />
+    <Content Include="Content\images\colors\pink.png" />
+    <Content Include="Content\images\colors\red.png" />
+    <Content Include="Content\images\colors\yellow.png" />
+    <Content Include="Content\images\fashion\Product-1.jpg" />
+    <Content Include="Content\images\fashion\Product-2.jpg" />
+    <Content Include="Content\images\fashion\Product-3.jpg" />
+    <Content Include="Content\images\fashion\Product-4.jpg" />
+    <Content Include="Content\images\flash_sales\flash_sales_1.jpg" />
+    <Content Include="Content\images\flash_sales\flash_sales_1.png" />
+    <Content Include="Content\images\flash_sales\flash_sales_2.png" />
+    <Content Include="Content\images\flash_sales\flash_sales_3.png" />
+    <Content Include="Content\images\gallery\preview\Product_image_01.jpg" />
+    <Content Include="Content\images\gallery\preview\Product_image_02.jpg" />
+    <Content Include="Content\images\gallery\preview\Product_image_03.jpg" />
+    <Content Include="Content\images\gallery\preview\Product_image_04.jpg" />
+    <Content Include="Content\images\gallery\preview\Product_image_05.jpg" />
+    <Content Include="Content\images\gallery\thumbs\New folder\Product_image_01.jpg" />
+    <Content Include="Content\images\gallery\thumbs\New folder\Product_image_02.jpg" />
+    <Content Include="Content\images\gallery\thumbs\New folder\Product_image_03.jpg" />
+    <Content Include="Content\images\gallery\thumbs\New folder\Product_image_04.jpg" />
+    <Content Include="Content\images\gallery\thumbs\New folder\Product_image_05.jpg" />
+    <Content Include="Content\images\gallery\thumbs\Product_image_01.jpg" />
+    <Content Include="Content\images\gallery\thumbs\Product_image_02.jpg" />
+    <Content Include="Content\images\gallery\thumbs\Product_image_03.jpg" />
+    <Content Include="Content\images\gallery\thumbs\Product_image_04.jpg" />
+    <Content Include="Content\images\gallery\thumbs\Product_image_05.jpg" />
+    <Content Include="Content\images\grocery\product-1.png" />
+    <Content Include="Content\images\grocery\product-2.png" />
+    <Content Include="Content\images\grocery\product-3.png" />
+    <Content Include="Content\images\grocery\product-4.png" />
+    <Content Include="Content\images\img_option\img-1.jpg" />
+    <Content Include="Content\images\img_option\img-2.jpg" />
+    <Content Include="Content\images\img_option\img-3.jpg" />
+    <Content Include="Content\images\index-2\bg-paralex.jpg" />
+    <Content Include="Content\images\index-2\bg-paralex12.jpg" />
+    <Content Include="Content\images\index-2\blog1.jpg" />
+    <Content Include="Content\images\index-2\blog2.jpg" />
+    <Content Include="Content\images\index-2\blog3.jpg" />
+    <Content Include="Content\images\index-2\fullwidthbanner.jpg" />
+    <Content Include="Content\images\index-2\homepage_Fashion1.jpg" />
+    <Content Include="Content\images\index-2\homepage_Fashion2.jpg" />
+    <Content Include="Content\images\index-2\homepage_Fashion3.jpg" />
+    <Content Include="Content\images\index-2\Product-1.jpg" />
+    <Content Include="Content\images\index-2\Product-2.jpg" />
+    <Content Include="Content\images\index-2\Product-3.jpg" />
+    <Content Include="Content\images\index-2\Product-4.jpg" />
+    <Content Include="Content\images\index-2\Product-5.jpg" />
+    <Content Include="Content\images\index-2\Product-6.jpg" />
+    <Content Include="Content\images\index-2\Product-7.jpg" />
+    <Content Include="Content\images\index-2\Product-8.jpg" />
+    <Content Include="Content\images\index-2\Product1.jpg" />
+    <Content Include="Content\images\index-2\Product19.jpg" />
+    <Content Include="Content\images\index-2\Product2-1.jpg" />
+    <Content Include="Content\images\index-2\Product2-2.jpg" />
+    <Content Include="Content\images\index-2\Product2-3.jpg" />
+    <Content Include="Content\images\index-2\Product2-4.jpg" />
+    <Content Include="Content\images\index-2\Product2-5.jpg" />
+    <Content Include="Content\images\index-2\Product2-6.jpg" />
+    <Content Include="Content\images\index-2\Product2.jpg" />
+    <Content Include="Content\images\index-2\Product3.jpg" />
+    <Content Include="Content\images\index-2\Product4.jpg" />
+    <Content Include="Content\images\index-2\Product5.jpg" />
+    <Content Include="Content\images\index-2\Product6.jpg" />
+    <Content Include="Content\images\index-2\Product7.jpg" />
+    <Content Include="Content\images\index-2\Product8.jpg" />
+    <Content Include="Content\images\index-3\bg-paralex.jpg" />
+    <Content Include="Content\images\index-3\blog1.jpg" />
+    <Content Include="Content\images\index-3\camera.png" />
+    <Content Include="Content\images\index-3\CamLens.png" />
+    <Content Include="Content\images\index-3\cat-01 - Copy.png" />
+    <Content Include="Content\images\index-3\cat-01.png" />
+    <Content Include="Content\images\index-3\cat-011.png" />
+    <Content Include="Content\images\index-3\cat-02.png" />
+    <Content Include="Content\images\index-3\cat-03.png" />
+    <Content Include="Content\images\index-3\cat-04.png" />
+    <Content Include="Content\images\index-3\cat-05.png" />
+    <Content Include="Content\images\index-3\cat-06.png" />
+    <Content Include="Content\images\index-3\cat-07.png" />
+    <Content Include="Content\images\index-3\cat-08.png" />
+    <Content Include="Content\images\index-3\cat-09.png" />
+    <Content Include="Content\images\index-3\deal-01.png" />
+    <Content Include="Content\images\index-3\deal-02 - Copy.png" />
+    <Content Include="Content\images\index-3\deal-02.png" />
+    <Content Include="Content\images\index-3\deal-03.png" />
+    <Content Include="Content\images\index-3\deal-04.png" />
+    <Content Include="Content\images\index-3\deal-05.png" />
+    <Content Include="Content\images\index-3\deal-of-the-day.png" />
+    <Content Include="Content\images\index-3\Earphones.png" />
+    <Content Include="Content\images\index-3\feat-01.png" />
+    <Content Include="Content\images\index-3\feat-02.png" />
+    <Content Include="Content\images\index-3\feat-03.png" />
+    <Content Include="Content\images\index-3\feat-04.png" />
+    <Content Include="Content\images\index-3\feat-05.png" />
+    <Content Include="Content\images\index-3\feat-06.png" />
+    <Content Include="Content\images\index-3\feat-07.png" />
+    <Content Include="Content\images\index-3\fullwidthbanner.jpg" />
+    <Content Include="Content\images\index-3\homepage_Fashion1.jpg" />
+    <Content Include="Content\images\index-3\homepage_Fashion2.jpg" />
+    <Content Include="Content\images\index-3\on-sale-01.jpg" />
+    <Content Include="Content\images\index-3\on-sale-02.jpg" />
+    <Content Include="Content\images\index-3\Product1.jpg" />
+    <Content Include="Content\images\index-3\Product2.jpg" />
+    <Content Include="Content\images\index-3\product_image_21.png" />
+    <Content Include="Content\images\index-3\Speakers.png" />
+    <Content Include="Content\images\index-3\stock-01.png" />
+    <Content Include="Content\images\index-3\stock-02.png" />
+    <Content Include="Content\images\index-3\stock-03.png" />
+    <Content Include="Content\images\index-3\stock-04.png" />
+    <Content Include="Content\images\index-3\stock-05.png" />
+    <Content Include="Content\images\index-3\stock-06.png" />
+    <Content Include="Content\images\index-3\testimonial-01.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery-02.jpg" />
+    <Content Include="Content\images\index-4\04_homepage_grocery-02.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery.jpg" />
+    <Content Include="Content\images\index-4\04_homepage_grocery.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery2.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery3.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery4.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery5.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery6.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery7.png" />
+    <Content Include="Content\images\index-4\04_homepage_grocery8.png" />
+    <Content Include="Content\images\index-4\banner-01.jpg" />
+    <Content Include="Content\images\index-4\banner-02.jpg" />
+    <Content Include="Content\images\index-4\cate--01.jpg" />
+    <Content Include="Content\images\index-4\cate-01.jpg" />
+    <Content Include="Content\images\index-4\cate-01.png" />
+    <Content Include="Content\images\index-4\cate-02.jpg" />
+    <Content Include="Content\images\index-4\cate-02.png" />
+    <Content Include="Content\images\index-4\cate-03.jpg" />
+    <Content Include="Content\images\index-4\cate-03.png" />
+    <Content Include="Content\images\index-4\cate-04.jpg" />
+    <Content Include="Content\images\index-4\cate-04.png" />
+    <Content Include="Content\images\index-4\cate-05.jpg" />
+    <Content Include="Content\images\index-4\cate-05.png" />
+    <Content Include="Content\images\index-4\cate-06.jpg" />
+    <Content Include="Content\images\index-4\paralex.jpg" />
+    <Content Include="Content\images\index-4\product-banner.jpg" />
+    <Content Include="Content\images\index-5\addproduct-1.png" />
+    <Content Include="Content\images\index-5\bb-banner1.jpg" />
+    <Content Include="Content\images\index-5\bb-banner2.jpg" />
+    <Content Include="Content\images\index-5\bb-banner3.jpg" />
+    <Content Include="Content\images\index-5\bb-banner4.jpg" />
+    <Content Include="Content\images\index-5\bg-circle.png" />
+    <Content Include="Content\images\index-5\bg-circle1.png" />
+    <Content Include="Content\images\index-5\bg-circle2.png" />
+    <Content Include="Content\images\index-5\bg-circle3.png" />
+    <Content Include="Content\images\index-5\bg-circlered.png" />
+    <Content Include="Content\images\index-5\blog1.jpg" />
+    <Content Include="Content\images\index-5\blog2.jpg" />
+    <Content Include="Content\images\index-5\blog3.jpg" />
+    <Content Include="Content\images\index-5\feat-1.png" />
+    <Content Include="Content\images\index-5\feat-2.png" />
+    <Content Include="Content\images\index-5\feat-3.png" />
+    <Content Include="Content\images\index-5\feat-4.png" />
+    <Content Include="Content\images\index-5\feat-5.png" />
+    <Content Include="Content\images\index-5\feat-6.png" />
+    <Content Include="Content\images\index-5\feat-7.png" />
+    <Content Include="Content\images\index-5\feat-8.png" />
+    <Content Include="Content\images\index-5\feat-9.png" />
+    <Content Include="Content\images\index-5\insta1.jpg" />
+    <Content Include="Content\images\index-5\insta2.jpg" />
+    <Content Include="Content\images\index-5\newslater.jpg" />
+    <Content Include="Content\images\index-5\offers-1.png" />
+    <Content Include="Content\images\index-5\offers-2.png" />
+    <Content Include="Content\images\index-5\offers-3.png" />
+    <Content Include="Content\images\index-5\payment-1.png" />
+    <Content Include="Content\images\index-5\payment-2.png" />
+    <Content Include="Content\images\index-5\payment-3.png" />
+    <Content Include="Content\images\index-5\payment-4.png" />
+    <Content Include="Content\images\index-5\payment-5.png" />
+    <Content Include="Content\images\index-5\product-1.png" />
+    <Content Include="Content\images\index-5\product-10.png" />
+    <Content Include="Content\images\index-5\product-11.png" />
+    <Content Include="Content\images\index-5\product-12.png" />
+    <Content Include="Content\images\index-5\product-2.png" />
+    <Content Include="Content\images\index-5\product-3.png" />
+    <Content Include="Content\images\index-5\product-4.png" />
+    <Content Include="Content\images\index-5\product-5.png" />
+    <Content Include="Content\images\index-5\product-6.png" />
+    <Content Include="Content\images\index-5\product-7.png" />
+    <Content Include="Content\images\index-5\product-8.png" />
+    <Content Include="Content\images\index-5\product-9.png" />
+    <Content Include="Content\images\index-6\bg-paralax.jpg" />
+    <Content Include="Content\images\index-6\blog-1.jpg" />
+    <Content Include="Content\images\index-6\blog-2.jpg" />
+    <Content Include="Content\images\index-6\cat-1.jpg" />
+    <Content Include="Content\images\index-6\cate-banner1.jpg" />
+    <Content Include="Content\images\index-6\cate-banner2.jpg" />
+    <Content Include="Content\images\index-6\feat-1.jpg" />
+    <Content Include="Content\images\index-6\feat-2.jpg" />
+    <Content Include="Content\images\index-6\feat-3.jpg" />
+    <Content Include="Content\images\index-6\feat-4.jpg" />
+    <Content Include="Content\images\index-6\feat-5.jpg" />
+    <Content Include="Content\images\index-6\feat-6.jpg" />
+    <Content Include="Content\images\index-6\feat-7.jpg" />
+    <Content Include="Content\images\index-6\feat-8.jpg" />
+    <Content Include="Content\images\index-6\feat-9.jpg" />
+    <Content Include="Content\images\index-6\kids-img1.jpg" />
+    <Content Include="Content\images\index-6\kids-img2.jpg" />
+    <Content Include="Content\images\index-6\kids-img3.jpg" />
+    <Content Include="Content\images\index-6\man-img1.jpg" />
+    <Content Include="Content\images\index-6\newslater6.jpg" />
+    <Content Include="Content\images\index-6\p6-1.jpg" />
+    <Content Include="Content\images\index-6\p6-10.jpg" />
+    <Content Include="Content\images\index-6\p6-11.jpg" />
+    <Content Include="Content\images\index-6\p6-12.jpg" />
+    <Content Include="Content\images\index-6\p6-2.jpg" />
+    <Content Include="Content\images\index-6\p6-3.jpg" />
+    <Content Include="Content\images\index-6\p6-4.jpg" />
+    <Content Include="Content\images\index-6\p6-5.jpg" />
+    <Content Include="Content\images\index-6\p6-6.jpg" />
+    <Content Include="Content\images\index-6\p6-7.jpg" />
+    <Content Include="Content\images\index-6\p6-8.jpg" />
+    <Content Include="Content\images\index-6\p6-9.jpg" />
+    <Content Include="Content\images\index-6\payment.png" />
+    <Content Include="Content\images\index-6\quickview1.jpg" />
+    <Content Include="Content\images\index-6\women-img2.jpg" />
+    <Content Include="Content\images\index-7\banner7.jpg" />
+    <Content Include="Content\images\index-7\bg-cookie.png" />
+    <Content Include="Content\images\index-7\blog1.jpg" />
+    <Content Include="Content\images\index-7\blog2.jpg" />
+    <Content Include="Content\images\index-7\blog3.jpg" />
+    <Content Include="Content\images\index-7\card-1.jpg" />
+    <Content Include="Content\images\index-7\cate-banner1.jpg" />
+    <Content Include="Content\images\index-7\cate-banner3.jpg" />
+    <Content Include="Content\images\index-7\newslater.jpg" />
+    <Content Include="Content\images\index-7\p13.jpg" />
+    <Content Include="Content\images\index-7\p14.jpg" />
+    <Content Include="Content\images\index-7\p15.jpg" />
+    <Content Include="Content\images\index-7\p16.jpg" />
+    <Content Include="Content\images\index-7\p17.jpg" />
+    <Content Include="Content\images\index-7\p18.jpg" />
+    <Content Include="Content\images\index-7\p19.jpg" />
+    <Content Include="Content\images\index-7\p7-1.jpg" />
+    <Content Include="Content\images\index-7\p7-10.jpg" />
+    <Content Include="Content\images\index-7\p7-11.jpg" />
+    <Content Include="Content\images\index-7\p7-12.jpg" />
+    <Content Include="Content\images\index-7\p7-13.jpg" />
+    <Content Include="Content\images\index-7\p7-14.jpg" />
+    <Content Include="Content\images\index-7\p7-15.jpg" />
+    <Content Include="Content\images\index-7\p7-2.jpg" />
+    <Content Include="Content\images\index-7\p7-3.jpg" />
+    <Content Include="Content\images\index-7\p7-4.jpg" />
+    <Content Include="Content\images\index-7\p7-4.png" />
+    <Content Include="Content\images\index-7\p7-5.jpg" />
+    <Content Include="Content\images\index-7\p7-6.jpg" />
+    <Content Include="Content\images\index-7\p7-7.jpg" />
+    <Content Include="Content\images\index-7\p7-8.jpg" />
+    <Content Include="Content\images\index-7\p7-9.jpg" />
+    <Content Include="Content\images\index-7\slider7.jpg" />
+    <Content Include="Content\images\index-8\addproduct-1.jpg" />
+    <Content Include="Content\images\index-8\banner-left.png" />
+    <Content Include="Content\images\index-8\blog1.jpg" />
+    <Content Include="Content\images\index-8\blog2.jpg" />
+    <Content Include="Content\images\index-8\blog3.jpg" />
+    <Content Include="Content\images\index-8\Flower-banner1.jpg" />
+    <Content Include="Content\images\index-8\Flower-banner2.jpg" />
+    <Content Include="Content\images\index-8\newslater.jpg" />
+    <Content Include="Content\images\index-8\p10.jpg" />
+    <Content Include="Content\images\index-8\p11.jpg" />
+    <Content Include="Content\images\index-8\p12-small.jpg" />
+    <Content Include="Content\images\index-8\p13-small.jpg" />
+    <Content Include="Content\images\index-8\p14-small.jpg" />
+    <Content Include="Content\images\index-8\p15-small.jpg" />
+    <Content Include="Content\images\index-8\p16-small.jpg" />
+    <Content Include="Content\images\index-8\p17-small.jpg" />
+    <Content Include="Content\images\index-8\p18-small.jpg" />
+    <Content Include="Content\images\index-8\p19-small.jpg" />
+    <Content Include="Content\images\index-8\p5.jpg" />
+    <Content Include="Content\images\index-8\p6.jpg" />
+    <Content Include="Content\images\index-8\p7.jpg" />
+    <Content Include="Content\images\index-8\p8.jpg" />
+    <Content Include="Content\images\index-8\p9.jpg" />
+    <Content Include="Content\images\index-8\product1.png" />
+    <Content Include="Content\images\index-8\product10.png" />
+    <Content Include="Content\images\index-8\product11.png" />
+    <Content Include="Content\images\index-8\product12.png" />
+    <Content Include="Content\images\index-8\product13.png" />
+    <Content Include="Content\images\index-8\product14.png" />
+    <Content Include="Content\images\index-8\product15.png" />
+    <Content Include="Content\images\index-8\product16.png" />
+    <Content Include="Content\images\index-8\product2.png" />
+    <Content Include="Content\images\index-8\product3.png" />
+    <Content Include="Content\images\index-8\product4.png" />
+    <Content Include="Content\images\index-8\product5.png" />
+    <Content Include="Content\images\index-8\product6.png" />
+    <Content Include="Content\images\index-8\product7.png" />
+    <Content Include="Content\images\index-8\product8.png" />
+    <Content Include="Content\images\index-8\product9.png" />
+    <Content Include="Content\images\index-9\banner1-2.jpg" />
+    <Content Include="Content\images\index-9\banner1-3.jpg" />
+    <Content Include="Content\images\index-9\banner1-4.jpg" />
+    <Content Include="Content\images\index-9\banner1-5.jpg" />
+    <Content Include="Content\images\index-9\banner1.jpg" />
+    <Content Include="Content\images\index-9\banner2.jpg" />
+    <Content Include="Content\images\index-9\banner3.jpg" />
+    <Content Include="Content\images\index-9\blog1.jpg" />
+    <Content Include="Content\images\index-9\elements-.png" />
+    <Content Include="Content\images\index-9\elements.png" />
+    <Content Include="Content\images\index-9\elements2-.png" />
+    <Content Include="Content\images\index-9\elements2.png" />
+    <Content Include="Content\images\index-9\product-1.png" />
+    <Content Include="Content\images\index-9\product-10.png" />
+    <Content Include="Content\images\index-9\product-11.png" />
+    <Content Include="Content\images\index-9\product-12.png" />
+    <Content Include="Content\images\index-9\product-13.png" />
+    <Content Include="Content\images\index-9\product-14.png" />
+    <Content Include="Content\images\index-9\product-15.png" />
+    <Content Include="Content\images\index-9\product-16.png" />
+    <Content Include="Content\images\index-9\product-2.png" />
+    <Content Include="Content\images\index-9\product-3.png" />
+    <Content Include="Content\images\index-9\product-4.png" />
+    <Content Include="Content\images\index-9\product-5.png" />
+    <Content Include="Content\images\index-9\product-6.png" />
+    <Content Include="Content\images\index-9\product-7.png" />
+    <Content Include="Content\images\index-9\product-8.png" />
+    <Content Include="Content\images\index-9\product-9.png" />
+    <Content Include="Content\images\index-9\quickview1.jpg" />
+    <Content Include="Content\images\instagram\insta_1.jpg" />
+    <Content Include="Content\images\instagram\insta_10.jpg" />
+    <Content Include="Content\images\instagram\insta_11.jpg" />
+    <Content Include="Content\images\instagram\insta_12.jpg" />
+    <Content Include="Content\images\instagram\insta_13.jpg" />
+    <Content Include="Content\images\instagram\insta_14.jpg" />
+    <Content Include="Content\images\instagram\insta_15.jpg" />
+    <Content Include="Content\images\instagram\insta_16.jpg" />
+    <Content Include="Content\images\instagram\insta_17.jpg" />
+    <Content Include="Content\images\instagram\insta_18.jpg" />
+    <Content Include="Content\images\instagram\insta_19.jpg" />
+    <Content Include="Content\images\instagram\insta_2.jpg" />
+    <Content Include="Content\images\instagram\insta_20.jpg" />
+    <Content Include="Content\images\instagram\insta_21.jpg" />
+    <Content Include="Content\images\instagram\insta_22.jpg" />
+    <Content Include="Content\images\instagram\insta_23.jpg" />
+    <Content Include="Content\images\instagram\insta_24.jpg" />
+    <Content Include="Content\images\instagram\insta_25.jpg" />
+    <Content Include="Content\images\instagram\insta_3.jpg" />
+    <Content Include="Content\images\instagram\insta_4.jpg" />
+    <Content Include="Content\images\instagram\insta_5.jpg" />
+    <Content Include="Content\images\instagram\insta_6.jpg" />
+    <Content Include="Content\images\instagram\insta_7.jpg" />
+    <Content Include="Content\images\instagram\insta_8.jpg" />
+    <Content Include="Content\images\instagram\insta_9.jpg" />
+    <Content Include="Content\images\loader-64x\Preloader_1.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_2.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_2_0.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_3.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_4.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_5.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_6.gif" />
+    <Content Include="Content\images\loader-64x\Preloader_7.gif" />
+    <Content Include="Content\images\logo\logo.png" />
+    <Content Include="Content\images\logo\logo2.png" />
+    <Content Include="Content\images\logo\logo22.png" />
+    <Content Include="Content\images\logo\logo3.png" />
+    <Content Include="Content\images\logo\logo_white.png" />
+    <Content Include="Content\images\lookbook\look1.jpg" />
+    <Content Include="Content\images\lookbook\look2.jpg" />
+    <Content Include="Content\images\lookbook\look3.jpg" />
+    <Content Include="Content\images\miscellaneous\1newslater.jpg" />
+    <Content Include="Content\images\miscellaneous\1newsletter-bg.jpg" />
+    <Content Include="Content\images\miscellaneous\1page-header.png" />
+    <Content Include="Content\images\miscellaneous\ajax-loader.gif" />
+    <Content Include="Content\images\miscellaneous\app-store-btn.png" />
+    <Content Include="Content\images\miscellaneous\arabic_flag.jpg" />
+    <Content Include="Content\images\miscellaneous\avatar.jpg" />
+    <Content Include="Content\images\miscellaneous\braintree.png" />
+    <Content Include="Content\images\miscellaneous\cod.png" />
+    <Content Include="Content\images\miscellaneous\cookies.png" />
+    <Content Include="Content\images\miscellaneous\cookies6.png" />
+    <Content Include="Content\images\miscellaneous\cookies7.png" />
+    <Content Include="Content\images\miscellaneous\cross.png" />
+    <Content Include="Content\images\miscellaneous\english_flag.jpg" />
+    <Content Include="Content\images\miscellaneous\fav.png" />
+    <Content Include="Content\images\miscellaneous\google-play-btn.png" />
+    <Content Include="Content\images\miscellaneous\hyperpay.png" />
+    <Content Include="Content\images\miscellaneous\instamojo.png" />
+    <Content Include="Content\images\miscellaneous\logo.png" />
+    <Content Include="Content\images\miscellaneous\map.jpg" />
+    <Content Include="Content\images\miscellaneous\mega-mene-image.jpg" />
+    <Content Include="Content\images\miscellaneous\newslater-electronics.jpg" />
+    <Content Include="Content\images\miscellaneous\newslater-fashion.jpg" />
+    <Content Include="Content\images\miscellaneous\newslater-grocery.jpg" />
+    <Content Include="Content\images\miscellaneous\newslater.jpg" />
+    <Content Include="Content\images\miscellaneous\newsletter-bg.jpg" />
+    <Content Include="Content\images\miscellaneous\newsletter-bg.png" />
+    <Content Include="Content\images\miscellaneous\newsletter.jpg" />
+    <Content Include="Content\images\miscellaneous\owl.video.play.png" />
+    <Content Include="Content\images\miscellaneous\page-header.jpg" />
+    <Content Include="Content\images\miscellaneous\page-header.png" />
+    <Content Include="Content\images\miscellaneous\payments.png" />
+    <Content Include="Content\images\miscellaneous\paypal.png" />
+    <Content Include="Content\images\miscellaneous\stripe.png" />
+    <Content Include="Content\images\products\p1-1.jpg" />
+    <Content Include="Content\images\products\p1-2.jpg" />
+    <Content Include="Content\images\products\p1-3.jpg" />
+    <Content Include="Content\images\products\p1-4.jpg" />
+    <Content Include="Content\images\products\p2-1.jpg" />
+    <Content Include="Content\images\products\p2-2.jpg" />
+    <Content Include="Content\images\products\p2-3.jpg" />
+    <Content Include="Content\images\products\p2-4.jpg" />
+    <Content Include="Content\images\products\p3-1.jpg" />
+    <Content Include="Content\images\products\p3-2.jpg" />
+    <Content Include="Content\images\products\p3-3.jpg" />
+    <Content Include="Content\images\products\p3-4.jpg" />
+    <Content Include="Content\images\products\p4-1.jpg" />
+    <Content Include="Content\images\products\p4-2.jpg" />
+    <Content Include="Content\images\products\p4-3.jpg" />
+    <Content Include="Content\images\products\p4-4.jpg" />
+    <Content Include="Content\images\products\p5-1.jpg" />
+    <Content Include="Content\images\products\p5-1_hr.jpg" />
+    <Content Include="Content\images\products\p5-2.jpg" />
+    <Content Include="Content\images\products\p5-2_hr.jpg" />
+    <Content Include="Content\images\products\p5-3.jpg" />
+    <Content Include="Content\images\products\p5-3_hr.jpg" />
+    <Content Include="Content\images\products\p5-4.jpg" />
+    <Content Include="Content\images\products\p5-4_hr.jpg" />
+    <Content Include="Content\images\products\p6-1.jpg" />
+    <Content Include="Content\images\products\p6-2.jpg" />
+    <Content Include="Content\images\products\p6-3.jpg" />
+    <Content Include="Content\images\products\p6-4.jpg" />
+    <Content Include="Content\images\products\p7-1.jpg" />
+    <Content Include="Content\images\products\p7-2.jpg" />
+    <Content Include="Content\images\products\p7-3.jpg" />
+    <Content Include="Content\images\products\p7-4.jpg" />
+    <Content Include="Content\images\products\p8-1.jpg" />
+    <Content Include="Content\images\products\p8-2.jpg" />
+    <Content Include="Content\images\products\p8-3.jpg" />
+    <Content Include="Content\images\products\p8-4.jpg" />
+    <Content Include="Content\images\products\p9-1.jpg" />
+    <Content Include="Content\images\products\p9-1_hr.jpg" />
+    <Content Include="Content\images\products\p9-2.jpg" />
+    <Content Include="Content\images\products\p9-2_hr.jpg" />
+    <Content Include="Content\images\products\p9-3.jpg" />
+    <Content Include="Content\images\products\p9-3_hr.jpg" />
+    <Content Include="Content\images\products\p9-4.jpg" />
+    <Content Include="Content\images\products\p9-4_hr.jpg" />
+    <Content Include="Content\images\products\page5-product.jpg" />
+    <Content Include="Content\images\product_images\product-14.png" />
+    <Content Include="Content\images\product_images\product_2x-01.jpg" />
+    <Content Include="Content\images\product_images\product_2x-02.jpg" />
+    <Content Include="Content\images\product_images\product_2x-03.jpg" />
+    <Content Include="Content\images\product_images\product_2x.jpg" />
+    <Content Include="Content\images\product_images\product_image_1.jpg" />
+    <Content Include="Content\images\product_images\product_image_11.png" />
+    <Content Include="Content\images\product_images\product_image_14.png" />
+    <Content Include="Content\images\product_images\product_image_2.jpg" />
+    <Content Include="Content\images\product_images\product_image_3.jpg" />
+    <Content Include="Content\images\product_images\product_image_4 - Copy.jpg" />
+    <Content Include="Content\images\product_images\product_image_4.jpg" />
+    <Content Include="Content\images\product_images\product_image_5.jpg" />
+    <Content Include="Content\images\product_images\product_image_6.jpg" />
+    <Content Include="Content\images\product_images\product_image_7.jpg" />
+    <Content Include="Content\images\product_images\product_image_8.jpg" />
+    <Content Include="Content\images\revolution_layer_slider\flash_sales_3.png" />
+    <Content Include="Content\images\revolution_layer_slider\newslater10.jpg" />
+    <Content Include="Content\images\revolution_layer_slider\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_2\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_2\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_2\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_3\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_3\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_3\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_4\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_4\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_4\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_5\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_5\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_5\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_6\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_6\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_6\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_7\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_7\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_7\Slider_01_03.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_8\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_8\Slider_01_02.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_9\Slider_01_01.jpg" />
+    <Content Include="Content\images\revolution_layer_slider_demo_9\Slider_01_02.jpg" />
+    <Content Include="Content\js\mc-validate.js" />
+    <Content Include="Content\js\scripts.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\fonts\Poppins-Bold.eot" />
+    <Content Include="Content\fonts\Poppins-Bold.ttf" />
+    <Content Include="Content\fonts\Poppins-Bold.woff" />
+    <Content Include="Content\fonts\Poppins-Light.eot" />
+    <Content Include="Content\fonts\Poppins-Light.ttf" />
+    <Content Include="Content\fonts\Poppins-Light.woff" />
+    <Content Include="Content\fonts\Poppins-Medium.eot" />
+    <Content Include="Content\fonts\Poppins-Medium.ttf" />
+    <Content Include="Content\fonts\Poppins-Medium.woff" />
+    <Content Include="Content\fonts\Poppins-Regular.eot" />
+    <Content Include="Content\fonts\Poppins-Regular.ttf" />
+    <Content Include="Content\fonts\Poppins-Regular.woff" />
+    <Content Include="Content\fonts\Poppins-Thin.eot" />
+    <Content Include="Content\fonts\Poppins-Thin.ttf" />
+    <Content Include="Content\fonts\Poppins-Thin.woff" />
+    <Content Include="Content\fonts\Poppins.zip" />
+    <Content Include="Content\css\fonts\slick.eot" />
+    <Content Include="Content\css\fonts\slick.ttf" />
+    <Content Include="Content\css\fonts\slick.woff" />
+    <Content Include="Content\css\responsive.css.map" />
+    <Content Include="Content\css\rtl.css.map" />
+    <Content Include="Content\css\style.css.map" />
+    <Content Include="Content\scss\api\_bootstrap-datepicker.scss" />
+    <Content Include="Content\scss\api\_bootstrap-select.min.scss" />
+    <Content Include="Content\scss\api\_jquery.fancybox.scss" />
+    <Content Include="Content\scss\api\_slick-theme.scss" />
+    <Content Include="Content\scss\api\_slick.scss" />
+    <Content Include="Content\scss\components\_accordion.scss" />
+    <Content Include="Content\scss\components\_banners.scss" />
+    <Content Include="Content\scss\components\_modal.scss" />
+    <Content Include="Content\scss\components\_pagination.scss" />
+    <Content Include="Content\scss\components\_popup.scss" />
+    <Content Include="Content\scss\components\_product.scss" />
+    <Content Include="Content\scss\components\_revolution-layer-carousel.scss" />
+    <Content Include="Content\scss\components\_skelton.scss" />
+    <Content Include="Content\scss\components\_slick-carousel.scss" />
+    <Content Include="Content\scss\components\_tabs.scss" />
+    <Content Include="Content\scss\layouts\banners\_banners.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-eight.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-five.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-four.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-mobile.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-nine.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-one.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-seven.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-six.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-three.scss" />
+    <Content Include="Content\scss\layouts\footer\_footer-two.scss" />
+    <Content Include="Content\scss\layouts\header\_header-eight.scss" />
+    <Content Include="Content\scss\layouts\header\_header-five.scss" />
+    <Content Include="Content\scss\layouts\header\_header-four.scss" />
+    <Content Include="Content\scss\layouts\header\_header-mobile.scss" />
+    <Content Include="Content\scss\layouts\header\_header-nine.scss" />
+    <Content Include="Content\scss\layouts\header\_header-one.scss" />
+    <Content Include="Content\scss\layouts\header\_header-seven.scss" />
+    <Content Include="Content\scss\layouts\header\_header-six.scss" />
+    <Content Include="Content\scss\layouts\header\_header-sticky.scss" />
+    <Content Include="Content\scss\layouts\header\_header-three.scss" />
+    <Content Include="Content\scss\layouts\header\_header-two.scss" />
+    <Content Include="Content\scss\layouts\sidebar\_account-sidebar.scss" />
+    <Content Include="Content\scss\layouts\sidebar\_blog-sidebar.scss" />
+    <Content Include="Content\scss\layouts\sidebar\_shop-filters.scss" />
+    <Content Include="Content\scss\pages\_404.scss" />
+    <Content Include="Content\scss\pages\_about-page.scss" />
+    <Content Include="Content\scss\pages\_blog-page.scss" />
+    <Content Include="Content\scss\pages\_cart-page.scss" />
+    <Content Include="Content\scss\pages\_checkout.scss" />
+    <Content Include="Content\scss\pages\_compare.scss" />
+    <Content Include="Content\scss\pages\_contact-page.scss" />
+    <Content Include="Content\scss\pages\_index-2.scss" />
+    <Content Include="Content\scss\pages\_index-3.scss" />
+    <Content Include="Content\scss\pages\_index-4.scss" />
+    <Content Include="Content\scss\pages\_index-5.scss" />
+    <Content Include="Content\scss\pages\_index-6.scss" />
+    <Content Include="Content\scss\pages\_index-7.scss" />
+    <Content Include="Content\scss\pages\_index-8.scss" />
+    <Content Include="Content\scss\pages\_index-9.scss" />
+    <Content Include="Content\scss\pages\_index.scss" />
+    <Content Include="Content\scss\pages\_order-detail.scss" />
+    <Content Include="Content\scss\pages\_orders.scss" />
+    <Content Include="Content\scss\pages\_product-page.scss" />
+    <Content Include="Content\scss\pages\_profile.scss" />
+    <Content Include="Content\scss\pages\_registration.scss" />
+    <Content Include="Content\scss\pages\_shipping-address.scss" />
+    <Content Include="Content\scss\pages\_shop-page.scss" />
+    <Content Include="Content\scss\pages\_wishlist.scss" />
+    <Content Include="Content\scss\private\_animation.scss" />
+    <Content Include="Content\scss\private\_base.scss" />
+    <Content Include="Content\scss\private\_button.scss" />
+    <Content Include="Content\scss\private\_functions-override.scss" />
+    <Content Include="Content\scss\private\_mixins.scss" />
+    <Content Include="Content\scss\private\_variables.scss" />
+    <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\assets\api\datepicker\themes-source\base.date.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\base.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\base.time.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\classic.date.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\classic.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\classic.time.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\default.date.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\default.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\default.time.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\rtl.less" />
+    <Content Include="Content\assets\api\datepicker\themes-source\_variables.less" />
+    <Content Include="Content\assets\api\datepicker\translations\FORMATTING.md" />
+    <Content Include="Content\assets\api\datepicker\translations\NAMING.md" />
+    <Content Include="Content\assets\css\style.css.map" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\api.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\css" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\fbe4515750eca2c90b65735d0a8a5771.min.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\fbevents.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\jquery-migrate.min.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\jquery.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\js" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\minerva-kb.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\recaptcha__en.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\scripts.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\wp-embed.min.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\wp-emoji-release.min.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\wpcf7-recaptcha-controls.js.download" />
+    <Content Include="Content\assets\images\misc\Laravel Ecommerce - Themes-Coder_files\x4dl7Lk5ENOB7Pbvmb3t7sJ-hPoGBwvfellrHtOoe40.js.download" />
+    <Content Include="Content\assets\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\assets\scss\global\_buttons.scss" />
+    <Content Include="Content\assets\scss\global\_layout.scss" />
+    <Content Include="Content\assets\scss\layout\aside\_aside.scss" />
+    <Content Include="Content\assets\scss\layout\footer-primary\_footer-primary.scss" />
+    <Content Include="Content\assets\scss\layout\header-mobile\_header-mobile.scss" />
+    <Content Include="Content\assets\scss\layout\header-primary\_header-pos.scss" />
+    <Content Include="Content\assets\scss\layout\header-primary\_header-primary.scss" />
+    <Content Include="Content\assets\scss\layout\offcanvas\_offcanvas.scss" />
+    <Content Include="Content\assets\scss\layout\subheader\_subheader.scss" />
+    <Content Include="Content\assets\scss\partial\_add-product.scss" />
+    <Content Include="Content\assets\scss\partial\_draganddrop.scss" />
+    <Content Include="Content\assets\scss\partial\_innerpages-changing.scss" />
+    <Content Include="Content\assets\scss\partial\_media-img.scss" />
+    <Content Include="Content\assets\scss\partial\_pos.scss" />
+    <Content Include="Content\assets\scss\partial\_radio-checkbox.scss" />
+    <Content Include="Content\assets\scss\partial\_switcher.scss" />
+    <Content Include="Content\assets\scss\partial\_wrapper.scss" />
+    <Content Include="Content\assets\scss\private\_base.scss" />
+    <Content Include="Content\assets\scss\private\_rtl.scss" />
+    <Content Include="Content\assets\scss\private\_variables.scss" />
+    <Content Include="Content\assets\scss\slick\_slick-theme.scss" />
+    <Content Include="Content\assets\scss\slick\_slick.scss" />
+    <Content Include="Content\assets\scss\style.scss" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff2" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Masterdata\CompanyMaster.cshtml" />
+    <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61397</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61397/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
