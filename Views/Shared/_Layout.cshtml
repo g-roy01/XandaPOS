@@ -9,35 +9,6 @@
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 </head>
 
-@*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>*@
-
-
-
 <body id="tc_body" class="header-fixed header-mobile-fixed subheader-enabled aside-enabled aside-fixed">
     <!-- Paste this code after body tag -->
 
@@ -1100,10 +1071,10 @@
                                                                 </li>
 
                                                                 <li class="nav-item">
-                                                                    <a href="add-product.html" class="nav-link mini-sub-nav-link">
-
-                                                                        <span class="nav-text">Product Group</span>
-                                                                    </a>
+                                                                    @*<a href="@Url.Action("ProductGroupMaster", "Masterdata")" class="nav-link mini-sub-nav-link">*@
+                                                                        <a href="@Url.Action("", "ProductGroup")" class="nav-link mini-sub-nav-link">
+                                                                            <span class="nav-text">Product Group</span>
+                                                                        </a>
                                                                 </li>
 
 

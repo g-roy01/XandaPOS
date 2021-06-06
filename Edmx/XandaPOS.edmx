@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="XANDA_POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="XANDA_POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="POS_BRAND_MASTER">
           <Key>
             <PropertyRef Name="brand_id" />
@@ -77,6 +77,7 @@
           <Property Name="product_details" Type="nchar" MaxLength="150" />
           <Property Name="product_image_link" Type="nchar" MaxLength="150" />
         </EntityType>
+        <Function Name="sp_GetNewProdGrpId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="XANDA_POSModelStoreContainer">
           <EntitySet Name="POS_BRAND_MASTER" EntityType="Self.POS_BRAND_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_COMPANY_MASTER" EntityType="Self.POS_COMPANY_MASTER" Schema="dbo" store:Type="Tables" />
@@ -86,8 +87,7 @@
           <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="XANDA_POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -171,6 +171,7 @@
           <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" />
           <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" />
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" />
+          <FunctionImport Name="sp_GetNewProdGrpId" ReturnType="Collection(String)" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -257,6 +258,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetNewProdGrpId" FunctionName="XANDA_POSModel.Store.sp_GetNewProdGrpId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

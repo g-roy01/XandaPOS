@@ -1,0 +1,45 @@
+﻿@model IEnumerable<XandaPOS.Edmx.POS_PRODUCT_GROUP_MASTER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @{var idFromModel = "";}
+    @foreach (var item in Model)
+    {
+        idFromModel = item.prod_grp_id;
+    }
+    @Html.ActionLink("Create New", "Create", new { id = idFromModel.Trim()})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.prod_grp_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prod_grp_type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.prod_grp_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prod_grp_type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.prod_grp_id.Trim() }) |
+            @Html.ActionLink("Details", "Details", new { id=item.prod_grp_id.Trim() }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.prod_grp_id.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

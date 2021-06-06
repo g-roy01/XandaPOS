@@ -22,5 +22,10 @@ namespace XandaPOS.Controllers
         {
             return View();
         }
+
+        //public ActionResult ProductGroupMaster()
+        //{
+        //    return View();
+        //}
     }
 }

@@ -132,6 +132,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterdataController.cs" />
+    <Compile Include="Controllers\ProductGroupController.cs" />
     <Compile Include="Edmx\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,10 +143,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Edmx\Model1.Designer.cs">
+    <Compile Include="Edmx\XandaPOS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>XandaPOS.edmx</DependentUpon>
     </Compile>
     <Compile Include="Edmx\POS_BRAND_MASTER.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -171,6 +172,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductGroupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1083,11 +1085,11 @@
     <Content Include="Edmx\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>XandaPOS.edmx</DependentUpon>
     </Content>
     <Content Include="Edmx\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>XandaPOS.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
@@ -1252,12 +1254,12 @@
     <Content Include="Content\assets\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\assets\webfonts\fa-solid-900.woff" />
     <Content Include="Content\assets\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Edmx\Model1.edmx">
+    <EntityDeploy Include="Edmx\XandaPOS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>XandaPOS.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Edmx\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Edmx\XandaPOS.edmx.diagram">
+      <DependentUpon>XandaPOS.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -1287,10 +1289,14 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Masterdata\CompanyMaster.cshtml" />
     <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
+    <Content Include="Views\ProductGroup\Create.cshtml" />
+    <Content Include="Views\ProductGroup\Delete.cshtml" />
+    <Content Include="Views\ProductGroup\Details.cshtml" />
+    <Content Include="Views\ProductGroup\Edit.cshtml" />
+    <Content Include="Views\ProductGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
