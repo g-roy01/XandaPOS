@@ -1,0 +1,67 @@
+﻿@model  List<XandaPOS.Models.ProductMasterVM>
+@{
+    ViewBag.Title = "EmployeeMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    loadCustomerGrid();
+</script>
+
+
+<table style="border:1px solid blue;">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Product Type
+        </th>
+        <th>
+            Product Group
+        </th>
+        <th>
+            Product Company
+        </th>
+        <th>
+            Product Details
+        </th>
+        <th>
+            Product Image Link
+        </th>
+    </tr>
+
+    @{ Boolean blankRow = true;}
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>
+                @product.product_name
+            </td>
+            <td>
+                @product.product_type
+            </td>
+            <td>
+                @product.product_group
+            </td>
+            <td>
+                @product.product_company
+            </td>
+            <td>
+                @product.product_details
+            </td>
+            <td>
+                @product.product_image_link
+            </td>
+        </tr>
+        @{blankRow = false;}
+    }
+    @{
+        if (blankRow)
+        {
+            <tr colspan="6">
+                NO DATA AVAILABLE
+            </tr>
+        }
+    }
+</table> 

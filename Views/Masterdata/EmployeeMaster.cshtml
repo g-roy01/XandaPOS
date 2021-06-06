@@ -1,0 +1,79 @@
+﻿@model  List<XandaPOS.Models.EmployeeMasterVM>
+@{
+    ViewBag.Title = "EmployeeMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script>
+    loadCustomerGrid();
+</script>
+
+
+<table style="border:1px solid blue;">
+    <tr>
+        <th>
+            Employee Name
+        </th>
+        <th>
+            Employee Address
+        </th>
+        <th>
+            Employee Pin
+        </th>
+        <th>
+            Employee Phone
+        </th>
+        <th>
+            Employee Govt. ID Type
+        </th>
+        <th>
+            Employee Govt. ID No.
+        </th>
+        <th>
+            Employee Join Date
+        </th>
+        <th>
+            Employee Resign Date
+        </th>
+    </tr>
+
+    @{ Boolean blankRow = true;}
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>
+                @employee.emp_name
+            </td>
+            <td>
+                @employee.emp_addr
+            </td>
+            <td>
+                @employee.emp_pin
+            </td>
+            <td>
+                @employee.emp_phn
+            </td>
+            <td>
+                @employee.emp_govt_id_type
+            </td>
+            <td>
+                @employee.emp_govt_id_no
+            </td>
+            <td>
+                @employee.emp_join_date
+            </td>
+            <td>
+                @employee.emp_resign_date
+            </td>
+        </tr>
+        @{blankRow = false;}
+    }
+    @{ 
+        if (blankRow){
+            <tr colspan="8">
+                NO DATA AVAILABLE
+            </tr>
+        }
+    }
+</table> 

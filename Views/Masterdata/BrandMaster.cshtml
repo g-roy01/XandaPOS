@@ -1,6 +1,6 @@
-﻿@model  List<XandaPOS.Models.CustomerMasterVM>
+﻿@model  List<XandaPOS.Models.BrandMasterVM>
 @{
-    ViewBag.Title = "CustomerMaster";
+    ViewBag.Title = "BrandMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,46 +8,38 @@
     loadCustomerGrid();
 </script>
 
-
-
 <table style="border:1px solid blue;">
     <tr>
         <th>
-            Customer Name
+            Brand Name
         </th>
         <th>
-            Customer Address
+            Brand Company
         </th>
         <th>
-            Customer Pin
-        </th>
-        <th>
-            Customer Phone
+            Brand Product Group
         </th>
     </tr>
 
     @*@{ Boolean blankRow = true;}*@
-    @foreach (var customer in Model)
+    @foreach (var brand in Model)
     {
         <tr>
             <td>
-                @customer.cust_name
+                @brand.brand_name
             </td>
             <td>
-                @customer.cust_addr
+                @brand.brand_company
             </td>
             <td>
-                @customer.cust_phn
-            </td>
-            <td>
-                @customer.cust_pin
+                @brand.brand_product_group
             </td>
         </tr>
         @*@{blankRow = false;}*@
     }
     @*@{ 
         if (blankRow){
-            <tr colspan="4">
+            <tr colspan="3">
                 NO DATA AVAILABLE
             </tr>
         }

@@ -16,15 +16,31 @@ namespace XandaPOS.Controllers
             return View();
         }
 
+        public ActionResult BrandMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadBrandMasterGrid());
+        }
+
         public ActionResult CompanyMaster()
         {
-            return View();
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadCompanyMasterGrid());
         }
+
         public ActionResult CustomerMaster()
         {
             //CustomerMasterVM _customerMastervm = new CustomerMasterVM();
-            MasterDataBL _MasterDataBL = new MasterDataBL(); 
-            return View(_MasterDataBL.LoadCustomerMasterGrid());
+
+            //This will show the data layout for Customer Master
+            MasterDataBL _masterDataBL = new MasterDataBL(); 
+            return View(_masterDataBL.LoadCustomerMasterGrid());
+        }
+
+        public ActionResult EmployeeMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadEmployeeMasterGrid());
         }
 
         public ActionResult LoadCustomerGrid()

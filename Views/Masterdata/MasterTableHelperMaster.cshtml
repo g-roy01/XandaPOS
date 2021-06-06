@@ -1,6 +1,6 @@
-﻿@model  List<XandaPOS.Models.CustomerMasterVM>
+﻿@model  List<XandaPOS.Models.MasterTableHelperMasterVM>
 @{
-    ViewBag.Title = "CustomerMaster";
+    ViewBag.Title = "MasterTableHelperMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,47 +9,47 @@
 </script>
 
 
-
 <table style="border:1px solid blue;">
     <tr>
         <th>
-            Customer Name
+            Helper Name
         </th>
         <th>
-            Customer Address
+            Helper To Master Table
         </th>
         <th>
-            Customer Pin
+            Helper Details
         </th>
         <th>
-            Customer Phone
+            Helper Required
         </th>
     </tr>
 
-    @*@{ Boolean blankRow = true;}*@
-    @foreach (var customer in Model)
+    @{ Boolean blankRow = true;}
+    @foreach (var helper in Model)
     {
         <tr>
             <td>
-                @customer.cust_name
+                @helper.helper_name
             </td>
             <td>
-                @customer.cust_addr
+                @helper.helper_link_master_table
             </td>
             <td>
-                @customer.cust_phn
+                @helper.helper_details
             </td>
             <td>
-                @customer.cust_pin
+                @helper.helper_active
             </td>
         </tr>
-        @*@{blankRow = false;}*@
+        @{blankRow = false;}
     }
-    @*@{ 
-        if (blankRow){
+    @{
+        if (blankRow)
+        {
             <tr colspan="4">
                 NO DATA AVAILABLE
             </tr>
         }
-    }*@
+    }
 </table> 

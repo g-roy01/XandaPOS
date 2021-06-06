@@ -1,8 +1,51 @@
-﻿
+﻿@model  List<XandaPOS.Models.CompanyMasterVM>
 @{
     ViewBag.Title = "CompanyMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CompanyMaster</h2>
+<script>
+    loadCustomerGrid();
+</script>
 
+<table style="border:1px solid blue;">
+    <tr>
+        <th>
+            Company Name
+        </th>
+        <th>
+            Company Type
+        </th>
+        <th>
+            Company Registration No
+        </th>
+        <th>
+            Customer Phone
+        </th>
+    </tr>
+
+    @*@{ Boolean blankRow = true;}*@
+    @foreach (var company in Model)
+    {
+        <tr>
+            <td>
+                @company.comp_name
+            </td>
+            <td>
+                @company.comp_type
+            </td>
+            <td>
+                @company.comp_regn_no
+            </td>
+        </tr>
+        @{blankRow = false;}
+    }
+    @{
+        if (blankRow)
+        {
+            <tr colspan="3">
+                NO DATA AVAILABLE
+            </tr>
+        }
+    }
+</table> 

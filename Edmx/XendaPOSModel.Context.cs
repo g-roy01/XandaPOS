@@ -15,10 +15,10 @@ namespace XandaPOS.Edmx
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class xandaposEntities1 : DbContext
+    public partial class xandaposEntities : DbContext
     {
-        public xandaposEntities1()
-            : base("name=xandaposEntities1")
+        public xandaposEntities()
+            : base("name=xandaposEntities")
         {
         }
     
@@ -34,7 +34,6 @@ namespace XandaPOS.Edmx
         public virtual DbSet<POS_MASTER_TABLE_HELPER> POS_MASTER_TABLE_HELPER { get; set; }
         public virtual DbSet<POS_PRODUCT_GROUP_MASTER> POS_PRODUCT_GROUP_MASTER { get; set; }
         public virtual DbSet<POS_PRODUCT_MASTER> POS_PRODUCT_MASTER { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     
         public virtual ObjectResult<string> sp_GetNewProdGrpId()
         {
