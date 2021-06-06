@@ -35,6 +35,10 @@ namespace XandaPOS
                       "~/Content/assets/js/script.bundle.js"
                     ));
 
+            bundles.Add(new ScriptBundle("~/bundles/masterDataJS").Include(
+                   "~/ClientScripts/MasterData.js"
+                   ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/assets/css/style.css",
                       "~/Content/assets/api/pace/pace-theme-flat-top.css",

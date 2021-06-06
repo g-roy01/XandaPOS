@@ -1072,9 +1072,9 @@
 
                                                                 <li class="nav-item">
                                                                     @*<a href="@Url.Action("ProductGroupMaster", "Masterdata")" class="nav-link mini-sub-nav-link">*@
-                                                                        <a href="@Url.Action("", "ProductGroup")" class="nav-link mini-sub-nav-link">
-                                                                            <span class="nav-text">Product Group</span>
-                                                                        </a>
+                                                                    <a href="@Url.Action("", "ProductGroup")" class="nav-link mini-sub-nav-link">
+                                                                        <span class="nav-text">Product Group</span>
+                                                                    </a>
                                                                 </li>
 
 
@@ -1290,14 +1290,14 @@
                                                                         <span class="nav-text">Theming / Colors</span>
                                                                     </a>
                                                                 </li>
-                                                                
+
                                                                 <li class="nav-item">
                                                                     <a href="website-setting.html#log-sign" class="nav-link mini-sub-nav-link">
 
                                                                         <span class="nav-text">Login / SignUp</span>
                                                                     </a>
                                                                 </li>
-                                                                
+
                                                             </ul>
                                                         </div>
                                                     </li>
@@ -1841,6 +1841,9 @@
     @Scripts.Render("~/bundles/js")
 
     @Scripts.Render("~/bundles/scripts")
+
+    @Scripts.Render("~/bundles/masterDataJS")
+    
 
     <script>
         var options = {
