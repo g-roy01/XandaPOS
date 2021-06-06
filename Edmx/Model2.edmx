@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="xandaposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="POS_BRAND_MASTER">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="brand_name" Type="nchar" MaxLength="100" />
+          <Property Name="brand_company" Type="nchar" MaxLength="100" />
+          <Property Name="brand_product_group" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="POS_COMPANY_MASTER">
+          <Key>
+            <PropertyRef Name="comp_id" />
+          </Key>
+          <Property Name="comp_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="comp_name" Type="nchar" MaxLength="50" />
+          <Property Name="comp_type" Type="nchar" MaxLength="50" />
+          <Property Name="comp_regn_no" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="POS_CUSTOMER_MASTER">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cust_name" Type="nchar" MaxLength="100" />
+          <Property Name="cust_addr" Type="nchar" MaxLength="200" />
+          <Property Name="cust_pin" Type="nchar" MaxLength="10" />
+          <Property Name="cust_phn" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="POS_EMPLOYEE_MASTER">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="emp_name" Type="nchar" MaxLength="100" />
+          <Property Name="emp_addr" Type="nchar" MaxLength="200" />
+          <Property Name="emp_pin" Type="nchar" MaxLength="10" />
+          <Property Name="emp_phn" Type="nchar" MaxLength="15" />
+          <Property Name="emp_govt_id_type" Type="nchar" MaxLength="100" />
+          <Property Name="emp_govt_id_no" Type="nchar" MaxLength="50" />
+          <Property Name="emp_join_date" Type="datetime" />
+          <Property Name="emp_resign_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="POS_MASTER_TABLE_HELPER">
+          <Key>
+            <PropertyRef Name="helper_id" />
+          </Key>
+          <Property Name="helper_id" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="helper_name" Type="nchar" MaxLength="50" />
+          <Property Name="helper_link_master_table" Type="nchar" MaxLength="50" />
+          <Property Name="helper_details" Type="nchar" MaxLength="150" />
+          <Property Name="helper_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POS_PRODUCT_GROUP_MASTER">
+          <Key>
+            <PropertyRef Name="prod_grp_id" />
+          </Key>
+          <Property Name="prod_grp_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="prod_grp_name" Type="nchar" MaxLength="50" />
+          <Property Name="prod_grp_type" Type="nchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="POS_PRODUCT_MASTER">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="product_name" Type="nchar" MaxLength="100" />
+          <Property Name="product_type" Type="nchar" MaxLength="100" />
+          <Property Name="product_group" Type="nchar" MaxLength="100" />
+          <Property Name="product_company" Type="nchar" MaxLength="100" />
+          <Property Name="product_details" Type="nchar" MaxLength="150" />
+          <Property Name="product_image_link" Type="nchar" MaxLength="150" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'xandapos.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="sp_GetNewProdGrpId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="xandaposModelStoreContainer">
+          <EntitySet Name="POS_BRAND_MASTER" EntityType="Self.POS_BRAND_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_COMPANY_MASTER" EntityType="Self.POS_COMPANY_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_CUSTOMER_MASTER" EntityType="Self.POS_CUSTOMER_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_EMPLOYEE_MASTER" EntityType="Self.POS_EMPLOYEE_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="xandaposModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="POS_BRAND_MASTER">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="brand_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="brand_company" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="brand_product_group" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POS_COMPANY_MASTER">
+          <Key>
+            <PropertyRef Name="comp_id" />
+          </Key>
+          <Property Name="comp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="comp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="comp_type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="comp_regn_no" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POS_CUSTOMER_MASTER">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cust_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cust_addr" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="cust_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cust_phn" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POS_EMPLOYEE_MASTER">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="emp_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="emp_addr" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="emp_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="emp_phn" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="emp_govt_id_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="emp_govt_id_no" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="emp_join_date" Type="DateTime" Precision="3" />
+          <Property Name="emp_resign_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="POS_MASTER_TABLE_HELPER">
+          <Key>
+            <PropertyRef Name="helper_id" />
+          </Key>
+          <Property Name="helper_id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="helper_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="helper_link_master_table" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="helper_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="helper_active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POS_PRODUCT_GROUP_MASTER">
+          <Key>
+            <PropertyRef Name="prod_grp_id" />
+          </Key>
+          <Property Name="prod_grp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="prod_grp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="prod_grp_type" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POS_PRODUCT_MASTER">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="product_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="product_group" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="product_company" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="product_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="product_image_link" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="xandaposEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="POS_BRAND_MASTER" EntityType="Self.POS_BRAND_MASTER" />
+          <EntitySet Name="POS_COMPANY_MASTER" EntityType="Self.POS_COMPANY_MASTER" />
+          <EntitySet Name="POS_CUSTOMER_MASTER" EntityType="Self.POS_CUSTOMER_MASTER" />
+          <EntitySet Name="POS_EMPLOYEE_MASTER" EntityType="Self.POS_EMPLOYEE_MASTER" />
+          <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" />
+          <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" />
+          <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <FunctionImport Name="sp_GetNewProdGrpId" ReturnType="Collection(String)" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="xandaposModelStoreContainer" CdmEntityContainer="xandaposEntities1">
+          <EntitySetMapping Name="POS_BRAND_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_BRAND_MASTER">
+              <MappingFragment StoreEntitySet="POS_BRAND_MASTER">
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+                <ScalarProperty Name="brand_name" ColumnName="brand_name" />
+                <ScalarProperty Name="brand_company" ColumnName="brand_company" />
+                <ScalarProperty Name="brand_product_group" ColumnName="brand_product_group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_COMPANY_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_COMPANY_MASTER">
+              <MappingFragment StoreEntitySet="POS_COMPANY_MASTER">
+                <ScalarProperty Name="comp_id" ColumnName="comp_id" />
+                <ScalarProperty Name="comp_name" ColumnName="comp_name" />
+                <ScalarProperty Name="comp_type" ColumnName="comp_type" />
+                <ScalarProperty Name="comp_regn_no" ColumnName="comp_regn_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_CUSTOMER_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_CUSTOMER_MASTER">
+              <MappingFragment StoreEntitySet="POS_CUSTOMER_MASTER">
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_addr" ColumnName="cust_addr" />
+                <ScalarProperty Name="cust_pin" ColumnName="cust_pin" />
+                <ScalarProperty Name="cust_phn" ColumnName="cust_phn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_EMPLOYEE_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_EMPLOYEE_MASTER">
+              <MappingFragment StoreEntitySet="POS_EMPLOYEE_MASTER">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="emp_addr" ColumnName="emp_addr" />
+                <ScalarProperty Name="emp_pin" ColumnName="emp_pin" />
+                <ScalarProperty Name="emp_phn" ColumnName="emp_phn" />
+                <ScalarProperty Name="emp_govt_id_type" ColumnName="emp_govt_id_type" />
+                <ScalarProperty Name="emp_govt_id_no" ColumnName="emp_govt_id_no" />
+                <ScalarProperty Name="emp_join_date" ColumnName="emp_join_date" />
+                <ScalarProperty Name="emp_resign_date" ColumnName="emp_resign_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_MASTER_TABLE_HELPER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_MASTER_TABLE_HELPER">
+              <MappingFragment StoreEntitySet="POS_MASTER_TABLE_HELPER">
+                <ScalarProperty Name="helper_id" ColumnName="helper_id" />
+                <ScalarProperty Name="helper_name" ColumnName="helper_name" />
+                <ScalarProperty Name="helper_link_master_table" ColumnName="helper_link_master_table" />
+                <ScalarProperty Name="helper_details" ColumnName="helper_details" />
+                <ScalarProperty Name="helper_active" ColumnName="helper_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_PRODUCT_GROUP_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_PRODUCT_GROUP_MASTER">
+              <MappingFragment StoreEntitySet="POS_PRODUCT_GROUP_MASTER">
+                <ScalarProperty Name="prod_grp_id" ColumnName="prod_grp_id" />
+                <ScalarProperty Name="prod_grp_name" ColumnName="prod_grp_name" />
+                <ScalarProperty Name="prod_grp_type" ColumnName="prod_grp_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_PRODUCT_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_PRODUCT_MASTER">
+              <MappingFragment StoreEntitySet="POS_PRODUCT_MASTER">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_type" ColumnName="product_type" />
+                <ScalarProperty Name="product_group" ColumnName="product_group" />
+                <ScalarProperty Name="product_company" ColumnName="product_company" />
+                <ScalarProperty Name="product_details" ColumnName="product_details" />
+                <ScalarProperty Name="product_image_link" ColumnName="product_image_link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="xandaposModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetNewProdGrpId" FunctionName="xandaposModel.Store.sp_GetNewProdGrpId" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
