@@ -12,6 +12,7 @@ namespace XandaPOS.Models
         public string cust_addr { get; set; }
         public string cust_pin { get; set; }
         public string cust_phn { get; set; }
+        public string cust_email { get; set; }
     }
 
      

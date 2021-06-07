@@ -43,6 +43,32 @@ namespace XandaPOS.Controllers
             return View(_masterDataBL.LoadEmployeeMasterGrid());
         }
 
+        public ActionResult MasterTableHelperMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadMasterTableHelperMasterGrid());
+        }
+
+        public ActionResult ProductGroupMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadProductGroupMasterGrid());
+        }
+
+        public ActionResult ProductMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadProductMasterGrid());
+        }
+
+
+        public ActionResult WarehouseMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadWarehouseMasterGrid());
+        }
+
+
         public ActionResult LoadCustomerGrid()
         {
             //var datasource = OrderRepository.GetAllRecords().ToList();

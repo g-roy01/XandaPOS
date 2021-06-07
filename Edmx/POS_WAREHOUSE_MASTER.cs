@@ -12,13 +12,13 @@ namespace XandaPOS.Edmx
     using System;
     using System.Collections.Generic;
     
-    public partial class POS_CUSTOMER_MASTER
+    public partial class POS_WAREHOUSE_MASTER
     {
-        public int cust_id { get; set; }
-        public string cust_name { get; set; }
-        public string cust_addr { get; set; }
-        public string cust_pin { get; set; }
-        public string cust_phn { get; set; }
-        public string cust_email { get; set; }
+        public string warehouse_id { get; set; }
+        public string warehouse_name { get; set; }
+        public string warehouse_address { get; set; }
+        public string warehouse_pin { get; set; }
+        public string warehouse_phone { get; set; }
+        public string warehouse_code { get; set; }
     }
 }

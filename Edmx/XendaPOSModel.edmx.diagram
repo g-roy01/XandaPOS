@@ -7,11 +7,12 @@
       <Diagram DiagramId="ff91111a967048c6b060170462280d98" Name="Diagram1">
         <EntityTypeShape EntityType="xandaposModel.POS_BRAND_MASTER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="xandaposModel.POS_COMPANY_MASTER" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="xandaposModel.POS_CUSTOMER_MASTER" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="xandaposModel.POS_CUSTOMER_MASTER" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="xandaposModel.POS_EMPLOYEE_MASTER" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="xandaposModel.POS_MASTER_TABLE_HELPER" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="xandaposModel.POS_PRODUCT_GROUP_MASTER" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="xandaposModel.POS_PRODUCT_MASTER" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="xandaposModel.POS_WAREHOUSE_MASTER" Width="1.5" PointX="6.75" PointY="3.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
