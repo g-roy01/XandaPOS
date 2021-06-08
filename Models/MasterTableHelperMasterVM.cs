@@ -7,7 +7,7 @@ namespace XandaPOS.Models
 {
     public class MasterTableHelperMasterVM
     {
-        public string helper_id { get; set; }
+        public int helper_id { get; set; }
         public string helper_name { get; set; }
         public string helper_link_master_table { get; set; }
         public string helper_details { get; set; }

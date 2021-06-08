@@ -49,12 +49,12 @@ namespace XandaPOS.Business
                 foreach (var item in list)
                 {
                     BrandMasterVM _brandMasterVM = new BrandMasterVM();
-                    _brandMasterVM.brand_id = item.brand_id.Trim();
+                    _brandMasterVM.brand_id = item.brand_id;
                     _brandMasterVM.brand_name = item.brand_name.Trim();
-                    _brandMasterVM.brand_company = item.brand_company.Trim();
-                    _brandMasterVM.brand_product_group_id = item.brand_product_group.Trim();
+                    _brandMasterVM.brand_company = item.brand_company;
+                    _brandMasterVM.brand_product_group_id = item.brand_product_group;
 
-                    var prodGroupName = posProdGrpMaster.Where(m => m.prod_grp_id.Equals(item.brand_product_group.Trim())).Select(m=>m.prod_grp_name);
+                    var prodGroupName = posProdGrpMaster.Where(m => m.prod_grp_id.Equals(item.brand_product_group)).Select(m=>m.prod_grp_name);
 
                     _brandMasterVM.brand_product_group_name = prodGroupName.FirstOrDefault().ToString().Trim();
 
@@ -68,7 +68,7 @@ namespace XandaPOS.Business
         //Load Company Grid
         public List<CompanyMasterVM> LoadCompanyMasterGrid(string companyType)
         {
-            //companyType - All, Vendor, Supplier
+            //companyType - ALL, VENDOR, SUPPLIER
 
             List<CompanyMasterVM> lstCompanyMasterVM = new List<CompanyMasterVM>();
             
@@ -77,23 +77,48 @@ namespace XandaPOS.Business
                 var posCompanyMaster = db.POS_COMPANY_MASTER;
                 var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
+                //For CompanyType = ALL
                 var list = posCompanyMaster.ToList();
+
+                if (companyType.Equals("VENDOR"))
+                {
+                    var vendorTypeCode = posMasterTableHelperMaster
+                                          .Where(m => m.helper_name.Trim().Equals("VENDOR")).Select(s => s)
+                                          .Where(m => m.helper_link_master_table.Equals("POS_COMPANY_MASTER")).Select(m => m.helper_id);
+
+                    list.Clear();
+                    list = posCompanyMaster
+                                .Where(m => m.comp_type.Equals(vendorTypeCode.FirstOrDefault())).Select(s => s).ToList();
+                }
+
+                if (companyType.Equals("SUPPLIER"))
+                {
+                    var supplierTypeCode = posMasterTableHelperMaster
+                                            .Where(m => m.helper_name.Trim().Equals("SUPPLIER")).Select(s => s)
+                                            .Where(m => m.helper_link_master_table.Equals("POS_COMPANY_MASTER")).Select(m => m.helper_id);
+
+                    list.Clear();
+                    list = posCompanyMaster
+                                .Where(m => m.comp_type.Equals(supplierTypeCode.FirstOrDefault())).Select(s => s).ToList();
+                }
+                
                 foreach (var item in list)
                 {
                     CompanyMasterVM _companyMasterVM = new CompanyMasterVM();
-                    _companyMasterVM.comp_id = item.comp_id.Trim();
+                    _companyMasterVM.comp_id = item.comp_id;
                     _companyMasterVM.comp_name = item.comp_name.Trim();
                     _companyMasterVM.comp_regn_no = item.comp_regn_no.Trim();
-                    _companyMasterVM.comp_type_id = item.comp_type.Trim();
+                    _companyMasterVM.comp_type_id = item.comp_type;
 
                     var compName = posMasterTableHelperMaster
-                                          .Where(m => m.helper_id.Equals(item.comp_type.Trim())).Select(s=>s)
-                                          .Where(m=> m.helper_link_master_table.Equals("POS_COMPANY_MASTER")).Select(m => m.helper_name);
+                                          .Where(m => m.helper_id.Equals(item.comp_type)).Select(s => s)
+                                          .Where(m => m.helper_link_master_table.Equals("POS_COMPANY_MASTER")).Select(m => m.helper_name);
 
                     _companyMasterVM.comp_type_name = compName.FirstOrDefault().ToString().Trim();
 
                     lstCompanyMasterVM.Add(_companyMasterVM);
                 }
+
                 return lstCompanyMasterVM;
             }
         }
@@ -111,11 +136,11 @@ namespace XandaPOS.Business
                 foreach (var item in list)
                 {
                     EmployeeMasterVM _employeeMasterVM = new EmployeeMasterVM();
-                    _employeeMasterVM.emp_id = item.emp_id.Trim();
+                    _employeeMasterVM.emp_id = item.emp_id;
                     _employeeMasterVM.emp_name = item.emp_name.Trim();
                     _employeeMasterVM.emp_addr = item.emp_addr.Trim();
                     _employeeMasterVM.emp_pin = item.emp_pin.Trim();
-                    _employeeMasterVM.emp_phn = item.emp_phn.Trim();
+                    _employeeMasterVM.emp_phn = item.emp_phone.Trim();
                     _employeeMasterVM.emp_govt_id_type = item.emp_govt_id_type.Trim();
                     _employeeMasterVM.emp_govt_id_no = item.emp_govt_id_no.Trim();
                     _employeeMasterVM.emp_join_date = item.emp_join_date;
@@ -140,7 +165,7 @@ namespace XandaPOS.Business
                 foreach (var item in list)
                 {
                     MasterTableHelperMasterVM _masterTableHelperMasterVM = new MasterTableHelperMasterVM();
-                    _masterTableHelperMasterVM.helper_id = item.helper_id.Trim();
+                    _masterTableHelperMasterVM.helper_id = item.helper_id;
                     _masterTableHelperMasterVM.helper_name = item.helper_name.Trim();
                     _masterTableHelperMasterVM.helper_details = item.helper_details.Trim();
                     _masterTableHelperMasterVM.helper_link_master_table = item.helper_link_master_table.Trim();
@@ -165,7 +190,7 @@ namespace XandaPOS.Business
                 foreach (var item in list)
                 {
                     ProductGroupMasterVM _productGroupMasterVM = new ProductGroupMasterVM();
-                    _productGroupMasterVM.prod_grp_id = item.prod_grp_id.Trim();
+                    _productGroupMasterVM.prod_grp_id = item.prod_grp_id;
                     _productGroupMasterVM.prod_grp_name = item.prod_grp_name.Trim();
                     _productGroupMasterVM.prod_grp_type = item.prod_grp_type.Trim();
 
@@ -192,21 +217,21 @@ namespace XandaPOS.Business
                 foreach (var item in list)
                 {
                     ProductMasterVM _productMasterVM = new ProductMasterVM();
-                    _productMasterVM.product_id = item.product_id.Trim();
+                    _productMasterVM.product_id = item.product_id;
                     _productMasterVM.product_name = item.product_name.Trim();
 
-                    _productMasterVM.product_type_id = item.product_type.Trim();
+                    _productMasterVM.product_type_id = item.product_type;
                     var prodTypeName = posMasterTableHelperMaster
-                                        .Where(m => m.helper_id.Equals(item.product_type.Trim())).Select(s => s)
+                                        .Where(m => m.helper_id.Equals(item.product_type)).Select(s => s)
                                         .Where(m => m.helper_link_master_table.Equals("POS_PRODUCT_MASTER")).Select(m => m.helper_name);
                     _productMasterVM.product_type_name = prodTypeName.FirstOrDefault().ToString().Trim();
 
-                    _productMasterVM.product_group_id = item.product_group.Trim();
-                    var prodGroupName = posProductGroupMaster.Where(m => m.prod_grp_id.Equals(item.product_group.Trim())).Select(m => m.prod_grp_name);
+                    _productMasterVM.product_group_id = item.product_group;
+                    var prodGroupName = posProductGroupMaster.Where(m => m.prod_grp_id.Equals(item.product_group)).Select(m => m.prod_grp_name);
                     _productMasterVM.product_group_name = prodGroupName.FirstOrDefault().ToString().Trim();
 
-                    _productMasterVM.product_company_id = item.product_company.Trim();
-                    var prodCompName = posCompanyMaster.Where(m => m.comp_id.Equals(item.product_company.Trim())).Select(m => m.comp_name);
+                    _productMasterVM.product_company_id = item.product_company;
+                    var prodCompName = posCompanyMaster.Where(m => m.comp_id.Equals(item.product_company)).Select(m => m.comp_name);
                     _productMasterVM.product_company_name = prodCompName.FirstOrDefault().ToString().Trim();
 
                     _productMasterVM.product_details = item.product_details.Trim();

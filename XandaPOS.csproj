@@ -134,6 +134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterdataController.cs" />
+    <Compile Include="BusinessData\DataLayer.cs" />
     <Compile Include="Edmx\POS_BRAND_MASTER.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
@@ -1300,13 +1301,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Masterdata\CompanyMaster.cshtml" />
-    <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
     <Content Include="Views\Masterdata\BrandMaster.cshtml" />
     <Content Include="Views\Masterdata\EmployeeMaster.cshtml" />
     <Content Include="Views\Masterdata\MasterTableHelperMaster.cshtml" />
     <Content Include="Views\Masterdata\ProductGroupMaster.cshtml" />
     <Content Include="Views\Masterdata\ProductMaster.cshtml" />
     <Content Include="Views\Masterdata\WarehouseMaster.cshtml" />
+    <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
+    <None Include="Views\Masterdata\CompanySupplierMaster.cshtml" />
+    <Content Include="Views\Masterdata\CompanyVendorMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

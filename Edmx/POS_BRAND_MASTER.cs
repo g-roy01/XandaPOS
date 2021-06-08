@@ -14,9 +14,9 @@ namespace XandaPOS.Edmx
     
     public partial class POS_BRAND_MASTER
     {
-        public string brand_id { get; set; }
+        public int brand_id { get; set; }
         public string brand_name { get; set; }
-        public string brand_company { get; set; }
-        public string brand_product_group { get; set; }
+        public int brand_company { get; set; }
+        public Nullable<int> brand_product_group { get; set; }
     }
 }

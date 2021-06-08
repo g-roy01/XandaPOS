@@ -14,9 +14,11 @@ namespace XandaPOS.Edmx
     
     public partial class POS_COMPANY_MASTER
     {
-        public string comp_id { get; set; }
+        public int comp_id { get; set; }
         public string comp_name { get; set; }
-        public string comp_type { get; set; }
+        public string comp_address { get; set; }
+        public string comp_pin { get; set; }
+        public Nullable<int> comp_type { get; set; }
         public string comp_regn_no { get; set; }
     }
 }

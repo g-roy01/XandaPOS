@@ -14,7 +14,7 @@ namespace XandaPOS.Edmx
     
     public partial class POS_PRODUCT_GROUP_MASTER
     {
-        public string prod_grp_id { get; set; }
+        public int prod_grp_id { get; set; }
         public string prod_grp_name { get; set; }
         public string prod_grp_type { get; set; }
     }

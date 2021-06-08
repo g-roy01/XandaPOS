@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using XandaPOS.Business;
 using XandaPOS.Models;
+using XandaPOS.BusinessData;
 
 namespace XandaPOS.Controllers
 {
@@ -25,7 +26,19 @@ namespace XandaPOS.Controllers
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid());
+            return View(_masterDataBL.LoadCompanyMasterGrid("ALL"));
+        }
+
+        public ActionResult CompanyVendorMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
+        }
+
+        public ActionResult CompanySupplierMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
         }
 
         public ActionResult CustomerMaster()
@@ -67,6 +80,33 @@ namespace XandaPOS.Controllers
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadWarehouseMasterGrid());
         }
+
+
+        //CustomerMasterDbContextVM custMasterDbContext = new CustomerMasterDbContextVM();
+
+        [HttpPost]
+        public ActionResult AddCustomer(CustomerMasterVM custData)
+        {
+            //BusinessData bdAddCustomer = new BusinessData();
+            //BusinessData businessData
+            //custMasterDbContext.CustomerData.Add(custData);
+            //custMasterDbContext.SaveChanges();
+            string message = "SUCCESS";
+            return Json(new {Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+
+        public JsonResult GetCustomer(string custId)
+        {
+            List<CustomerMasterVM> lstCustomerData = new List<CustomerMasterVM>();
+            //lstCustomerData = custMasterDbContext.CustomerData.ToList();
+            return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
 
 
         public ActionResult LoadCustomerGrid()

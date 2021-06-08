@@ -7,7 +7,7 @@ namespace XandaPOS.Models
 {
     public class EmployeeMasterVM
     {
-        public string emp_id { get; set; }
+        public int emp_id { get; set; }
         public string emp_name { get; set; }
         public string emp_addr { get; set; }
         public string emp_pin { get; set; }

@@ -7,9 +7,9 @@ namespace XandaPOS.Models
 {
     public class CompanyMasterVM
     {
-        public string comp_id { get; set; }
+        public int comp_id { get; set; }
         public string comp_name { get; set; }
-        public string comp_type_id { get; set; }
+        public int? comp_type_id { get; set; }
         public string comp_type_name { get; set; }
         public string comp_regn_no { get; set; }
     }

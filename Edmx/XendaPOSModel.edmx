@@ -4,47 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="xandaposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="xandaposModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="POS_BRAND_MASTER">
           <Key>
             <PropertyRef Name="brand_id" />
           </Key>
-          <Property Name="brand_id" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="brand_name" Type="nchar" MaxLength="100" />
-          <Property Name="brand_company" Type="nchar" MaxLength="100" />
-          <Property Name="brand_product_group" Type="nchar" MaxLength="10" />
+          <Property Name="brand_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brand_name" Type="nchar" MaxLength="50" />
+          <Property Name="brand_company" Type="int" Nullable="false" />
+          <Property Name="brand_product_group" Type="int" />
         </EntityType>
         <EntityType Name="POS_COMPANY_MASTER">
           <Key>
             <PropertyRef Name="comp_id" />
           </Key>
-          <Property Name="comp_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="comp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="comp_name" Type="nchar" MaxLength="50" />
-          <Property Name="comp_type" Type="nchar" MaxLength="50" />
-          <Property Name="comp_regn_no" Type="nchar" MaxLength="50" />
+          <Property Name="comp_address" Type="nchar" MaxLength="200" />
+          <Property Name="comp_pin" Type="nchar" MaxLength="10" />
+          <Property Name="comp_type" Type="int" />
+          <Property Name="comp_regn_no" Type="nchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="POS_CUSTOMER_MASTER">
           <Key>
             <PropertyRef Name="cust_id" />
           </Key>
           <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cust_name" Type="nchar" MaxLength="100" />
+          <Property Name="cust_name" Type="nchar" MaxLength="50" />
           <Property Name="cust_addr" Type="nchar" MaxLength="200" />
           <Property Name="cust_pin" Type="nchar" MaxLength="10" />
           <Property Name="cust_phn" Type="nchar" MaxLength="15" />
-          <Property Name="cust_email" Type="nchar" MaxLength="100" />
+          <Property Name="cust_email" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="POS_EMPLOYEE_MASTER">
           <Key>
             <PropertyRef Name="emp_id" />
           </Key>
-          <Property Name="emp_id" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="emp_name" Type="nchar" MaxLength="100" />
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_name" Type="nchar" MaxLength="50" />
           <Property Name="emp_addr" Type="nchar" MaxLength="200" />
           <Property Name="emp_pin" Type="nchar" MaxLength="10" />
-          <Property Name="emp_phn" Type="nchar" MaxLength="15" />
-          <Property Name="emp_govt_id_type" Type="nchar" MaxLength="100" />
-          <Property Name="emp_govt_id_no" Type="nchar" MaxLength="50" />
+          <Property Name="emp_phone" Type="nchar" MaxLength="15" />
+          <Property Name="emp_govt_id_type" Type="nchar" MaxLength="50" />
+          <Property Name="emp_govt_id_no" Type="nchar" MaxLength="30" />
           <Property Name="emp_join_date" Type="datetime" />
           <Property Name="emp_resign_date" Type="datetime" />
         </EntityType>
@@ -52,7 +54,7 @@
           <Key>
             <PropertyRef Name="helper_id" />
           </Key>
-          <Property Name="helper_id" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="helper_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="helper_name" Type="nchar" MaxLength="50" />
           <Property Name="helper_link_master_table" Type="nchar" MaxLength="50" />
           <Property Name="helper_details" Type="nchar" MaxLength="150" />
@@ -62,7 +64,7 @@
           <Key>
             <PropertyRef Name="prod_grp_id" />
           </Key>
-          <Property Name="prod_grp_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="prod_grp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="prod_grp_name" Type="nchar" MaxLength="50" />
           <Property Name="prod_grp_type" Type="nchar" MaxLength="100" />
         </EntityType>
@@ -70,11 +72,11 @@
           <Key>
             <PropertyRef Name="product_id" />
           </Key>
-          <Property Name="product_id" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="product_name" Type="nchar" MaxLength="100" />
-          <Property Name="product_type" Type="nchar" MaxLength="100" />
-          <Property Name="product_group" Type="nchar" MaxLength="100" />
-          <Property Name="product_company" Type="nchar" MaxLength="100" />
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name" Type="nchar" MaxLength="50" />
+          <Property Name="product_type" Type="int" />
+          <Property Name="product_group" Type="int" />
+          <Property Name="product_company" Type="int" />
           <Property Name="product_details" Type="nchar" MaxLength="150" />
           <Property Name="product_image_link" Type="nchar" MaxLength="150" />
         </EntityType>
@@ -82,13 +84,25 @@
           <Key>
             <PropertyRef Name="warehouse_id" />
           </Key>
-          <Property Name="warehouse_id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="warehouse_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="warehouse_name" Type="nchar" MaxLength="50" />
-          <Property Name="warehouse_address" Type="nchar" MaxLength="100" />
+          <Property Name="warehouse_address" Type="nchar" MaxLength="200" />
           <Property Name="warehouse_pin" Type="nchar" MaxLength="10" />
           <Property Name="warehouse_phone" Type="nchar" MaxLength="15" />
           <Property Name="warehouse_code" Type="nchar" MaxLength="10" />
         </EntityType>
+        <Function Name="sp_AddNewCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="custName" Type="nchar" Mode="In" />
+          <Parameter Name="custAddress" Type="nchar" Mode="In" />
+          <Parameter Name="custPin" Type="nchar" Mode="In" />
+          <Parameter Name="custPhone" Type="nchar" Mode="In" />
+          <Parameter Name="custEmail" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AddNewProductGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodGroupId" Type="nchar" Mode="In" />
+          <Parameter Name="prodGroupName" Type="nchar" Mode="In" />
+          <Parameter Name="prodGroupType" Type="nchar" Mode="In" />
+        </Function>
         <Function Name="sp_GetNewProdGrpId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="xandaposModelStoreContainer">
           <EntitySet Name="POS_BRAND_MASTER" EntityType="Self.POS_BRAND_MASTER" Schema="dbo" store:Type="Tables" />
@@ -100,7 +114,8 @@
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="Self.POS_WAREHOUSE_MASTER" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="xandaposModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -108,42 +123,44 @@
           <Key>
             <PropertyRef Name="brand_id" />
           </Key>
-          <Property Name="brand_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="brand_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="brand_company" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="brand_product_group" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="brand_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brand_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="brand_company" Type="Int32" Nullable="false" />
+          <Property Name="brand_product_group" Type="Int32" />
         </EntityType>
         <EntityType Name="POS_COMPANY_MASTER">
           <Key>
             <PropertyRef Name="comp_id" />
           </Key>
-          <Property Name="comp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="comp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="comp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="comp_type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="comp_regn_no" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="comp_address" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="comp_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="comp_type" Type="Int32" />
+          <Property Name="comp_regn_no" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="POS_CUSTOMER_MASTER">
           <Key>
             <PropertyRef Name="cust_id" />
           </Key>
           <Property Name="cust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cust_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="cust_addr" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
           <Property Name="cust_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="cust_phn" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="cust_email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="cust_email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="POS_EMPLOYEE_MASTER">
           <Key>
             <PropertyRef Name="emp_id" />
           </Key>
-          <Property Name="emp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="emp_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="emp_addr" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
           <Property Name="emp_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="emp_phn" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="emp_govt_id_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="emp_govt_id_no" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="emp_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="emp_govt_id_type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="emp_govt_id_no" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="emp_join_date" Type="DateTime" Precision="3" />
           <Property Name="emp_resign_date" Type="DateTime" Precision="3" />
         </EntityType>
@@ -151,7 +168,7 @@
           <Key>
             <PropertyRef Name="helper_id" />
           </Key>
-          <Property Name="helper_id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="helper_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="helper_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="helper_link_master_table" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="helper_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
@@ -161,7 +178,7 @@
           <Key>
             <PropertyRef Name="prod_grp_id" />
           </Key>
-          <Property Name="prod_grp_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="prod_grp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="prod_grp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="prod_grp_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
@@ -169,13 +186,24 @@
           <Key>
             <PropertyRef Name="product_id" />
           </Key>
-          <Property Name="product_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="product_name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="product_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="product_group" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="product_company" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="product_type" Type="Int32" />
+          <Property Name="product_group" Type="Int32" />
+          <Property Name="product_company" Type="Int32" />
           <Property Name="product_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
           <Property Name="product_image_link" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="POS_WAREHOUSE_MASTER">
+          <Key>
+            <PropertyRef Name="warehouse_id" />
+          </Key>
+          <Property Name="warehouse_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="warehouse_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="warehouse_address" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="warehouse_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="warehouse_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="warehouse_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityContainer Name="xandaposEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="POS_BRAND_MASTER" EntityType="Self.POS_BRAND_MASTER" />
@@ -185,20 +213,21 @@
           <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" />
           <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" />
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" />
+          <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="Self.POS_WAREHOUSE_MASTER" />
+          <FunctionImport Name="sp_AddNewCustomer">
+            <Parameter Name="custName" Mode="In" Type="String" />
+            <Parameter Name="custAddress" Mode="In" Type="String" />
+            <Parameter Name="custPin" Mode="In" Type="String" />
+            <Parameter Name="custPhone" Mode="In" Type="String" />
+            <Parameter Name="custEmail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AddNewProductGroup">
+            <Parameter Name="prodGroupId" Mode="In" Type="String" />
+            <Parameter Name="prodGroupName" Mode="In" Type="String" />
+            <Parameter Name="prodGroupType" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_GetNewProdGrpId" ReturnType="Collection(String)" />
-          <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="xandaposModel.POS_WAREHOUSE_MASTER" />
         </EntityContainer>
-        <EntityType Name="POS_WAREHOUSE_MASTER">
-          <Key>
-            <PropertyRef Name="warehouse_id" />
-          </Key>
-          <Property Name="warehouse_id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="warehouse_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="warehouse_address" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="warehouse_pin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="warehouse_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="warehouse_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -220,6 +249,8 @@
               <MappingFragment StoreEntitySet="POS_COMPANY_MASTER">
                 <ScalarProperty Name="comp_id" ColumnName="comp_id" />
                 <ScalarProperty Name="comp_name" ColumnName="comp_name" />
+                <ScalarProperty Name="comp_address" ColumnName="comp_address" />
+                <ScalarProperty Name="comp_pin" ColumnName="comp_pin" />
                 <ScalarProperty Name="comp_type" ColumnName="comp_type" />
                 <ScalarProperty Name="comp_regn_no" ColumnName="comp_regn_no" />
               </MappingFragment>
@@ -228,12 +259,12 @@
           <EntitySetMapping Name="POS_CUSTOMER_MASTER">
             <EntityTypeMapping TypeName="xandaposModel.POS_CUSTOMER_MASTER">
               <MappingFragment StoreEntitySet="POS_CUSTOMER_MASTER">
-                <ScalarProperty Name="cust_email" ColumnName="cust_email" />
                 <ScalarProperty Name="cust_id" ColumnName="cust_id" />
                 <ScalarProperty Name="cust_name" ColumnName="cust_name" />
                 <ScalarProperty Name="cust_addr" ColumnName="cust_addr" />
                 <ScalarProperty Name="cust_pin" ColumnName="cust_pin" />
                 <ScalarProperty Name="cust_phn" ColumnName="cust_phn" />
+                <ScalarProperty Name="cust_email" ColumnName="cust_email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -244,7 +275,7 @@
                 <ScalarProperty Name="emp_name" ColumnName="emp_name" />
                 <ScalarProperty Name="emp_addr" ColumnName="emp_addr" />
                 <ScalarProperty Name="emp_pin" ColumnName="emp_pin" />
-                <ScalarProperty Name="emp_phn" ColumnName="emp_phn" />
+                <ScalarProperty Name="emp_phone" ColumnName="emp_phone" />
                 <ScalarProperty Name="emp_govt_id_type" ColumnName="emp_govt_id_type" />
                 <ScalarProperty Name="emp_govt_id_no" ColumnName="emp_govt_id_no" />
                 <ScalarProperty Name="emp_join_date" ColumnName="emp_join_date" />
@@ -285,19 +316,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetNewProdGrpId" FunctionName="xandaposModel.Store.sp_GetNewProdGrpId" />
           <EntitySetMapping Name="POS_WAREHOUSE_MASTER">
             <EntityTypeMapping TypeName="xandaposModel.POS_WAREHOUSE_MASTER">
               <MappingFragment StoreEntitySet="POS_WAREHOUSE_MASTER">
-                <ScalarProperty Name="warehouse_code" ColumnName="warehouse_code" />
-                <ScalarProperty Name="warehouse_phone" ColumnName="warehouse_phone" />
-                <ScalarProperty Name="warehouse_pin" ColumnName="warehouse_pin" />
-                <ScalarProperty Name="warehouse_address" ColumnName="warehouse_address" />
-                <ScalarProperty Name="warehouse_name" ColumnName="warehouse_name" />
                 <ScalarProperty Name="warehouse_id" ColumnName="warehouse_id" />
+                <ScalarProperty Name="warehouse_name" ColumnName="warehouse_name" />
+                <ScalarProperty Name="warehouse_address" ColumnName="warehouse_address" />
+                <ScalarProperty Name="warehouse_pin" ColumnName="warehouse_pin" />
+                <ScalarProperty Name="warehouse_phone" ColumnName="warehouse_phone" />
+                <ScalarProperty Name="warehouse_code" ColumnName="warehouse_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AddNewCustomer" FunctionName="xandaposModel.Store.sp_AddNewCustomer" />
+          <FunctionImportMapping FunctionImportName="sp_AddNewProductGroup" FunctionName="xandaposModel.Store.sp_AddNewProductGroup" />
+          <FunctionImportMapping FunctionImportName="sp_GetNewProdGrpId" FunctionName="xandaposModel.Store.sp_GetNewProdGrpId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

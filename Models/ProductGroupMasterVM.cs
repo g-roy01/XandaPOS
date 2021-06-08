@@ -8,7 +8,7 @@ namespace XandaPOS.Models
 {
     public class ProductGroupMasterVM
     {
-        public string prod_grp_id { get; set; }
+        public int prod_grp_id { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid Product Group Name.")]
         [StringLength(100, ErrorMessage = "The Product Group Name must be less than {1} characters.")]

@@ -7,7 +7,7 @@ namespace XandaPOS.Models
 {
     public class WarehouseMasterVM
     {
-        public string warehouse_id { get; set; }
+        public int warehouse_id { get; set; }
         public string warehouse_name { get; set; }
         public string warehouse_address { get; set; }
         public string warehouse_pin { get; set; }
