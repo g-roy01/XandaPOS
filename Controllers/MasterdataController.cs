@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using XandaPOS.Business;
 using XandaPOS.Models;
 using XandaPOS.BusinessData;
+using XandaPOS.Edmx;
+using System.Data.Entity;
 
 namespace XandaPOS.Controllers
 {
@@ -46,7 +48,7 @@ namespace XandaPOS.Controllers
             //CustomerMasterVM _customerMastervm = new CustomerMasterVM();
 
             //This will show the data layout for Customer Master
-            MasterDataBL _masterDataBL = new MasterDataBL(); 
+            MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCustomerMasterGrid());
         }
 
@@ -81,27 +83,73 @@ namespace XandaPOS.Controllers
             return View(_masterDataBL.LoadWarehouseMasterGrid());
         }
 
+        [HttpPost]
+        public ActionResult AddCustomer(POS_CUSTOMER_MASTER custData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new DBContextMaster())
+                {
+                    db.CustomerData.Add(custData); 
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
 
-        //CustomerMasterDbContextVM custMasterDbContext = new CustomerMasterDbContextVM();
 
         [HttpPost]
-        public ActionResult AddCustomer(CustomerMasterVM custData)
+        public ActionResult EditCustomer(POS_CUSTOMER_MASTER custData)
         {
-            //BusinessData bdAddCustomer = new BusinessData();
-            //BusinessData businessData
-            //custMasterDbContext.CustomerData.Add(custData);
-            //custMasterDbContext.SaveChanges();
-            string message = "SUCCESS";
-            return Json(new {Message = message, JsonRequestBehavior.AllowGet });
+            string message = "";
+            try
+            {
+                using (var db = new DBContextMaster())
+                {
+                    var retVal = db.CustomerData.Where(x => x.cust_id == custData.cust_id).FirstOrDefault();
+                    retVal.cust_name = custData.cust_name;
+                    retVal.cust_addr = custData.cust_addr;
+                    retVal.cust_pin = custData.cust_pin;
+                    retVal.cust_phn = custData.cust_phn;
+                    retVal.cust_email = custData.cust_email;
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+
+            //string message = "";
+            //try
+            //{
+            //    using (var db = new DBContextMaster())
+            //    {
+            //        db.Entry(custData).State = EntityState.Modified;
+            //        db.SaveChanges();
+            //    }
+            //    message = "SUCCESS";
+            //}
+            //catch(Exception ex)
+            //{
+            //    message = "FAIL";
+            //}
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
 
-
-        public JsonResult GetCustomer(string custId)
-        {
-            List<CustomerMasterVM> lstCustomerData = new List<CustomerMasterVM>();
-            //lstCustomerData = custMasterDbContext.CustomerData.ToList();
-            return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetCustomer(string custId)
+        //{
+        //    List<CustomerMasterVM> lstCustomerData = new List<CustomerMasterVM>();
+        //    lstCustomerData = custDBContext.CustomerData.ToList();
+        //    return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
+        //}
 
 
 

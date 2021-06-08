@@ -99,13 +99,13 @@
                                                     {
                                                         <tr class="kt-table-row kt-table-row-level-0">
 
-                                                            <td>@customer.cust_name</td>
-                                                            <td class="">
+                                                            <td id="@( "CustName_" +customer.cust_id)">@customer.cust_name</td>
+                                                            <td class="" id="@( "CustAddr_" +customer.cust_id)">
                                                                 @customer.cust_addr
                                                             </td>
-                                                            <td class="">@customer.cust_pin</td>
-                                                            <td class="">@customer.cust_phn</td>
-                                                            <td class="">@customer.cust_email</td>
+                                                            <td class="" id="@( "CustPin_" +customer.cust_id)">@customer.cust_pin</td>
+                                                            <td class="" id="@( "CustPhn_" +customer.cust_id)">@customer.cust_phn</td>
+                                                            <td class="" id="@( "CustEmail_" +customer.cust_id)">@customer.cust_email</td>
                                                             <td>
                                                                 <div class="card-toolbar text-right">
                                                                     <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,10 +115,11 @@
                                                                             </svg>
                                                                         </span>
                                                                     </button>
+                                                                    
                                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-toggle="tooltip" title="" data-placement="right"
+                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit CustEditButton" id="@( "CustEdit_" +customer.cust_id)" data-toggle="tooltip" title="" data-placement="right"
                                                                            data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
+                                                                        <a class="dropdown-item confirm-delete" id="@( "CustDelete_" +customer.cust_id)" title="Delete" href="#">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -167,33 +168,33 @@
                 <div class="form-group">
                     <label class="text-dark">Customer Name</label>
                     <input type="text" name="CustName" class="form-control" id="CustName">
-                    <small class="form-text text-muted">please enter User Name</small>
+                    <small class="form-text text-muted">Please Enter Customer Name</small>
                 </div>
 
                 <div class="form-group">
                     <label class="text-dark">Customer Address</label>
                     <input type="text" name="CustAddress" class="form-control" id="CustAddress">
-                    <small class="form-text text-muted">Please enter Address</small>
+                    <small class="form-text text-muted">Please Enter Address</small>
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Pincode</label>
                     <input type="text" name="CustPinCode" class="form-control" id="CustPinCode">
-                    <small class="form-text text-muted">Please enter Pincode</small>
+                    <small class="form-text text-muted">Please Enter Pincode</small>
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Customer Phone</label>
                     <input type="text" name="CustPhnData" class="form-control" id="CustPhnData">
-                    <small class="form-text text-muted">Please enter Phone Number</small>
+                    <small class="form-text text-muted">Please Enter Phone Number</small>
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Customer Email</label>
                     <input type="email" name="CustEmailData" class="form-control" id="CustEmailData">
-                    <small class="form-text text-muted">Please enter Email</small>
+                    <small class="form-text text-muted">Please Enter Email</small>
                 </div>
             </div>
         </div>
 
-        <button type="button" id="AddBtnCustomer" class="btn btn-prusimary">Add Customer</button>
+        <button type="button" id="AddBtnCustomer" class="btn btn-primary">Add Customer</button>
     </form>
 </div>
 
@@ -214,40 +215,46 @@
 
             <div class="col-12">
                 <div class="form-group">
+                    @*<label class="text-dark">Customer ID</label>*@
+                    <input type="text" name="text" class="form-control" value="" id="CustomerEditId" style="visibility:hidden;">
+
+                </div>
+
+                <div class="form-group">
                     <label class="text-dark">Customer Name</label>
-                    <input type="text" name="text" class="form-control" value="Admin">
+                    <input type="text" name="text" class="form-control" value="" id="CustomerEditName">
 
                 </div>
 
                 <div class="form-group">
                     <label class="text-dark">Customer Address</label>
-                    <input type="text" name="text" class="form-control" value="Coder">
-                    <small class="form-text text-muted">please enter Company Name</small>
+                    <input type="text" name="text" class="form-control" value="" id="CustomerEditAddress">
+
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Customer PinCode</label>
-                    <input type="password" name="password" class="form-control" value="1234656">
+                    <input type="text" name="text" class="form-control" value="" id="CustomerEditPin">
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Customer Phone</label>
-                    <input type="text" name="text" class="form-control" value="030000000">
+                    <input type="text" name="text" class="form-control" value="" id="CustomerEditPhone">
 
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Customer Email</label>
-                    <input type="email" name="email" class="form-control" value="Admin@gmail.com">
+                    <input type="email" name="email" class="form-control" value="" id="CustomerEditEmail">
                 </div>
-                <div class="form-group">
-                    <label class="text-dark">List</label>
-                    <select class="arabic-select w-100 mb-3 h-30px">
-                        <option value="1">Admin</option>
-                        <option value="2">Owner</option>
-                    </select>
+                @*<div class="form-group">
+            <label class="text-dark">List</label>
+            <select class="arabic-select w-100 mb-3 h-30px">
+                <option value="1">Admin</option>
+                <option value="2">Owner</option>
+            </select>
 
-                </div>
+        </div>*@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add User</button>
+        <button type="submit" id="EditBtnCustomer" class="btn btn-primary">Edit Customer</button>
     </form>
 </div>

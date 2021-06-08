@@ -180,11 +180,13 @@
     <Compile Include="Models\BrandMasterVM.cs" />
     <Compile Include="Models\CompanyMasterVM.cs" />
     <Compile Include="Models\CustomerMasterVM.cs" />
+    <Compile Include="Models\DBContextMaster.cs" />
     <Compile Include="Models\EmployeeMasterVM.cs" />
     <Compile Include="Models\MasterTableHelperMasterVM.cs" />
     <Compile Include="Models\ProductGroupMasterVM.cs" />
     <Compile Include="Models\ProductMasterVM.cs" />
     <Compile Include="Models\WarehouseMasterVM.cs" />
+    <Compile Include="Models\XendaPOSDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

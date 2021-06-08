@@ -22,11 +22,11 @@ namespace XandaPOS.Business
                 {
                     CustomerMasterVM _customerMasterVM = new CustomerMasterVM();
                     _customerMasterVM.cust_id = item.cust_id;
-                    _customerMasterVM.cust_addr = item.cust_addr.Trim();
-                    _customerMasterVM.cust_name = item.cust_name.Trim();
-                    _customerMasterVM.cust_pin = item.cust_pin.Trim();
-                    _customerMasterVM.cust_phn = item.cust_phn.Trim();
-                    _customerMasterVM.cust_email = item.cust_email.Trim();
+                    _customerMasterVM.cust_addr = string.IsNullOrEmpty(item.cust_addr) ? "" : item.cust_addr.Trim();
+                    _customerMasterVM.cust_name = string.IsNullOrEmpty(item.cust_name) ? "" : item.cust_name.Trim();
+                    _customerMasterVM.cust_pin = string.IsNullOrEmpty(item.cust_pin) ? "" : item.cust_pin.Trim();
+                    _customerMasterVM.cust_phn = string.IsNullOrEmpty(item.cust_phn)? "": item.cust_phn.Trim();
+                    _customerMasterVM.cust_email = string.IsNullOrEmpty(item.cust_email) ? "" : item.cust_email.Trim();
 
                     lstCustomerMasterVM.Add(_customerMasterVM);
                 }
