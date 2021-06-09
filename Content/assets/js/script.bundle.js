@@ -26,25 +26,25 @@ jQuery(window).on('load', function(){
   jQuery('.se-pre-con').fadeOut("slow");
 });
 
-jQuery('#kt_notes_panel_toggle2').on("click", function(e){
-  window.location.replace("http://localhost:3000/admin/product-units-list.html");
+//jQuery('#kt_notes_panel_toggle2').on("click", function(e){
+//  window.location.replace("http://localhost:3000/admin/product-units-list.html");
  
   
-    // jQuery( document ).on('load' , readyFn );
-    // if( window.location.href == 'http://localhost:3000/admin/product-units-list.html'){
+//    // jQuery( document ).on('load' , readyFn );
+//    // if( window.location.href == 'http://localhost:3000/admin/product-units-list.html'){
       
-    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-    // }
-    // var hash= window.location.href;
+//    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//    // }
+//    // var hash= window.location.href;
    
-    // if(hash === 'http://localhost:3000/admin/product-units-list.html'){
-    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-    // }
-//     jQuery(hash).trigger('load');
-//     jQuery(hash).on('load', function(event) {
-//       jQuery('#kt_notes_panel').addClass('offcanvas-on');
-//   });
-  });
+//    // if(hash === 'http://localhost:3000/admin/product-units-list.html'){
+//    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//    // }
+////     jQuery(hash).trigger('load');
+////     jQuery(hash).on('load', function(event) {
+////       jQuery('#kt_notes_panel').addClass('offcanvas-on');
+////   });
+//  });
 
 // tabs open with click on another page
 window.onload = function(){  
@@ -533,9 +533,11 @@ jQuery(document).ready(function() {
       jQuery('#kt_color_panel').removeClass('offcanvas-on');
   });
 
-  jQuery('#kt_notes_panel_toggle').on("click", function(e){
-    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-});
+//Code Commented for Customer Master Add refer MasterData.js + CustomerMaster.cshtml
+//jQuery('#kt_notes_panel_toggle').on("click", function (e) {
+//    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//});
+
 jQuery('#kt_notes_panel_close').on("click", function(e){
     jQuery('#kt_notes_panel').removeClass('offcanvas-on');
    

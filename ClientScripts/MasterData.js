@@ -1,19 +1,10 @@
-//Load grid
-//function loadCustomerGrid() {
-//    //$.ajax({
-//    //    type: "GET",
-//    //    url: "/MasterData/LoadCustomerGrid",
-//    //    datatype: "json",
-//    //    contentType: "application/json; charset=utf-8",
-//    //    success: function (result) {
-//    //        $("#FlatGrid").ejGrid("dataSource", result);
-//    //    },
-//    //    error: function (args) {
-//    //        alert('error occurred');
-//    //    }
-//    //});
-//    alert("aasd");
-//} 
+
+
+//jQuery(document).ajaxStart(function () {
+//    jQuery('#pre-loader').show();
+//}).ajaxStop(function () {
+//    jQuery('#pre-loader').hide();
+//});
 
 function ReloadCustomerMasterData() {
     //Check the table class
@@ -27,7 +18,6 @@ function ReloadCustomerMasterData() {
         success: function (data) {
             //var item = '';
             jQuery.each(data.CustMasterList, function (i, item) {
-                //alert(item.cust_id);
                 var row =
                       "<tr class='kt-table-row kt-table-row-level-0'>"
                     + "<td id='CustName_" + item.cust_id + "'>" + item.cust_name + "</td>"
@@ -67,25 +57,42 @@ function ReloadCustomerMasterData() {
 }
 
 jQuery(document).ready(function () {
-    //AJAX call to controller
+
+    jQuery('#kt_notes_panel_toggle_customer').on("click", function (e) {
+
+        //The script has been used from script.bundle.js
+        //For all the Add Panel this code must be used to open the edit panel
+        jQuery('#kt_notes_panel').addClass('offcanvas-on');
+
+        //Cleaning the Customer Add Field
+        jQuery("#CustNameAdd").val('');
+        jQuery("#CustAddressAdd").val('');
+        jQuery("#CustPinCodeAdd").val('');
+        jQuery("#CustPhnDataAdd").val('');
+        jQuery("#CustEmailDataAdd").val('');
+
+        //Setting focus to the Customer Name field
+        jQuery("#CustNameAdd").focus();
+    });
+
+
     jQuery("#AddBtnCustomer").click(function () {
         var customerMaster = new Object(); //{}; 
         //customerMaster.cust_id = '';
-        customerMaster.cust_name = jQuery('#CustName').val();
-        customerMaster.cust_addr = jQuery('#CustAddress').val();
-        customerMaster.cust_pin = jQuery('#CustPinCode').val();
-        customerMaster.cust_phn = jQuery('#CustPhnData').val();
-        customerMaster.cust_email = jQuery('#CustEmailData').val();
+        customerMaster.cust_name = jQuery('#CustNameAdd').val();
+        customerMaster.cust_addr = jQuery('#CustAddressAdd').val();
+        customerMaster.cust_pin = jQuery('#CustPinCodeAdd').val();
+        customerMaster.cust_phn = jQuery('#CustPhnDataAdd').val();
+        customerMaster.cust_email = jQuery('#CustEmailDataAdd').val();
 
         jQuery.ajax({
             type: "POST",
             url: "/Masterdata/AddCustomer",
-            //data: '{custData : ' + JSON.stringify(customerMaster) + '}',
             data: JSON.stringify(customerMaster),
-            //data: "{ JSON.stringify(customerMaster) }",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
+                jQuery('#kt_notes_panel').removeClass('offcanvas-on');
                 ReloadCustomerMasterData();
             },
             failure: function (response){
@@ -101,12 +108,23 @@ jQuery(document).ready(function () {
     jQuery(document).on('click', '.CustEditButton', function () {
         ReloadCustomerMasterData();
 
+        //The script has been used from script.bundle.js
         //For all the Edit Panel this code must be used to open the edit panel
         jQuery('.editpopup').addClass('offcanvas-on');
 
+        //Cleaning Edit Panel Field for any old data
+        jQuery("#CustomerEditId").val('');
+        jQuery("#CustomerEditName").val('');
+        jQuery("#CustomerEditAddress").val('');
+        jQuery("#CustomerEditPin").val('');
+        jQuery("#CustomerEditPhone").val('');
+        jQuery("#CustomerEditEmail").val('');
+
+
         var buttonID = jQuery(this).attr("id");
-        //alert(buttonID);
         var id = buttonID.substring(9);
+
+        //jQuery('.modal_pre_loader').show();
         jQuery.ajax({
             url: "/Masterdata/GetCustomerDataForEdit",
             data: '{custID : ' + id + '}',
@@ -114,19 +132,20 @@ jQuery(document).ready(function () {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                
-                alert(data.CustMasterList[0].cust_id);
                 jQuery("#CustomerEditId").val(data.CustMasterList[0].cust_id);
                 jQuery("#CustomerEditName").val(data.CustMasterList[0].cust_name);
                 jQuery("#CustomerEditAddress").val(data.CustMasterList[0].cust_addr);
                 jQuery("#CustomerEditPin").val(data.CustMasterList[0].cust_pin);
                 jQuery("#CustomerEditPhone").val(data.CustMasterList[0].cust_phn);
                 jQuery("#CustomerEditEmail").val(data.CustMasterList[0].cust_email);
+                ajaxStop();
             },
             failure: function (response) {
+                //jQuery('.modal_pre_loader').hide();
                 //alert(response.responseText);
             },
             error: function (response) {
+                //jQuery('.modal_pre_loader').hide();
                 //Insert error handling code here
             }
         });
@@ -149,6 +168,7 @@ jQuery(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
+                jQuery('.editpopup').removeClass('offcanvas-on');
                 ReloadCustomerMasterData();
             },
             failure: function (response) {
@@ -161,37 +181,11 @@ jQuery(document).ready(function () {
         return false;
     });
 
-    //jQuery(".confirm-delete").on("click", function () { 
-    //jQuery(".CustDeleteButton").click(function () {
     jQuery(document).on('click', '.CustDeleteButton', function () {
         var buttonID = jQuery(this).attr("id");
         var custId = buttonID.substring(11);
-        //The code has been used from sweetalert1.js
-        //Swal.fire({
-        //    title: "Are you sure ?",
-        //    text: "Customer data will be deleted!",
-        //    type: "warning", showCancelButton: !0,
-        //    confirmButtonColor: "#3085d6",
-        //    cancelButtonColor: "#d33",
-        //    confirmButtonText: "Yes, delete it!",
-        //    confirmButtonClass: "btn btn-primary",
-        //    cancelButtonClass: "btn btn-danger ml-1",
-        //    buttonsStyling: !1
-        //}).then(function (t) {
-        //    t.value ?
-        //        Swal.fire({
-        //            type: "success",
-        //            title: "Deleted!",
-        //            text: "Customer Data has been deleted.",
-        //            confirmButtonClass: "btn btn-success"
-        //        })
-        //        : t.dismiss === Swal.DismissReason.cancel && Swal.fire
-        //            ({
-        //                title: "Cancelled", text: "Customer Data is safe :)",
-        //                type: "error", confirmButtonClass: "btn btn-success"
-        //            })
-        //});
 
+        //The code has been used from sweetalert1.js
         //This will launch the pop-up for deletion
         Swal.fire({
             title: "Are you sure ?",
@@ -205,10 +199,10 @@ jQuery(document).ready(function () {
             buttonsStyling: !1
         }).then(function (t) {
             //Here the click operation will be checked 
-            if (t.value) { //Deletion Process
+            if (t.value) { //Deletion Process - If 'Yes' is clicked
                 DeleteCustomer(custId);
             }
-            else {
+            else { //If 'No' is clicked
                 t.dismiss === Swal.DismissReason.cancel && Swal.fire
                     ({
                         type: "error",
@@ -221,18 +215,15 @@ jQuery(document).ready(function () {
     });
 
     function DeleteCustomer(custId) {
-        //var status = 0;
-        //alert('Deleting Customer id : ' + custId);
+
             jQuery.ajax({
                 type: "POST",
                 url: "/Masterdata/DeleteCustomer",
                 data: '{custId : ' + custId + ' }',
-                //data: JSON.stringify(customerMaster),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function () {
                     ReloadCustomerMasterData();
-                    //GetCustomer();
                     Swal.fire({
                         type: "success",
                         title: "Deleted!",
