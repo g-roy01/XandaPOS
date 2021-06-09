@@ -11,13 +11,16 @@ namespace XandaPOS.Edmx
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class POS_CUSTOMER_MASTER
     {
+        [Key]
         public int cust_id { get; set; }
         public string cust_name { get; set; }
         public string cust_addr { get; set; }
         public string cust_pin { get; set; }
         public string cust_phn { get; set; }
+        public string cust_email { get; set; }
     }
 }

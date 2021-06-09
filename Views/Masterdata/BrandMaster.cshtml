@@ -1,6 +1,6 @@
-﻿@model  List<XandaPOS.Models.CompanyMasterVM>
+﻿@model  List<XandaPOS.Models.BrandMasterVM>
 @{
-    ViewBag.Title = "CompanyMaster";
+    ViewBag.Title = "BrandMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-white mb-0 px-0 py-2">
-                    <li class="breadcrumb-item " aria-current="page">Company Master</li>
+                    <li class="breadcrumb-item " aria-current="page">Brand Master</li>
                     <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
             </nav>
@@ -33,7 +33,7 @@
                                 <div class="card-header align-items-center  border-bottom-dark px-0">
                                     <div class="card-title mb-0">
                                         <h3 class="card-label mb-0 font-weight-bold text-body">
-                                            Company Details
+                                            Customer Details
                                         </h3>
                                     </div>
                                     <div class="icons d-flex">
@@ -86,40 +86,42 @@
 
                                                 <thead class="text-body">
                                                     <tr>
-                                                        <th>Company Name</th>
-                                                        <th class="">Company Type</th>
-                                                        <th class="">Company Registration No</th>
+                                                        <th>Brand Name</th>
+                                                        <th class="">Brand Company</th>
+                                                        <th class="">Brand Product Group</th>
                                                         <th class="no-sort text-right">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
-                                                    @foreach (var company in Model)
-                                                    {
-                                                        <tr class="kt-table-row kt-table-row-level-0">
-                                                            <td>@company.comp_name</td>
-                                                            <td class="">
-                                                                @company.comp_type_name
-                                                            </td>
-                                                            <td class="">@company.comp_regn_no</td>
-                                                            <td>
-                                                                <div class="card-toolbar text-right">
-                                                                    <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="svg-icon">
-                                                                            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
-                                                                            </svg>
-                                                                        </span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-toggle="tooltip" title="" data-placement="right"
-                                                                           data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+                                                @foreach (var brand in Model)
+                                                {
+                                                    <tr class="kt-table-row kt-table-row-level-0">
 
-                                                        </tr>
-                                                    }
+                                                        <td>@brand.brand_name</td>
+                                                        <td class="">
+                                                            @brand.brand_company
+                                                        </td>
+                                                        <td class="">@brand.brand_product_group_name</td>
+                                                        
+                                                        <td>
+                                                            <div class="card-toolbar text-right">
+                                                                <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="svg-icon">
+                                                                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-toggle="tooltip" title="" data-placement="right"
+                                                                       data-original-title="Check out more demos">Edit</a>
+                                                                    <a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                }
 
                                                 </tbody>
                                             </table>
@@ -141,4 +143,3 @@
     </div>
 
 </div>
-

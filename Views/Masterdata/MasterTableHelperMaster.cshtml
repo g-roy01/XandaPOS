@@ -1,6 +1,6 @@
-﻿@model  List<XandaPOS.Models.CompanyMasterVM>
+﻿@model  List<XandaPOS.Models.MasterTableHelperMasterVM>
 @{
-    ViewBag.Title = "CompanyMaster";
+    ViewBag.Title = "MasterTableHelperMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-white mb-0 px-0 py-2">
-                    <li class="breadcrumb-item " aria-current="page">Company Master</li>
+                    <li class="breadcrumb-item " aria-current="page">Master Table Helper Master</li>
                     <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
             </nav>
@@ -33,7 +33,7 @@
                                 <div class="card-header align-items-center  border-bottom-dark px-0">
                                     <div class="card-title mb-0">
                                         <h3 class="card-label mb-0 font-weight-bold text-body">
-                                            Company Details
+                                            Master Table Helper Details
                                         </h3>
                                     </div>
                                     <div class="icons d-flex">
@@ -86,21 +86,24 @@
 
                                                 <thead class="text-body">
                                                     <tr>
-                                                        <th>Company Name</th>
-                                                        <th class="">Company Type</th>
-                                                        <th class="">Company Registration No</th>
+                                                        <th>Helper Name</th>
+                                                        <th class="">Master Data Type</th>
+                                                        <th class="">Helper Details</th>
+                                                        <th class="">Is Helper Active?</th>
                                                         <th class="no-sort text-right">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
-                                                    @foreach (var company in Model)
+                                                    
+                                                    @foreach (var masterHelper in Model)
                                                     {
                                                         <tr class="kt-table-row kt-table-row-level-0">
-                                                            <td>@company.comp_name</td>
+                                                            <td>@masterHelper.helper_name</td>
                                                             <td class="">
-                                                                @company.comp_type_name
+                                                                @masterHelper.helper_link_master_table
                                                             </td>
-                                                            <td class="">@company.comp_regn_no</td>
+                                                            <td class="">@masterHelper.helper_details</td>
+                                                            <td class="">@masterHelper.helper_active</td>
                                                             <td>
                                                                 <div class="card-toolbar text-right">
                                                                     <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

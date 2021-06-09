@@ -21,23 +21,36 @@ namespace XandaPOS
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include( 
                       "~/Content/assets/api/jqueryvalidate/jquery.validate.min.js",
-                      "~/Content/assets/api/apexcharts/apexcharts.js",
+                      //"~/Content/assets/api/apexcharts/apexcharts.js",
                       "~/Content/assets/api/apexcharts/scriptcharts.js",
                       "~/Content/assets/api/pace/pace.js",
                       "~/Content/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js",
                       "~/Content/assets/api/quill/quill.min.js",
+                       "~/Content/api/multiple-select/multiple-select.min.js",
                       "~/Content/assets/api/datatable/jquery.dataTables.min.js" 
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                     "~/Content/assets/js/plugin.bundle.min.js",
                     "~/Content/assets/js/bootstrap.bundle.min.js",
-                      "~/Content/assets/js/script.bundle.js"
+                    "~/Content/assets/js/sweetalert.js",
+                    "~/Content/assets/js/sweetalert1.js",
+                    "~/Content/assets/js/script.bundle.js"
                     ));
 
             bundles.Add(new ScriptBundle("~/bundles/masterDataJS").Include(
                    "~/ClientScripts/MasterData.js"
                    ));
+
+
+
+
+
+
+
+
+
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/assets/css/style.css",

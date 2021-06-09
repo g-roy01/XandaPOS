@@ -14,11 +14,11 @@ namespace XandaPOS.Edmx
     
     public partial class POS_PRODUCT_MASTER
     {
-        public string product_id { get; set; }
+        public int product_id { get; set; }
         public string product_name { get; set; }
-        public string product_type { get; set; }
-        public string product_group { get; set; }
-        public string product_company { get; set; }
+        public Nullable<int> product_type { get; set; }
+        public Nullable<int> product_group { get; set; }
+        public Nullable<int> product_company { get; set; }
         public string product_details { get; set; }
         public string product_image_link { get; set; }
     }
