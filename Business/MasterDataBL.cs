@@ -9,6 +9,8 @@ namespace XandaPOS.Business
 {
     public class MasterDataBL
     {
+        #region CUSTOMER MASTER
+
         // Load Customer Grid
         public List<CustomerMasterVM> LoadCustomerMasterGrid()
         {
@@ -34,7 +36,71 @@ namespace XandaPOS.Business
             } 
         }
 
+        public string AddCustomerMaster(POS_CUSTOMER_MASTER custData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_CUSTOMER_MASTER.Add(custData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
 
+        public string UpdateCustomerMaster(POS_CUSTOMER_MASTER custData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_CUSTOMER_MASTER.Where(x => x.cust_id == custData.cust_id).FirstOrDefault();
+                    retVal.cust_name = custData.cust_name;
+                    retVal.cust_addr = custData.cust_addr;
+                    retVal.cust_pin = custData.cust_pin;
+                    retVal.cust_phn = custData.cust_phn;
+                    retVal.cust_email = custData.cust_email;
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        public string DeleteCustomerMaster(int custId)
+        {
+            string message = "";
+            try
+            {
+                using(var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_CUSTOMER_MASTER.Where(x => x.cust_id == custId).FirstOrDefault();
+                    db.POS_CUSTOMER_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch(Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+        #endregion
+
+        #region BRAND MASTER
         //Load Brand Grid
         public List<BrandMasterVM> LoadBrandMasterGrid()
         {
@@ -63,8 +129,9 @@ namespace XandaPOS.Business
                 return lstBrandMasterVM;
             }
         }
+        #endregion
 
-
+        #region COMPANY MASTER
         //Load Company Grid
         public List<CompanyMasterVM> LoadCompanyMasterGrid(string companyType)
         {
@@ -122,8 +189,9 @@ namespace XandaPOS.Business
                 return lstCompanyMasterVM;
             }
         }
+        #endregion
 
-
+        #region EMPLOYEE MASTER
         //Load Employee Grid
         public List<EmployeeMasterVM> LoadEmployeeMasterGrid()
         {
@@ -151,8 +219,9 @@ namespace XandaPOS.Business
                 return lstEmployeeMasterVM;
             }
         }
+        #endregion
 
-
+        #region MASTER TABLE HELPER
         //Load Master Table Helper Grid
         public List<MasterTableHelperMasterVM> LoadMasterTableHelperMasterGrid()
         {
@@ -176,8 +245,9 @@ namespace XandaPOS.Business
                 return lstMasterTableHelperMasterVM;
             }
         }
+        #endregion
 
-
+        #region PRODUCT GROUP MASTER
         //Load Product Group Grid
         public List<ProductGroupMasterVM> LoadProductGroupMasterGrid()
         {
@@ -199,8 +269,9 @@ namespace XandaPOS.Business
                 return lstProductGroupMasterVM;
             }
         }
+        #endregion
 
-
+        #region PRODUCT MASTER
         //Load Product Grid
         public List<ProductMasterVM> LoadProductMasterGrid()
         {
@@ -245,8 +316,9 @@ namespace XandaPOS.Business
                 return lstProductMasterVM;
             }
         }
+        #endregion
 
-
+        #region WAREHOUSE MASTER
         //Load Warehouse Grid
         public List<WarehouseMasterVM> LoadWarehouseMasterGrid()
         {
@@ -271,7 +343,7 @@ namespace XandaPOS.Business
                 return lstWarehouseMasterVM;
             }
         }
-
+        #endregion
 
     }
 }

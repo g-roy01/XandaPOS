@@ -185,11 +185,11 @@ function checkedPoint() {
 jQuery(document).ready(function(){
   jQuery(".loadingmore").slice(0, 12).show();
   console.log( jQuery(".loadingmore").slice(0, 12).show().length);
-  var getnumber = document.getElementById('numbering').innerHTML;
+    var getnumber = 'x'; //document.getElementById('numbering').innerHTML;
  console.log(getnumber);
-  var totalgetnumber =jQuery(".loadingmore").length
-  document.getElementById('totalnumber').innerHTML=totalgetnumber;
-  console.log(totalgetnumber);
+  //var totalgetnumber =jQuery(".loadingmore").length
+  //document.getElementById('totalnumber').innerHTML=totalgetnumber;
+  //console.log(totalgetnumber);
   
   jQuery("#loadMore").on("click", function(e){
   e.preventDefault();

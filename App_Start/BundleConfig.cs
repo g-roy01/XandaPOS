@@ -21,7 +21,7 @@ namespace XandaPOS
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include( 
                       "~/Content/assets/api/jqueryvalidate/jquery.validate.min.js",
-                      "~/Content/assets/api/apexcharts/apexcharts.js",
+                      //"~/Content/assets/api/apexcharts/apexcharts.js",
                       "~/Content/assets/api/apexcharts/scriptcharts.js",
                       "~/Content/assets/api/pace/pace.js",
                       "~/Content/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js",

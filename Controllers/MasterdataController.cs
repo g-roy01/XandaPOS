@@ -19,130 +19,123 @@ namespace XandaPOS.Controllers
             return View();
         }
 
+        #region BrandMaster
         public ActionResult BrandMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadBrandMasterGrid());
         }
 
+        #endregion
+
+        #region CompanyMaster
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCompanyMasterGrid("ALL"));
         }
+        #endregion
 
+        #region CompanyVendorMaster
         public ActionResult CompanyVendorMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
         }
 
+        #endregion
+
+        #region CompanySupplierMaster
         public ActionResult CompanySupplierMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
         }
 
+        #endregion
+
+        #region CustomerMaster
         public ActionResult CustomerMaster()
         {
-            //CustomerMasterVM _customerMastervm = new CustomerMasterVM();
-
             //This will show the data layout for Customer Master
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCustomerMasterGrid());
         }
 
-        public ActionResult EmployeeMaster()
+        [HttpPost]
+        public JsonResult GetReloadCustomerMaster()
         {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadEmployeeMasterGrid());
-        }
-
-        public ActionResult MasterTableHelperMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadMasterTableHelperMasterGrid());
-        }
-
-        public ActionResult ProductGroupMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadProductGroupMasterGrid());
-        }
-
-        public ActionResult ProductMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadProductMasterGrid());
-        }
-
-
-        public ActionResult WarehouseMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadWarehouseMasterGrid());
+            MasterDataBL _custMaster = new MasterDataBL();
+            List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid();
+            return Json(new { CustMasterList = custMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
         public ActionResult AddCustomer(POS_CUSTOMER_MASTER custData)
         {
-            string message = "";
-            try
-            {
-                using (var db = new DBContextMaster())
-                {
-                    db.CustomerData.Add(custData); 
-                    db.SaveChanges();
-                }
-                message = "SUCCESS";
-            }
-            catch (Exception ex)
-            {
-                message = "FAIL";
-            }
+            MasterDataBL custMaster = new MasterDataBL();
+            string message = custMaster.AddCustomerMaster(custData);
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
-
 
         [HttpPost]
         public ActionResult EditCustomer(POS_CUSTOMER_MASTER custData)
         {
-            string message = "";
-            try
-            {
-                using (var db = new DBContextMaster())
-                {
-                    var retVal = db.CustomerData.Where(x => x.cust_id == custData.cust_id).FirstOrDefault();
-                    retVal.cust_name = custData.cust_name;
-                    retVal.cust_addr = custData.cust_addr;
-                    retVal.cust_pin = custData.cust_pin;
-                    retVal.cust_phn = custData.cust_phn;
-                    retVal.cust_email = custData.cust_email;
-                    db.SaveChanges();
-                }
-                message = "SUCCESS";
-            }
-            catch (Exception ex)
-            {
-                message = "FAIL";
-            }
-
-            //string message = "";
-            //try
-            //{
-            //    using (var db = new DBContextMaster())
-            //    {
-            //        db.Entry(custData).State = EntityState.Modified;
-            //        db.SaveChanges();
-            //    }
-            //    message = "SUCCESS";
-            //}
-            //catch(Exception ex)
-            //{
-            //    message = "FAIL";
-            //}
+            MasterDataBL custMaster = new MasterDataBL();
+            string message = custMaster.UpdateCustomerMaster(custData);
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
+
+        [HttpPost]
+        public ActionResult DeleteCustomer(int custId)
+        {
+            MasterDataBL custMaster = new MasterDataBL();
+            string message = custMaster.DeleteCustomerMaster(custId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+        #endregion
+
+        #region EmployeeMaster
+        public ActionResult EmployeeMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadEmployeeMasterGrid());
+        }
+        #endregion
+
+        #region MasterTableHelperMaster
+        public ActionResult MasterTableHelperMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadMasterTableHelperMasterGrid());
+        }
+        #endregion
+
+        #region ProductGroupMaster
+        public ActionResult ProductGroupMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadProductGroupMasterGrid());
+        }
+        #endregion
+
+        #region ProductMaster
+        public ActionResult ProductMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadProductMasterGrid());
+        }
+        #endregion
+
+        #region WarehouseMaster
+        public ActionResult WarehouseMaster()
+        {
+            MasterDataBL _masterDataBL = new MasterDataBL();
+            return View(_masterDataBL.LoadWarehouseMasterGrid());
+        }
+        #endregion
+
 
         //public JsonResult GetCustomer(string custId)
         //{
@@ -151,19 +144,12 @@ namespace XandaPOS.Controllers
         //    return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
         //}
 
+        //public ActionResult LoadCustomerGrid()
+        //{
+        //    //var datasource = OrderRepository.GetAllRecords().ToList();
 
-
-
-
-
-
-        public ActionResult LoadCustomerGrid()
-        {
-            //var datasource = OrderRepository.GetAllRecords().ToList();
-
-            return Json("s", JsonRequestBehavior.AllowGet);
-        }
-
+        //    return Json("s", JsonRequestBehavior.AllowGet);
+        //}
 
         //public ActionResult ProductGroupMaster()
         //{
