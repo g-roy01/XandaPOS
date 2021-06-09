@@ -59,14 +59,14 @@ namespace XandaPOS.Controllers
         {
             //This will show the data layout for Customer Master
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCustomerMasterGrid());
+            return View(_masterDataBL.LoadCustomerMasterGrid(0));
         }
 
         [HttpPost]
         public JsonResult GetReloadCustomerMaster()
         {
             MasterDataBL _custMaster = new MasterDataBL();
-            List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid();
+            List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid(0);
             return Json(new { CustMasterList = custMasterList, JsonRequestBehavior.AllowGet });
             //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
@@ -77,6 +77,14 @@ namespace XandaPOS.Controllers
             MasterDataBL custMaster = new MasterDataBL();
             string message = custMaster.AddCustomerMaster(custData);
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetCustomerDataForEdit(int custID)
+        {
+            MasterDataBL _custMaster = new MasterDataBL();
+            List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid(custID);
+            return Json(new { CustMasterList = custMasterList, JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]

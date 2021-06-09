@@ -1,25 +1,22 @@
 //Load grid
-function loadCustomerGrid() {
-    //$.ajax({
-    //    type: "GET",
-    //    url: "/MasterData/LoadCustomerGrid",
-    //    datatype: "json",
-    //    contentType: "application/json; charset=utf-8",
-    //    success: function (result) {
-    //        $("#FlatGrid").ejGrid("dataSource", result);
-    //    },
-    //    error: function (args) {
-    //        alert('error occurred');
-    //    }
-    //});
-    alert("aasd");
-} 
+//function loadCustomerGrid() {
+//    //$.ajax({
+//    //    type: "GET",
+//    //    url: "/MasterData/LoadCustomerGrid",
+//    //    datatype: "json",
+//    //    contentType: "application/json; charset=utf-8",
+//    //    success: function (result) {
+//    //        $("#FlatGrid").ejGrid("dataSource", result);
+//    //    },
+//    //    error: function (args) {
+//    //        alert('error occurred');
+//    //    }
+//    //});
+//    alert("aasd");
+//} 
 
 function ReloadCustomerMasterData() {
-    //jQuery.ReloadCustomerMasterData = function () {
-
-    alert("abc");
-
+    //Check the table class
     jQuery(".tableCustomerLoad tbody tr").remove();
 
     jQuery.ajax({
@@ -28,9 +25,6 @@ function ReloadCustomerMasterData() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (data) {
-            //alert('1');
-            //alert(data.CustMasterList);
-            //alert(data);
             //var item = '';
             jQuery.each(data.CustMasterList, function (i, item) {
                 //alert(item.cust_id);
@@ -63,7 +57,7 @@ function ReloadCustomerMasterData() {
             });
         },
         failure: function (response) {
-            alert(response.responseText);
+            //alert(response.responseText);
         },
         error: function (response) {
             //Insert error handling code here
@@ -75,7 +69,6 @@ function ReloadCustomerMasterData() {
 jQuery(document).ready(function () {
     //AJAX call to controller
     jQuery("#AddBtnCustomer").click(function () {
-        //ReloadCustomerMasterData();
         var customerMaster = new Object(); //{}; 
         //customerMaster.cust_id = '';
         customerMaster.cust_name = jQuery('#CustName').val();
@@ -94,12 +87,9 @@ jQuery(document).ready(function () {
             contentType: "application/json; charset=utf-8",
             success: function (msg) {
                 ReloadCustomerMasterData();
-                //alert(msg);
-                //GetCustomer();
-                //ReloadCustomerMasterData1();
             },
             failure: function (response){
-                alert(response.responseText);
+                //alert(response.responseText);
             }, 
             error: function (response){
                 //Insert error handling code here
@@ -109,76 +99,40 @@ jQuery(document).ready(function () {
     });
 
     jQuery(document).on('click', '.CustEditButton', function () {
-        alert('1');
         ReloadCustomerMasterData();
+
+        //For all the Edit Panel this code must be used to open the edit panel
+        jQuery('.editpopup').addClass('offcanvas-on');
+
         var buttonID = jQuery(this).attr("id");
+        //alert(buttonID);
         var id = buttonID.substring(9);
-        jQuery("#CustomerEditId")
-            .val(id.trim());
-
-        jQuery("#CustomerEditName")
-            .val(
-                jQuery("#CustName_" + id.trim()).text().trim()
-            );
-
-        jQuery("#CustomerEditAddress")
-            .val(
-                jQuery("#CustAddr_" + id.trim()).text().trim()
-            );
-
-        jQuery("#CustomerEditPin")
-            .val(
-                jQuery("#CustPin_" + id.trim()).text().trim()
-            );
-
-        jQuery("#CustomerEditPhone")
-            .val(
-                jQuery("#CustPin_" + id.trim()).text().trim()
-            );
-
-        jQuery("#CustomerEditEmail")
-            .val(
-                jQuery("#CustEmail_" + id.trim()).text().trim()
-            );
+        jQuery.ajax({
+            url: "/Masterdata/GetCustomerDataForEdit",
+            data: '{custID : ' + id + '}',
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                
+                alert(data.CustMasterList[0].cust_id);
+                jQuery("#CustomerEditId").val(data.CustMasterList[0].cust_id);
+                jQuery("#CustomerEditName").val(data.CustMasterList[0].cust_name);
+                jQuery("#CustomerEditAddress").val(data.CustMasterList[0].cust_addr);
+                jQuery("#CustomerEditPin").val(data.CustMasterList[0].cust_pin);
+                jQuery("#CustomerEditPhone").val(data.CustMasterList[0].cust_phn);
+                jQuery("#CustomerEditEmail").val(data.CustMasterList[0].cust_email);
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
     });
-
-   
-
-    //jQuery(".CustEditButton").click(function () {
-    //    alert('1');
-    //    ReloadCustomerMasterData();
-    //    var buttonID = jQuery(this).attr("id");
-    //    var id = buttonID.substring(9);
-    //    jQuery("#CustomerEditId")
-    //        .val(id.trim());
-
-    //    jQuery("#CustomerEditName")
-    //        .val(
-    //            jQuery("#CustName_" + id.trim()).text().trim()
-    //    );
-
-    //    jQuery("#CustomerEditAddress")
-    //        .val(
-    //            jQuery("#CustAddr_" + id.trim()).text().trim()
-    //    );
-
-    //    jQuery("#CustomerEditPin")
-    //        .val(
-    //            jQuery("#CustPin_" + id.trim()).text().trim()
-    //    );
-
-    //    jQuery("#CustomerEditPhone")
-    //        .val(
-    //            jQuery("#CustPin_" + id.trim()).text().trim()
-    //    );
-
-    //    jQuery("#CustomerEditEmail")
-    //        .val(
-    //            jQuery("#CustEmail_" + id.trim()).text().trim()
-    //    );
-
-    //});
-
+    
     jQuery("#EditBtnCustomer").click(function () {
         var customerMaster = new Object(); 
         customerMaster.cust_id = jQuery('#CustomerEditId').val();
@@ -191,15 +145,14 @@ jQuery(document).ready(function () {
         jQuery.ajax({
             type: "POST",
             url: "/Masterdata/EditCustomer",
-            //data: '{custid : ' + customerMaster.cust_id + ' ,' + JSON.stringify(customerMaster) + '}',
             data: JSON.stringify(customerMaster),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                //GetCustomer();
+                ReloadCustomerMasterData();
             },
             failure: function (response) {
-                alert(response.responseText);
+                //alert(response.responseText);
             },
             error: function (response) {
                 //Insert error handling code here
@@ -208,34 +161,108 @@ jQuery(document).ready(function () {
         return false;
     });
 
-    jQuery(".CustDeleteButton").click(function () {
-
+    //jQuery(".confirm-delete").on("click", function () { 
+    //jQuery(".CustDeleteButton").click(function () {
+    jQuery(document).on('click', '.CustDeleteButton', function () {
         var buttonID = jQuery(this).attr("id");
         var custId = buttonID.substring(11);
-        jQuery.ajax({
-            type: "POST",
-            url: "/Masterdata/DeleteCustomer",
-            data: '{custId : ' + custId + ' }',
-            //data: JSON.stringify(customerMaster),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                //GetCustomer();
-            },
-            failure: function (response) {
-                alert(response.responseText);
-            },
-            error: function (response) {
-                //Insert error handling code here
+        //The code has been used from sweetalert1.js
+        //Swal.fire({
+        //    title: "Are you sure ?",
+        //    text: "Customer data will be deleted!",
+        //    type: "warning", showCancelButton: !0,
+        //    confirmButtonColor: "#3085d6",
+        //    cancelButtonColor: "#d33",
+        //    confirmButtonText: "Yes, delete it!",
+        //    confirmButtonClass: "btn btn-primary",
+        //    cancelButtonClass: "btn btn-danger ml-1",
+        //    buttonsStyling: !1
+        //}).then(function (t) {
+        //    t.value ?
+        //        Swal.fire({
+        //            type: "success",
+        //            title: "Deleted!",
+        //            text: "Customer Data has been deleted.",
+        //            confirmButtonClass: "btn btn-success"
+        //        })
+        //        : t.dismiss === Swal.DismissReason.cancel && Swal.fire
+        //            ({
+        //                title: "Cancelled", text: "Customer Data is safe :)",
+        //                type: "error", confirmButtonClass: "btn btn-success"
+        //            })
+        //});
+
+        //This will launch the pop-up for deletion
+        Swal.fire({
+            title: "Are you sure ?",
+            text: "Customer data will be deleted!",
+            type: "warning", showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonClass: "btn btn-primary",
+            cancelButtonClass: "btn btn-danger ml-1",
+            buttonsStyling: !1
+        }).then(function (t) {
+            //Here the click operation will be checked 
+            if (t.value) { //Deletion Process
+                DeleteCustomer(custId);
             }
-        });
-        return false;
+            else {
+                t.dismiss === Swal.DismissReason.cancel && Swal.fire
+                    ({
+                        type: "error",
+                        title: "Cancelled!",
+                        text: "Customer Data is safe :)",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });    
     });
 
-    
-
+    function DeleteCustomer(custId) {
+        //var status = 0;
+        //alert('Deleting Customer id : ' + custId);
+            jQuery.ajax({
+                type: "POST",
+                url: "/Masterdata/DeleteCustomer",
+                data: '{custId : ' + custId + ' }',
+                //data: JSON.stringify(customerMaster),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    ReloadCustomerMasterData();
+                    //GetCustomer();
+                    Swal.fire({
+                        type: "success",
+                        title: "Deleted!",
+                        text: "Customer Data has been deleted.",
+                        confirmButtonClass: "btn btn-success"
+                    });
+                },
+                failure: function (response) {
+                    Swal.fire
+                        ({
+                            type: "warning",
+                            title: "Deletion Fail!",
+                            text: "Customer Data cannot been deleted, as server cannot process the request currently.",
+                            confirmButtonClass: "btn btn-success"
+                        });
+                },
+                error: function (response) {
+                    Swal.fire
+                        ({
+                            type: "warning",
+                            title: "Deletion Fail!",
+                            text: "Customer Data cannot been deleted, as unexpected condition occured!",
+                            confirmButtonClass: "btn btn-success"
+                        });
+                }
+            });
+        return false;
+    }
 });
-
+    
 //Insert data
 
 //Update data

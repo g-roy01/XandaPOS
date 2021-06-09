@@ -541,9 +541,10 @@ jQuery('#kt_notes_panel_close').on("click", function(e){
    
 });
 
-jQuery('.click-edit').on("click",function(){
-  jQuery('.editpopup').addClass('offcanvas-on');
-});
+//Code Commented for Customer Master Edit refer MasterData.js + CustomerMaster.cshtml
+//jQuery('.click-edit').on("click",function(){
+//  jQuery('.editpopup').addClass('offcanvas-on');
+//});
 
 jQuery('.kt_notes_panel_toggle').on("click", function(e){
   jQuery('.kt_notes_panel').addClass('offcanvas-on');

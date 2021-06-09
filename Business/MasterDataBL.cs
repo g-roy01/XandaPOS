@@ -12,14 +12,23 @@ namespace XandaPOS.Business
         #region CUSTOMER MASTER
 
         // Load Customer Grid
-        public List<CustomerMasterVM> LoadCustomerMasterGrid()
+        public List<CustomerMasterVM> LoadCustomerMasterGrid(int custID)
         {
             List<CustomerMasterVM> lstCustomerMasterVM = new List<CustomerMasterVM>();
 
             using (var db = new xandaposEntities())
             {
                 var posCustomerMaster = db.POS_CUSTOMER_MASTER;
+
                 var list = posCustomerMaster.ToList();
+
+                if (custID > 0) //If we want a single data
+                {
+                    list.Clear();
+                    var custData = posCustomerMaster.Where(x => x.cust_id == custID).FirstOrDefault();
+                    list.Add(custData);
+                }
+                
                 foreach (var item in list)
                 {
                     CustomerMasterVM _customerMasterVM = new CustomerMasterVM();
