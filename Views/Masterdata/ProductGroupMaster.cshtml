@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="icons d-flex">
                                         <button class="btn ml-2 p-0"
-                                                id="kt_notes_panel_toggle" data-toggle="tooltip" title="" data-placement="right"
+                                                id="kt_notes_panel_toggle_prodGrp" data-toggle="tooltip" title="" data-placement="right"
                                                 data-original-title="Check out more demos">
                                             <span class="bg-secondary h-30px font-size-h5 w-30px d-flex align-items-center justify-content-center  rounded-circle shadow-sm ">
 
@@ -83,7 +83,7 @@
                                 <div class="card-body">
                                     <div>
                                         <div class=" table-responsive" id="printableTable">
-                                            <table id="mainTable" class="display ">
+                                            <table id="mainTable" class="display tableProdGrpLoad">
 
                                                 <thead class="text-body">
                                                     <tr>
@@ -95,29 +95,28 @@
                                                 <tbody class="kt-table-tbody text-dark">
                                                     @foreach (var prodGrp in Model)
                                                     {
-                                                        <tr class="kt-table-row kt-table-row-level-0">
-                                                            <td>@prodGrp.prod_grp_name</td>
-                                                            <td class="">
-                                                                @prodGrp.prod_grp_type
-                                                            </td>
-                                                            <td>
-                                                                <div class="card-toolbar text-right">
-                                                                    <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="svg-icon">
-                                                                            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
-                                                                            </svg>
-                                                                        </span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-toggle="tooltip" title="" data-placement="right"
-                                                                           data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
+                                                    <tr class="kt-table-row kt-table-row-level-0">
 
-                                                        </tr>
+                                                        <td id="@( "ProdGrpName_" +prodGrp.prod_grp_id)">@prodGrp.prod_grp_name</td>
+                                                        <td class="" id="@( "ProdGrpTypeName_" +prodGrp.prod_grp_id)">@prodGrp.prod_grp_type</td>
+                                                        <td>
+                                                            <div class="card-toolbar text-right">
+                                                                <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="svg-icon">
+                                                                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit ProdGrpEditButton" id="@( "ProdGrpEdit_" +prodGrp.prod_grp_id)" data-toggle="tooltip" title="" data-placement="right"
+                                                                       data-original-title="Check out more demos">Edit</a>
+                                                                    <a class="dropdown-item confirm-delete ProdGrpDeleteButton" id="@( "ProdGrpDelete_" +prodGrp.prod_grp_id)" title="Delete" href="#">Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
                                                     }
 
                                                 </tbody>
@@ -139,5 +138,81 @@
 
     </div>
 
+</div>
+
+
+
+@*ADD PRODUCT GROUP MASTER PANEL*@
+<div id="kt_notes_panel" class="offcanvas offcanvas-right kt-color-panel p-5">
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Add Product Group
+        </h4>
+        <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary" id="kt_notes_panel_close">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </a>
+    </div>
+    <form id="myform">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="text-dark">Product Group Name</label>
+                    <input type="text" name="ProdGrpName" class="form-control" id="ProdGrpNameAdd">
+                    <small class="form-text text-muted">Please Enter Product Group Name</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Product Group Type</label>
+                    <input type="text" name="ProdGrpType" class="form-control" id="ProdGrpTypeAdd">
+                    <small class="form-text text-muted">Please Enter Product Group Type</small>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="AddBtnProdGrp" class="btn btn-primary">Add Product Group</button>
+    </form>
+</div>
+
+@*EDIT PRODUCT GROUP MASTER PANEL*@
+<div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Edit Product Group
+        </h4>
+        <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary kt_notes_panel_close" id="kt_notes_panel_close2">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </a>
+    </div>
+    <form id="myform1">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="form-group">
+                    @*<label class="text-dark">Customer ID</label>*@
+                    <input type="text" name="text" class="form-control" value="" id="ProdGrpEditId" style="visibility:hidden;">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Product Group Name</label>
+                    <input type="text" name="text" class="form-control" value="abc" id="ProdGrpEditName">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Product Group Type</label>
+                    <input type="text" name="text" class="form-control" value="" id="ProdGrpEditType">
+
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="EditBtnProdGrp" class="btn btn-primary">Edit Product Group</button>
+    </form>
 </div>
 
