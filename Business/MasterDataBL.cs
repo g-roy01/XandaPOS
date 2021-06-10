@@ -444,22 +444,127 @@ namespace XandaPOS.Business
 
         #region MASTER TABLE HELPER
         //Load Master Table Helper Grid
-        public List<MasterTableHelperMasterVM> LoadMasterTableHelperMasterGrid()
+        public List<MasterTableHelperMasterVM> LoadMasterTableHelperMasterGrid(int helperID, string operationType = "GET")
         {
             List<MasterTableHelperMasterVM> lstMasterTableHelperMasterVM = new List<MasterTableHelperMasterVM>();
 
             using (var db = new xandaposEntities())
             {
                 var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
+
                 var list = posMasterTableHelperMaster.ToList();
+
+                if (helperID > 0) //If we want a single data
+                {
+                    list.Clear();
+                    var custData = posMasterTableHelperMaster.Where(x => x.helper_id == helperID).FirstOrDefault();
+                    list.Add(custData);
+                }
+
                 foreach (var item in list)
                 {
                     MasterTableHelperMasterVM _masterTableHelperMasterVM = new MasterTableHelperMasterVM();
                     _masterTableHelperMasterVM.helper_id = item.helper_id;
                     _masterTableHelperMasterVM.helper_name = item.helper_name.Trim();
                     _masterTableHelperMasterVM.helper_details = item.helper_details.Trim();
-                    _masterTableHelperMasterVM.helper_link_master_table = item.helper_link_master_table.Trim();
-                    _masterTableHelperMasterVM.helper_active = item.helper_active;
+
+
+                    //_masterTableHelperMasterVM.helper_link_master_table = item.helper_link_master_table.Trim();
+                    if (operationType.Equals("GET"))
+                    {
+                        if (item.helper_link_master_table.Trim().Equals("POS_BRAND_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Brand Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_COMPANY_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Company Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_CUSTOMER_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Customer Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_EMPLOYEE_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Employee Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_PRODUCT_GROUP_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Product Group Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_PRODUCT_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Product Master";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_WAREHOUSE_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Warehouse Master";
+                        }
+                        else
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "NA";
+                        }
+
+
+                        if (item.helper_active) //Boolean Field
+                        {
+                            _masterTableHelperMasterVM.helper_active = "Helper Active";
+                        }
+                        else
+                        {
+                            _masterTableHelperMasterVM.helper_active = "Helper Deactive";
+                        }
+                    }
+                    //_masterTableHelperMasterVM.helper_active = item.helper_active;
+
+                    if (operationType.Equals("EDIT"))
+                    {
+                        if (item.helper_link_master_table.Trim().Equals("POS_BRAND_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Brand";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_COMPANY_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Company";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_CUSTOMER_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Customer";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_EMPLOYEE_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Employee";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_PRODUCT_GROUP_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "ProductGroup";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_PRODUCT_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Product";
+                        }
+                        else if (item.helper_link_master_table.Trim().Equals("POS_WAREHOUSE_MASTER"))
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "Warehouse";
+                        }
+                        else
+                        {
+                            _masterTableHelperMasterVM.helper_link_master_table = "NA";
+                        }
+
+
+                        if (item.helper_active) //Boolean Field
+                        {
+                            _masterTableHelperMasterVM.helper_active = "true";
+                        }
+                        else
+                        {
+                            _masterTableHelperMasterVM.helper_active = "false";
+                        }
+                    }
+
+
+
 
                     lstMasterTableHelperMasterVM.Add(_masterTableHelperMasterVM);
                 }
@@ -475,6 +580,50 @@ namespace XandaPOS.Business
             {
                 using (var db = new xandaposEntities())
                 {
+                    //Filtering the Master Table Data
+                    if(helperData.helper_link_master_table.Trim().Equals("Brand"))
+                    {
+                        helperData.helper_link_master_table = "POS_BRAND_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Company"))
+                    {
+                        helperData.helper_link_master_table = "POS_COMPANY_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Customer"))
+                    {
+                        helperData.helper_link_master_table = "POS_CUSTOMER_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Employee"))
+                    {
+                        helperData.helper_link_master_table = "POS_EMPLOYEE_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("ProductGroup"))
+                    {
+                        helperData.helper_link_master_table = "POS_PRODUCT_GROUP_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Product"))
+                    {
+                        helperData.helper_link_master_table = "POS_PRODUCT_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Warehouse"))
+                    {
+                        helperData.helper_link_master_table = "POS_WAREHOUSE_MASTER";
+                    }
+                    else
+                    {
+                        helperData.helper_link_master_table = "NA";
+                    }
+
+                    //Filtering the Helper Active Data
+                    if(helperData.helper_active) //Boolean Field
+                    {
+                        helperData.helper_active = true;
+                    }
+                    else
+                    {
+                        helperData.helper_active = false;
+                    }
+
                     db.POS_MASTER_TABLE_HELPER.Add(helperData);
                     db.SaveChanges();
                 }
@@ -500,8 +649,52 @@ namespace XandaPOS.Business
                     retVal.helper_id = helperData.helper_id;
                     retVal.helper_name = helperData.helper_name.Trim();
                     retVal.helper_details = helperData.helper_details.Trim();
-                    retVal.helper_link_master_table = helperData.helper_link_master_table.Trim();
-                    retVal.helper_active = helperData.helper_active;
+
+                    //retVal.helper_link_master_table = helperData.helper_link_master_table.Trim();
+                    
+                    if (helperData.helper_link_master_table.Trim().Equals("Brand"))
+                    {
+                        retVal.helper_link_master_table = "POS_BRAND_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Company"))
+                    {
+                        retVal.helper_link_master_table = "POS_COMPANY_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Customer"))
+                    {
+                        retVal.helper_link_master_table = "POS_CUSTOMER_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Employee"))
+                    {
+                        retVal.helper_link_master_table = "POS_EMPLOYEE_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("ProductGroup"))
+                    {
+                        retVal.helper_link_master_table = "POS_PRODUCT_GROUP_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Product"))
+                    {
+                        retVal.helper_link_master_table = "POS_PRODUCT_MASTER";
+                    }
+                    else if (helperData.helper_link_master_table.Trim().Equals("Warehouse"))
+                    {
+                        retVal.helper_link_master_table = "POS_WAREHOUSE_MASTER";
+                    }
+                    else
+                    {
+                        retVal.helper_link_master_table = "NA";
+                    }
+
+                    //Filtering the Helper Active Data
+                    if (helperData.helper_active) //Boolean Field
+                    {
+                        retVal.helper_active = true;
+                    }
+                    else
+                    {
+                        retVal.helper_active = false;
+                    }
+                    //retVal.helper_active = helperData.helper_active;
 
                     db.SaveChanges();
                 }

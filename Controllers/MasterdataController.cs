@@ -155,7 +155,48 @@ namespace XandaPOS.Controllers
         public ActionResult MasterTableHelperMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadMasterTableHelperMasterGrid());
+            return View(_masterDataBL.LoadMasterTableHelperMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadHelperMaster()
+        {
+            MasterDataBL _helperMaster = new MasterDataBL();
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(0);
+            return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddHelper(POS_MASTER_TABLE_HELPER helperData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.AddMasterTableHelperMaster(helperData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetHelperDataForEdit(int helperID)
+        {
+            MasterDataBL _helperMaster = new MasterDataBL();
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID,"EDIT");
+            return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditHelper(POS_MASTER_TABLE_HELPER helperData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.UpdateMasterTableHelperMaster(helperData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteHelper(int helperId)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.DeleteMasterTableHelperMaster(helperId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
