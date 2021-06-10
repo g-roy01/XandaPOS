@@ -26,25 +26,25 @@ jQuery(window).on('load', function(){
   jQuery('.se-pre-con').fadeOut("slow");
 });
 
-jQuery('#kt_notes_panel_toggle2').on("click", function(e){
-  window.location.replace("http://localhost:3000/admin/product-units-list.html");
+//jQuery('#kt_notes_panel_toggle2').on("click", function(e){
+//  window.location.replace("http://localhost:3000/admin/product-units-list.html");
  
   
-    // jQuery( document ).on('load' , readyFn );
-    // if( window.location.href == 'http://localhost:3000/admin/product-units-list.html'){
+//    // jQuery( document ).on('load' , readyFn );
+//    // if( window.location.href == 'http://localhost:3000/admin/product-units-list.html'){
       
-    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-    // }
-    // var hash= window.location.href;
+//    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//    // }
+//    // var hash= window.location.href;
    
-    // if(hash === 'http://localhost:3000/admin/product-units-list.html'){
-    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-    // }
-//     jQuery(hash).trigger('load');
-//     jQuery(hash).on('load', function(event) {
-//       jQuery('#kt_notes_panel').addClass('offcanvas-on');
-//   });
-  });
+//    // if(hash === 'http://localhost:3000/admin/product-units-list.html'){
+//    //    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//    // }
+////     jQuery(hash).trigger('load');
+////     jQuery(hash).on('load', function(event) {
+////       jQuery('#kt_notes_panel').addClass('offcanvas-on');
+////   });
+//  });
 
 // tabs open with click on another page
 window.onload = function(){  
@@ -185,11 +185,11 @@ function checkedPoint() {
 jQuery(document).ready(function(){
   jQuery(".loadingmore").slice(0, 12).show();
   console.log( jQuery(".loadingmore").slice(0, 12).show().length);
-  var getnumber = document.getElementById('numbering').innerHTML;
+    var getnumber = 'x'; //document.getElementById('numbering').innerHTML;
  console.log(getnumber);
-  var totalgetnumber =jQuery(".loadingmore").length
-  document.getElementById('totalnumber').innerHTML=totalgetnumber;
-  console.log(totalgetnumber);
+  //var totalgetnumber =jQuery(".loadingmore").length
+  //document.getElementById('totalnumber').innerHTML=totalgetnumber;
+  //console.log(totalgetnumber);
   
   jQuery("#loadMore").on("click", function(e){
   e.preventDefault();
@@ -533,17 +533,20 @@ jQuery(document).ready(function() {
       jQuery('#kt_color_panel').removeClass('offcanvas-on');
   });
 
-  jQuery('#kt_notes_panel_toggle').on("click", function(e){
-    jQuery('#kt_notes_panel').addClass('offcanvas-on');
-});
+//Code Commented for Customer Master Add refer MasterData.js + CustomerMaster.cshtml
+//jQuery('#kt_notes_panel_toggle').on("click", function (e) {
+//    jQuery('#kt_notes_panel').addClass('offcanvas-on');
+//});
+
 jQuery('#kt_notes_panel_close').on("click", function(e){
     jQuery('#kt_notes_panel').removeClass('offcanvas-on');
    
 });
 
-jQuery('.click-edit').on("click",function(){
-  jQuery('.editpopup').addClass('offcanvas-on');
-});
+//Code Commented for Customer Master Edit refer MasterData.js + CustomerMaster.cshtml
+//jQuery('.click-edit').on("click",function(){
+//  jQuery('.editpopup').addClass('offcanvas-on');
+//});
 
 jQuery('.kt_notes_panel_toggle').on("click", function(e){
   jQuery('.kt_notes_panel').addClass('offcanvas-on');
@@ -642,19 +645,19 @@ jQuery('.kt_notes_panel_close').on("click", function(e){
 });
 jQuery(document).on('click',function() {
   var sel22 = document.getElementById('typeselect');
-  console.log('value', sel22.value)
+  //console.log('value', sel22.value)
    /// show and hide div on the click by value basis
   //  var cliked = document.getElementById(sel.value);
-   for ( var i = 1; i <= 7; i++){
-     if(sel22.value == i){
-     console.log("aya rye" ,i);
-      jQuery(`#${i}`).css("display", "block");
+  // for ( var i = 1; i <= 7; i++){
+  //   if(sel22.value == i){
+  //   console.log("aya rye" ,i);
+  //    jQuery(`#${i}`).css("display", "block");
       
-     }else{
+  //   }else{
 
-     jQuery(`#${i}`).css("display", "none");
-   }
-  }
+  //   jQuery(`#${i}`).css("display", "none");
+  // }
+  //}
   
 
 
@@ -837,66 +840,67 @@ for (var i = 0; i < operator.length; i++) {
 }
 
 // on click of 'equal' button
-result.addEventListener("click", function() {
+//result.addEventListener("click", function() {
 
-  // this is the string that we will be processing eg. -10+26+33-56*34/23
-  var inputString = input.innerHTML;
+//  // this is the string that we will be processing eg. -10+26+33-56*34/23
+//  var inputString = input.innerHTML;
 
-  // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
-  var numbers = inputString.split(/\+|\-|\×|\÷/g);
+//  // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
+//  var numbers = inputString.split(/\+|\-|\×|\÷/g);
 
-  // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
-  // first we replace all the numbers and dot with empty string and then split
-  var operators = inputString.replace(/[0-9]|\./g, "").split("");
+//  // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
+//  // first we replace all the numbers and dot with empty string and then split
+//  var operators = inputString.replace(/[0-9]|\./g, "").split("");
 
-  console.log(inputString);
-  console.log(operators);
-  console.log(numbers);
-  console.log("----------------------------");
+//  console.log(inputString);
+//  console.log(operators);
+//  console.log(numbers);
+//  console.log("----------------------------");
 
-  // now we are looping through the array and doing one operation at a time.
-  // first divide, then multiply, then subtraction and then addition
-  // as we move we are alterning the original numbers and operators array
-  // the final element remaining in the array will be the output
+//  // now we are looping through the array and doing one operation at a time.
+//  // first divide, then multiply, then subtraction and then addition
+//  // as we move we are alterning the original numbers and operators array
+//  // the final element remaining in the array will be the output
 
-  var divide = operators.indexOf("÷");
-  while (divide != -1) {
-    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
-    operators.splice(divide, 1);
-    divide = operators.indexOf("÷");
-  }
+//  var divide = operators.indexOf("÷");
+//  while (divide != -1) {
+//    numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
+//    operators.splice(divide, 1);
+//    divide = operators.indexOf("÷");
+//  }
 
-  var multiply = operators.indexOf("×");
-  while (multiply != -1) {
-    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
-    operators.splice(multiply, 1);
-    multiply = operators.indexOf("×");
-  }
+//  var multiply = operators.indexOf("×");
+//  while (multiply != -1) {
+//    numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
+//    operators.splice(multiply, 1);
+//    multiply = operators.indexOf("×");
+//  }
 
-  var subtract = operators.indexOf("-");
-  while (subtract != -1) {
-    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
-    operators.splice(subtract, 1);
-    subtract = operators.indexOf("-");
-  }
+//  var subtract = operators.indexOf("-");
+//  while (subtract != -1) {
+//    numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
+//    operators.splice(subtract, 1);
+//    subtract = operators.indexOf("-");
+//  }
 
-  var add = operators.indexOf("+");
-  while (add != -1) {
-    // using parseFloat is necessary, otherwise it will result in string concatenation :)
-    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
-    operators.splice(add, 1);
-    add = operators.indexOf("+");
-  }
+//  var add = operators.indexOf("+");
+//  while (add != -1) {
+//    // using parseFloat is necessary, otherwise it will result in string concatenation :)
+//    numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
+//    operators.splice(add, 1);
+//    add = operators.indexOf("+");
+//  }
 
-  input.innerHTML = numbers[0]; // displaying the output
+//  input.innerHTML = numbers[0]; // displaying the output
 
-  resultDisplayed = true; // turning flag if result is displayed
-});
+//  resultDisplayed = true; // turning flag if result is displayed
+//});
 
-// clearing the input on press of clear
-clear.addEventListener("click", function() {
-  input.innerHTML = "";
-})
+//// clearing the input on press of clear
+//clear.addEventListener("click", function() {
+//  input.innerHTML = "";
+//})
+
 jQuery(document).ready(function() {
   // Create two variables with names of months and days of the week in the array
   var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
@@ -933,35 +937,35 @@ jQuery(document).ready(function() {
   }); 
 
 // for classic Editor
-ClassicEditor
-.create( document.querySelector( '#editor' ),{
-    toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ],
-    alignment: {
-      options: [ 'left', 'right' ]
-    }
-})
+//ClassicEditor
+//.create( document.querySelector( '#editor' ),{
+//    toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ],
+//    alignment: {
+//      options: [ 'left', 'right' ]
+//    }
+//})
 
-.catch( error => {
-    console.error( error );
-});
+//.catch( error => {
+//    console.error( error );
+//});
 
-ClassicEditor
-.create( document.querySelector( '#editor3' ),{
-    toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ],
-    alignment: {
-      options: [ 'left', 'right' ]
-    }
-})
+//ClassicEditor
+//.create( document.querySelector( '#editor3' ),{
+//    toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ],
+//    alignment: {
+//      options: [ 'left', 'right' ]
+//    }
+//})
 
-.catch( error => {
-    console.error( error );
-});
+//.catch( error => {
+//    console.error( error );
+//});
 
-InlineEditor
-.create( document.querySelector( '#editor2' ) )
-.catch( error => {
-    console.error( error );
-} );
+//InlineEditor
+//.create( document.querySelector( '#editor2' ) )
+//.catch( error => {
+//    console.error( error );
+//} );
 
 // for data tables
 jQuery(document).ready( function () {

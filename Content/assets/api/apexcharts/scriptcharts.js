@@ -63,8 +63,8 @@ var options = {
         },
     },
 };
-var chart = new ApexCharts(document.querySelector("#chart-3"), options);
-chart.render();
+//var chart = new ApexCharts(document.querySelector("#chart-3"), options);
+//chart.render();
 
 
 var options = {
@@ -121,8 +121,8 @@ var options = {
       },
     }
 };
-var chart = new ApexCharts(document.querySelector("#chart-4"), options);
-chart.render();
+//var chart = new ApexCharts(document.querySelector("#chart-4"), options);
+//chart.render();
 
 
 var options = {
@@ -140,5 +140,5 @@ plotOptions: {
 },
 labels: ['Prograss'],
 };
-var chart = new ApexCharts(document.querySelector("#chart-5"), options);
-chart.render();
+//var chart = new ApexCharts(document.querySelector("#chart-5"), options);
+//chart.render();

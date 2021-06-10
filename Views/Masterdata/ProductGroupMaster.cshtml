@@ -1,6 +1,6 @@
-﻿@model  List<XandaPOS.Models.CustomerMasterVM>
+﻿@model  List<XandaPOS.Models.ProductGroupMasterVM>
 @{
-    ViewBag.Title = "CustomerMaster";
+    ViewBag.Title = "ProductGroupMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,13 +8,14 @@
     //loadCustomerGrid();
 </script>
 
+
 <div class="content d-flex flex-column flex-column-fluid" id="tc_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-6 subheader-solid">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-white mb-0 px-0 py-2">
-                    <li class="breadcrumb-item " aria-current="page">Customer Master</li>
+                    <li class="breadcrumb-item " aria-current="page">Product Group Master</li>
                     <li class="breadcrumb-item active" aria-current="page">Details</li>
                 </ol>
             </nav>
@@ -33,12 +34,12 @@
                                 <div class="card-header align-items-center  border-bottom-dark px-0">
                                     <div class="card-title mb-0">
                                         <h3 class="card-label mb-0 font-weight-bold text-body">
-                                            Customer Details
+                                            Product Group Details
                                         </h3>
                                     </div>
                                     <div class="icons d-flex">
                                         <button class="btn ml-2 p-0"
-                                                id="kt_notes_panel_toggle_customer" data-toggle="tooltip" title="" data-placement="right"
+                                                id="kt_notes_panel_toggle_prodGrp" data-toggle="tooltip" title="" data-placement="right"
                                                 data-original-title="Check out more demos">
                                             <span class="bg-secondary h-30px font-size-h5 w-30px d-flex align-items-center justify-content-center  rounded-circle shadow-sm ">
 
@@ -82,49 +83,40 @@
                                 <div class="card-body">
                                     <div>
                                         <div class=" table-responsive" id="printableTable">
-                                            <table id="mainTable" class="display tableCustomerLoad">
+                                            <table id="mainTable" class="display tableProdGrpLoad">
 
                                                 <thead class="text-body">
                                                     <tr>
-                                                        <th>Customer Name</th>
-                                                        <th class="">Customer Address</th>
-                                                        <th class="">Customer Pin</th>
-                                                        <th class="">Customer Phone</th>
-                                                        <th class="">Customer Email</th>
+                                                        <th>Product Group Name</th>
+                                                        <th class="">Product Group Type</th>
                                                         <th class="no-sort text-right">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
-                                                    @foreach (var customer in Model)
+                                                    @foreach (var prodGrp in Model)
                                                     {
-                                                        <tr class="kt-table-row kt-table-row-level-0">
+                                                    <tr class="kt-table-row kt-table-row-level-0">
 
-                                                            <td id="@( "CustName_" +customer.cust_id)">@customer.cust_name</td>
-                                                            <td class="" id="@( "CustAddr_" +customer.cust_id)">
-                                                                @customer.cust_addr
-                                                            </td>
-                                                            <td class="" id="@( "CustPin_" +customer.cust_id)">@customer.cust_pin</td>
-                                                            <td class="" id="@( "CustPhn_" +customer.cust_id)">@customer.cust_phn</td>
-                                                            <td class="" id="@( "CustEmail_" +customer.cust_id)">@customer.cust_email</td>
-                                                            <td>
-                                                                <div class="card-toolbar text-right">
-                                                                    <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="svg-icon">
-                                                                            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
-                                                                            </svg>
-                                                                        </span>
-                                                                    </button>
-                                                                    
-                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit CustEditButton" id="@( "CustEdit_" +customer.cust_id)" data-toggle="tooltip" title="" data-placement="right"
-                                                                           data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete CustDeleteButton" id="@( "CustDelete_" +customer.cust_id)" title="Delete" href="#">Delete</a>
-                                                                    </div>
+                                                        <td id="@( "ProdGrpName_" +prodGrp.prod_grp_id)">@prodGrp.prod_grp_name</td>
+                                                        <td class="" id="@( "ProdGrpTypeName_" +prodGrp.prod_grp_id)">@prodGrp.prod_grp_type</td>
+                                                        <td>
+                                                            <div class="card-toolbar text-right">
+                                                                <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="svg-icon">
+                                                                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit ProdGrpEditButton" id="@( "ProdGrpEdit_" +prodGrp.prod_grp_id)" data-toggle="tooltip" title="" data-placement="right"
+                                                                       data-original-title="Check out more demos">Edit</a>
+                                                                    <a class="dropdown-item confirm-delete ProdGrpDeleteButton" id="@( "ProdGrpDelete_" +prodGrp.prod_grp_id)" title="Delete" href="#">Delete</a>
                                                                 </div>
-                                                            </td>
+                                                            </div>
+                                                        </td>
 
-                                                        </tr>
+                                                    </tr>
                                                     }
 
                                                 </tbody>
@@ -149,11 +141,12 @@
 </div>
 
 
-@*ADD CUSTOMER MASTER PANEL*@
+
+@*ADD PRODUCT GROUP MASTER PANEL*@
 <div id="kt_notes_panel" class="offcanvas offcanvas-right kt-color-panel p-5">
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
         <h4 class="font-size-h4 font-weight-bold m-0">
-            Add Customer
+            Add Product Group
         </h4>
         <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary" id="kt_notes_panel_close">
             <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -166,43 +159,28 @@
 
             <div class="col-12">
                 <div class="form-group">
-                    <label class="text-dark">Customer Name</label>
-                    <input type="text" name="CustName" class="form-control" id="CustNameAdd">
-                    <small class="form-text text-muted">Please Enter Customer Name</small>
+                    <label class="text-dark">Product Group Name</label>
+                    <input type="text" name="ProdGrpName" class="form-control" id="ProdGrpNameAdd">
+                    <small class="form-text text-muted">Please Enter Product Group Name</small>
                 </div>
 
                 <div class="form-group">
-                    <label class="text-dark">Customer Address</label>
-                    <input type="text" name="CustAddress" class="form-control" id="CustAddressAdd">
-                    <small class="form-text text-muted">Please Enter Address</small>
-                </div>
-                <div class="form-group">
-                    <label class="text-dark">Pincode</label>
-                    <input type="text" name="CustPinCode" class="form-control" id="CustPinCodeAdd">
-                    <small class="form-text text-muted">Please Enter Pincode</small>
-                </div>
-                <div class="form-group">
-                    <label class="text-dark">Customer Phone</label>
-                    <input type="text" name="CustPhnData" class="form-control" id="CustPhnDataAdd">
-                    <small class="form-text text-muted">Please Enter Phone Number</small>
-                </div>
-                <div class="form-group">
-                    <label class="text-dark">Customer Email</label>
-                    <input type="email" name="CustEmailData" class="form-control" id="CustEmailDataAdd">
-                    <small class="form-text text-muted">Please Enter Email</small>
+                    <label class="text-dark">Product Group Type</label>
+                    <input type="text" name="ProdGrpType" class="form-control" id="ProdGrpTypeAdd">
+                    <small class="form-text text-muted">Please Enter Product Group Type</small>
                 </div>
             </div>
         </div>
 
-        <button type="button" id="AddBtnCustomer" class="btn btn-primary">Add Customer</button>
+        <button type="button" id="AddBtnProdGrp" class="btn btn-primary">Add Product Group</button>
     </form>
 </div>
 
-@*EDIT CUSTOMER MASTER PANEL*@
+@*EDIT PRODUCT GROUP MASTER PANEL*@
 <div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
         <h4 class="font-size-h4 font-weight-bold m-0">
-            Edit Customer
+            Edit Product Group
         </h4>
         <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary kt_notes_panel_close" id="kt_notes_panel_close2">
             <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -216,45 +194,25 @@
             <div class="col-12">
                 <div class="form-group">
                     @*<label class="text-dark">Customer ID</label>*@
-                    <input type="text" name="text" class="form-control" value="" id="CustomerEditId" style="visibility:hidden;">
+                    <input type="text" name="text" class="form-control" value="" id="ProdGrpEditId" style="visibility:hidden;">
 
                 </div>
 
                 <div class="form-group">
-                    <label class="text-dark">Customer Name</label>
-                    <input type="text" name="text" class="form-control" value="abc" id="CustomerEditName">
+                    <label class="text-dark">Product Group Name</label>
+                    <input type="text" name="text" class="form-control" value="abc" id="ProdGrpEditName">
 
                 </div>
 
                 <div class="form-group">
-                    <label class="text-dark">Customer Address</label>
-                    <input type="text" name="text" class="form-control" value="" id="CustomerEditAddress">
+                    <label class="text-dark">Product Group Type</label>
+                    <input type="text" name="text" class="form-control" value="" id="ProdGrpEditType">
 
                 </div>
-                <div class="form-group">
-                    <label class="text-dark">Customer PinCode</label>
-                    <input type="text" name="text" class="form-control" value="" id="CustomerEditPin">
-                </div>
-                <div class="form-group">
-                    <label class="text-dark">Customer Phone</label>
-                    <input type="text" name="text" class="form-control" value="" id="CustomerEditPhone">
-
-                </div>
-                <div class="form-group">
-                    <label class="text-dark">Customer Email</label>
-                    <input type="email" name="email" class="form-control" value="" id="CustomerEditEmail">
-                </div>
-                @*<div class="form-group">
-            <label class="text-dark">List</label>
-            <select class="arabic-select w-100 mb-3 h-30px">
-                <option value="1">Admin</option>
-                <option value="2">Owner</option>
-            </select>
-
-        </div>*@
             </div>
         </div>
 
-        <button type="submit" id="EditBtnCustomer" class="btn btn-primary">Edit Customer</button>
+        <button type="submit" id="EditBtnProdGrp" class="btn btn-primary">Edit Product Group</button>
     </form>
 </div>
+
