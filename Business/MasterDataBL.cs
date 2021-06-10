@@ -45,6 +45,7 @@ namespace XandaPOS.Business
             } 
         }
 
+        //Add Customer Master
         public string AddCustomerMaster(POS_CUSTOMER_MASTER custData)
         {
             string message = "";
@@ -64,6 +65,7 @@ namespace XandaPOS.Business
             return message;
         }
 
+        //Update Customer Master
         public string UpdateCustomerMaster(POS_CUSTOMER_MASTER custData)
         {
             string message = "";
@@ -88,6 +90,7 @@ namespace XandaPOS.Business
             return message;
         }
 
+        //Delete Customer Master
         public string DeleteCustomerMaster(int custId)
         {
             string message = "";
@@ -110,8 +113,9 @@ namespace XandaPOS.Business
         #endregion
 
         #region BRAND MASTER
+        
         //Load Brand Grid
-        public List<BrandMasterVM> LoadBrandMasterGrid()
+        public List<BrandMasterVM> LoadBrandMasterGrid(int v)
         {
             List<BrandMasterVM> lstBrandMasterVM = new List<BrandMasterVM>();
 
@@ -137,6 +141,72 @@ namespace XandaPOS.Business
                 }
                 return lstBrandMasterVM;
             }
+        }
+
+        //Add Brand Master
+        public string AddBrandMaster(POS_BRAND_MASTER brandData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_BRAND_MASTER.Add(brandData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+        
+        //Update Brand Master
+        public string UpdateBrandMaster(POS_BRAND_MASTER brandData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_BRAND_MASTER.Where(x => x.brand_id == brandData.brand_id).FirstOrDefault();
+                    retVal.brand_id = brandData.brand_id;
+                    retVal.brand_name = brandData.brand_name;
+                    retVal.brand_company = brandData.brand_company;
+                    retVal.brand_product_group = brandData.brand_product_group;
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Brand Master
+        public string DeleteBrandMaster(int brandId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_BRAND_MASTER.Where(x => x.brand_id == brandId).FirstOrDefault();
+                    db.POS_BRAND_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
         }
         #endregion
 
@@ -198,6 +268,76 @@ namespace XandaPOS.Business
                 return lstCompanyMasterVM;
             }
         }
+
+        //Add Company Master
+        public string AddCompanyMaster(POS_COMPANY_MASTER companyData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_COMPANY_MASTER.Add(companyData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Company Master
+        public string UpdateCompanyMaster(POS_COMPANY_MASTER companyData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_COMPANY_MASTER.Where(x => x.comp_id == companyData.comp_id).FirstOrDefault();
+
+                    retVal.comp_id = companyData.comp_id;
+                    retVal.comp_name = companyData.comp_name;
+                    retVal.comp_address = companyData.comp_address;
+                    retVal.comp_pin = companyData.comp_pin;
+                    retVal.comp_regn_no = companyData.comp_regn_no;
+                    retVal.comp_type = companyData.comp_type;
+
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Company Master
+        public string DeleteCompanyMaster(int compId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_COMPANY_MASTER.Where(x => x.comp_id == compId).FirstOrDefault();
+                    db.POS_COMPANY_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
         #endregion
 
         #region EMPLOYEE MASTER
@@ -217,7 +357,7 @@ namespace XandaPOS.Business
                     _employeeMasterVM.emp_name = item.emp_name.Trim();
                     _employeeMasterVM.emp_addr = item.emp_addr.Trim();
                     _employeeMasterVM.emp_pin = item.emp_pin.Trim();
-                    _employeeMasterVM.emp_phn = item.emp_phone.Trim();
+                    _employeeMasterVM.emp_phone = item.emp_phone.Trim();
                     _employeeMasterVM.emp_govt_id_type = item.emp_govt_id_type.Trim();
                     _employeeMasterVM.emp_govt_id_no = item.emp_govt_id_no.Trim();
                     _employeeMasterVM.emp_join_date = item.emp_join_date;
@@ -227,6 +367,78 @@ namespace XandaPOS.Business
                 }
                 return lstEmployeeMasterVM;
             }
+        }
+
+        //Add Employee Master
+        public string AddEmployeeMaster(POS_EMPLOYEE_MASTER employeeData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_EMPLOYEE_MASTER.Add(employeeData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Employee Master
+        public string UpdateEmployeeMaster(POS_EMPLOYEE_MASTER employeeData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_EMPLOYEE_MASTER.Where(x => x.emp_id == employeeData.emp_id).FirstOrDefault();
+
+                    retVal.emp_id = employeeData.emp_id;
+                    retVal.emp_name = employeeData.emp_name.Trim();
+                    retVal.emp_addr = employeeData.emp_addr.Trim();
+                    retVal.emp_pin = employeeData.emp_pin.Trim();
+                    retVal.emp_phone = employeeData.emp_phone.Trim();
+                    retVal.emp_govt_id_type = employeeData.emp_govt_id_type.Trim();
+                    retVal.emp_govt_id_no = employeeData.emp_govt_id_no.Trim();
+                    retVal.emp_join_date = employeeData.emp_join_date;
+                    retVal.emp_resign_date = employeeData.emp_resign_date;
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Company Master
+        public string DeleteEmployeeMaster(int empId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_EMPLOYEE_MASTER.Where(x => x.emp_id == empId).FirstOrDefault();
+                    db.POS_EMPLOYEE_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
         }
         #endregion
 
@@ -254,11 +466,80 @@ namespace XandaPOS.Business
                 return lstMasterTableHelperMasterVM;
             }
         }
+
+        //Add Master Table Helper Master
+        public string AddMasterTableHelperMaster(POS_MASTER_TABLE_HELPER helperData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_MASTER_TABLE_HELPER.Add(helperData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Master Table Helper Master
+        public string UpdateMasterTableHelperMaster(POS_MASTER_TABLE_HELPER helperData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_MASTER_TABLE_HELPER.Where(x => x.helper_id == helperData.helper_id).FirstOrDefault();
+
+                    retVal.helper_id = helperData.helper_id;
+                    retVal.helper_name = helperData.helper_name.Trim();
+                    retVal.helper_details = helperData.helper_details.Trim();
+                    retVal.helper_link_master_table = helperData.helper_link_master_table.Trim();
+                    retVal.helper_active = helperData.helper_active;
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Master Table Helper Master
+        public string DeleteMasterTableHelperMaster(int helperId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_MASTER_TABLE_HELPER.Where(x => x.helper_id == helperId).FirstOrDefault();
+                    db.POS_MASTER_TABLE_HELPER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
         #endregion
 
         #region PRODUCT GROUP MASTER
+
         //Load Product Group Grid
-        public List<ProductGroupMasterVM> LoadProductGroupMasterGrid()
+        public List<ProductGroupMasterVM> LoadProductGroupMasterGrid(int prodGrpId)
         {
             List<ProductGroupMasterVM> lstProductGroupMasterVM = new List<ProductGroupMasterVM>();
 
@@ -266,6 +547,14 @@ namespace XandaPOS.Business
             {
                 var posProductGroupMaster = db.POS_PRODUCT_GROUP_MASTER;
                 var list = posProductGroupMaster.ToList();
+
+                if (prodGrpId > 0) //If we want a single data
+                {
+                    list.Clear();
+                    var prodGrpData = posProductGroupMaster.Where(x => x.prod_grp_id == prodGrpId).FirstOrDefault();
+                    list.Add(prodGrpData);
+                }
+
                 foreach (var item in list)
                 {
                     ProductGroupMasterVM _productGroupMasterVM = new ProductGroupMasterVM();
@@ -277,6 +566,72 @@ namespace XandaPOS.Business
                 }
                 return lstProductGroupMasterVM;
             }
+        }
+
+        //Add Product Group Master
+        public string AddProductGroupMaster(POS_PRODUCT_GROUP_MASTER prodGrpData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_PRODUCT_GROUP_MASTER.Add(prodGrpData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Product Group Master
+        public string UpdateProductGroupMaster(POS_PRODUCT_GROUP_MASTER prodGrpData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_PRODUCT_GROUP_MASTER.Where(x => x.prod_grp_id == prodGrpData.prod_grp_id).FirstOrDefault();
+
+                    retVal.prod_grp_id = prodGrpData.prod_grp_id;
+                    retVal.prod_grp_name = prodGrpData.prod_grp_name.Trim();
+                    retVal.prod_grp_type = prodGrpData.prod_grp_type.Trim();
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Product Group Master
+        public string DeleteProductGroupMaster(int prodGrpId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_PRODUCT_GROUP_MASTER.Where(x => x.prod_grp_id == prodGrpId).FirstOrDefault();
+                    db.POS_PRODUCT_GROUP_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
         }
         #endregion
 
@@ -325,6 +680,83 @@ namespace XandaPOS.Business
                 return lstProductMasterVM;
             }
         }
+
+        //Add Product Master
+        public string AddProductMaster(POS_PRODUCT_MASTER prodData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_PRODUCT_MASTER.Add(prodData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Product Master
+        public string UpdateProductMaster(POS_PRODUCT_MASTER prodData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_PRODUCT_MASTER.Where(x => x.product_id == prodData.product_id).FirstOrDefault();
+
+                    retVal.product_id = prodData.product_id;
+                    retVal.product_name = prodData.product_name.Trim();
+
+                    retVal.product_type = prodData.product_type;
+
+                    retVal.product_group = prodData.product_group;
+                    
+                    retVal.product_company = prodData.product_company;
+
+                    retVal.product_details = prodData.product_details.Trim();
+                    if (string.IsNullOrEmpty(prodData.product_image_link))
+                        retVal.product_image_link = "NO IMAGE LINKED";
+                    else
+                        retVal.product_image_link = prodData.product_image_link.Trim();
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Product Master
+        public string DeleteProductMaster(int prodId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_PRODUCT_MASTER.Where(x => x.product_id == prodId).FirstOrDefault();
+                    db.POS_PRODUCT_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
         #endregion
 
         #region WAREHOUSE MASTER
@@ -352,6 +784,77 @@ namespace XandaPOS.Business
                 return lstWarehouseMasterVM;
             }
         }
+
+        //Add Warehouse Master
+        public string AddWarehouseMaster(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    db.POS_WAREHOUSE_MASTER.Add(warehouseData);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Update Warehouse Master
+        public string UpdateWarehouseMaster(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_WAREHOUSE_MASTER.Where(x => x.warehouse_id == warehouseData.warehouse_id).FirstOrDefault();
+
+                    retVal.warehouse_id = warehouseData.warehouse_id;
+                    retVal.warehouse_name = warehouseData.warehouse_name;
+                    retVal.warehouse_address = warehouseData.warehouse_address;
+                    retVal.warehouse_pin = warehouseData.warehouse_pin;
+                    retVal.warehouse_phone = warehouseData.warehouse_phone;
+                    retVal.warehouse_code = warehouseData.warehouse_code;
+
+
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
+        //Delete Warehouse Master
+        public string DeleteWarehouseMaster(int warehouseId)
+        {
+            string message = "";
+            try
+            {
+                using (var db = new xandaposEntities())
+                {
+                    var retVal = db.POS_WAREHOUSE_MASTER.Where(x => x.warehouse_id == warehouseId).FirstOrDefault();
+                    db.POS_WAREHOUSE_MASTER.Remove(retVal);
+                    db.SaveChanges();
+                }
+                message = "SUCCESS";
+            }
+            catch (Exception ex)
+            {
+                message = "FAIL";
+            }
+            return message;
+        }
+
         #endregion
 
     }

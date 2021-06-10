@@ -23,9 +23,48 @@ namespace XandaPOS.Controllers
         public ActionResult BrandMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadBrandMasterGrid());
+            return View(_masterDataBL.LoadBrandMasterGrid(0));
         }
 
+        [HttpPost]
+        public JsonResult GetReloadBrandMaster()
+        {
+            MasterDataBL _brandMaster = new MasterDataBL();
+            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(0);
+            return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddBrand(POS_BRAND_MASTER brandData)
+        {
+            MasterDataBL brandMaster = new MasterDataBL();
+            string message = brandMaster.AddBrandMaster(brandData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetBrandDataForEdit(int brandID)
+        {
+            MasterDataBL _brandMaster = new MasterDataBL();
+            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID);
+            return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditBrand(POS_BRAND_MASTER brandData)
+        {
+            MasterDataBL brandMaster = new MasterDataBL();
+            string message = brandMaster.UpdateBrandMaster(brandData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBrand(int brandId)
+        {
+            MasterDataBL brandMaster = new MasterDataBL();
+            string message = brandMaster.DeleteBrandMaster(brandId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
         #endregion
 
         #region CompanyMaster
@@ -124,7 +163,48 @@ namespace XandaPOS.Controllers
         public ActionResult ProductGroupMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadProductGroupMasterGrid());
+            return View(_masterDataBL.LoadProductGroupMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadProductGroupMaster()
+        {
+            MasterDataBL _prodGroupMaster = new MasterDataBL();
+            List<ProductGroupMasterVM> prodGrpMasterList = _prodGroupMaster.LoadProductGroupMasterGrid(0);
+            return Json(new { ProdGrpMasterList = prodGrpMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddProdGrp(POS_PRODUCT_GROUP_MASTER prodGrpData)
+        {
+            MasterDataBL prodGrpMaster = new MasterDataBL();
+            string message = prodGrpMaster.AddProductGroupMaster(prodGrpData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetProdGrpDataForEdit(int prodGrpID)
+        {
+            MasterDataBL _prodGrpMaster = new MasterDataBL();
+            List<ProductGroupMasterVM> prodGrpMasterList = _prodGrpMaster.LoadProductGroupMasterGrid(prodGrpID);
+            return Json(new { ProdGrpMasterList = prodGrpMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditProdGrp(POS_PRODUCT_GROUP_MASTER prodGrpData)
+        {
+            MasterDataBL prodGrpMaster = new MasterDataBL();
+            string message = prodGrpMaster.UpdateProductGroupMaster(prodGrpData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProdGrp(int prodGrpId)
+        {
+            MasterDataBL prodGrpMaster = new MasterDataBL();
+            string message = prodGrpMaster.DeleteProductGroupMaster(prodGrpId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
