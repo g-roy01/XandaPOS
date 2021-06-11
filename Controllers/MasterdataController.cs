@@ -71,25 +71,67 @@ namespace XandaPOS.Controllers
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("ALL"));
+            return View(_masterDataBL.LoadCompanyMasterGrid(0,"ALL"));
         }
+
+        [HttpPost]
+        public JsonResult GetReloadCompanyMaster()
+        {
+            MasterDataBL _companyMaster = new MasterDataBL();
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0,"ALL").mainCompanyData;
+            return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddCompany(POS_COMPANY_MASTER companyData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.AddCompanyMaster(companyData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetCompanyDataForEdit(int companyID)
+        {
+            MasterDataBL _companyMaster = new MasterDataBL();
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID,"ALL","EDIT").mainCompanyData;
+            return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditCompany(POS_COMPANY_MASTER companyData)
+        {
+            MasterDataBL companyMaster = new MasterDataBL();
+            string message = companyMaster.UpdateCompanyMaster(companyData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCompany(int compId)
+        {
+            MasterDataBL companyMaster = new MasterDataBL();
+            string message = companyMaster.DeleteCompanyMaster(compId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
         #endregion
 
         #region CompanyVendorMaster
-        public ActionResult CompanyVendorMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
-        }
+        //public ActionResult CompanyVendorMaster()
+        //{
+        //    MasterDataBL _masterDataBL = new MasterDataBL();
+        //    return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
+        //}
 
         #endregion
 
         #region CompanySupplierMaster
-        public ActionResult CompanySupplierMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
-        }
+        //public ActionResult CompanySupplierMaster()
+        //{
+        //    MasterDataBL _masterDataBL = new MasterDataBL();
+        //    return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
+        //}
 
         #endregion
 
