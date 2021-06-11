@@ -30,7 +30,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetReloadBrandMaster()
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(0);
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(0);
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -46,7 +46,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetBrandDataForEdit(int brandID)
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID);
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID,"EDIT");
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
