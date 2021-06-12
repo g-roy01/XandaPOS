@@ -1,3 +1,55 @@
+//Product Master Grid Refresh
+function ReloadProductMasterData() {
+    //Check the table class
+    jQuery(".tableProductLoad tbody tr").remove();
+
+    jQuery.ajax({
+        url: "/Masterdata/GetReloadProductMaster",
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            //var item = '';
+            jQuery.each(data.ProductMasterList.mainProductData, function (i, item) {
+                var row =
+                    "<tr class='kt-table-row kt-table-row-level-0'>"
+                    + "<td id ='ProductName_" + item.product_id + "'>" + item.product_name + "</td >"
+                    + "<td id='ProductTypeName_" + item.product_id + "'>" + item.product_type_name + "</td >"
+                    + "<td id='ProductGroupName_" + item.product_id + "'>" + item.product_group_name + "</td >"
+                    + "<td id='ProductCompanyName_" + item.product_id + "'>" + item.product_company_name + "</td >"
+                    + "<td id='ProductDetails_" + item.product_id + "'>" + item.product_details + "</td >"
+                    + "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    + "<td>"
+                    + "<div class='card-toolbar text-right'>"
+                    + "<button class='btn p-0 shadow-none' type='button' id='dropdowneditButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
+                    + "<span class='svg-icon'>"
+                    + "<svg width='20px' height='20px' viewBox='0 0 16 16' class='bi bi-three-dots text-body' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
+                    + "<path fill-rule='evenodd' d='M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z'></path>"
+                    + "</svg>"
+                    + "</span>"
+                    + "</button>"
+                    + "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdowneditButton' style='position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;'>"
+                    + "<a href='javascript:void(0)' class='dropdown-item click-edit ProductEditButton' id='ProductEdit_" + item.product_id + "' data-toggle='tooltip' title='' data-placement='right' data-original-title='Check out more demos'>Edit</a>"
+                    + "<a class='dropdown-item confirm-delete ProductDeleteButton' id='ProductDelete_" + item.product_id + "' title='Delete' href='#'>Delete</a>"
+                    + "</div>"
+                    + "</div>"
+                    + "</td >"
+                    + "</tr >";
+
+
+                jQuery(".tableProductLoad tbody").append(row);
+            });
+        },
+        failure: function (response) {
+            //alert(response.responseText);
+        },
+        error: function (response) {
+            //Insert error handling code here
+        }
+    });
+    return false;
+}
+
 //Warehouse Master Grid Refresh
 function ReloadWarehouseMasterData() {
     //Check the table class
@@ -1780,7 +1832,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    //Employee Master Delete From DB
+    //Warehouse Master Delete From DB
     function DeleteWarehouse(warehouseId) {
 
         jQuery.ajax({
@@ -1820,7 +1872,227 @@ jQuery(document).ready(function () {
         return false;
     }
 
+    //***********************************//
+    //WAREHOUSE MASTER CODE SECTION END  //
+    //***********************************//
 
+    //========================================================================//
+
+    //***********************************//
+    //PRODUCT MASTER CODE SECTION START  //
+    //***********************************//
+
+    //Product Master Add Panel Open
+    jQuery('#kt_notes_panel_toggle_product').on("click", function (e) {
+        
+        //The script has been used from script.bundle.js
+        //For all the Add Panel this code must be used to open the edit panel
+        jQuery('#kt_notes_panel').addClass('offcanvas-on');
+
+        //Cleaning the Helper Add Field
+        jQuery("#ProductNameAdd").val('');
+        jQuery('#ProductTypeNameAdd').val('NA');
+        jQuery("#ProdGrpNameAdd").val('NA');
+        jQuery("#ProdCompanyNameAdd").val('NA');
+        jQuery('#ProductDetailsAdd').val('');
+        jQuery('#ProductImageAdd').val('');
+
+        //Setting focus to the Helper Name field
+        jQuery("#ProductNameAdd").focus();
+    });
+
+    //Product Master Add To DB
+    jQuery("#AddBtnProduct").click(function () {
+        var productMaster = new Object(); //{}; 
+
+        //productMaster.product_id = '';
+        productMaster.product_name = jQuery("#ProductNameAdd").val();
+        productMaster.product_type = jQuery('#ProductTypeNameAdd').val();
+        productMaster.product_group = jQuery("#ProdGrpNameAdd").val();
+        productMaster.product_company = jQuery("#ProdCompanyNameAdd").val();
+        productMaster.product_details = jQuery('#ProductDetailsAdd').val();
+        productMaster.product_image_link = jQuery('#ProductImageAdd').val('');
+
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/AddProduct",
+            data: JSON.stringify(productMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                jQuery('#kt_notes_panel').removeClass('offcanvas-on');
+                ReloadProductMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Product Master Edit Panel Open
+    jQuery(document).on('click', '.ProductEditButton', function () {
+
+        //The script has been used from script.bundle.js
+        //For all the Edit Panel this code must be used to open the edit panel
+        jQuery('.editpopup').addClass('offcanvas-on');
+
+        //Cleaning Edit Panel Field for any old data
+        jQuery("#ProductEditName").val('');
+        jQuery('#ProductEditTypeName').val('NA');
+        jQuery("#ProdEditGrpName").val('NA');
+        jQuery("#ProdEditCompanyName").val('NA');
+        jQuery('#ProductEditDetails').val('');
+        jQuery('#ProductEditImage').val('');
+
+        var buttonID = jQuery(this).attr("id");
+        var id = buttonID.substring(12); //ProductEdit_
+
+        //jQuery('.modal_pre_loader').show();
+        jQuery.ajax({
+            url: "/Masterdata/GetProductDataForEdit",
+            data: '{productID : ' + id + '}',
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                jQuery("#ProductEditId").val(data.ProdMasterList[0].product_id);
+                jQuery("#ProductEditName").val(data.ProdMasterList[0].product_name);
+                jQuery("#ProductEditTypeName").val(data.ProdMasterList[0].product_type_name);
+                jQuery("#ProdEditGrpName").val(data.ProdMasterList[0].product_group_name);
+                jQuery("#ProdEditCompanyName").val(data.ProdMasterList[0].product_company_name);
+                jQuery("#ProductEditDetails").val(data.ProdMasterList[0].product_details);
+                jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
+                //ajaxStop();
+            },
+            failure: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Product Master Edit To DB
+    jQuery("#EditBtnProduct").click(function () {
+        var productMaster = new Object();
+
+        productMaster.product_id = jQuery("#ProductEditId").val();
+        productMaster.product_name = jQuery("#ProductEditName").val();
+        productMaster.product_type = jQuery("#ProductEditTypeName").val();
+        productMaster.product_group = jQuery("#ProdEditGrpName").val();
+        productMaster.product_company = jQuery("#ProdEditCompanyName").val();
+        productMaster.product_details = jQuery("#ProductEditDetails").val();
+        productMaster.product_image_link = jQuery("#ProductEditImage").val();
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/EditProduct",
+            data: JSON.stringify(productMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //alert(data.Message);
+                jQuery('.editpopup').removeClass('offcanvas-on');
+                ReloadProductMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Product Master Delete Button Setup
+    jQuery(document).on('click', '.ProductDeleteButton', function () {
+        var buttonID = jQuery(this).attr("id");
+        var productId = buttonID.substring(14); //ProductDelete_
+
+        //The code has been used from sweetalert1.js
+        //This will launch the pop-up for deletion
+        Swal.fire({
+            title: "Are you sure ?",
+            text: "Product data will be deleted!",
+            type: "warning", showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonClass: "btn btn-primary",
+            cancelButtonClass: "btn btn-danger ml-1",
+            buttonsStyling: !1
+        }).then(function (t) {
+            //Here the click operation will be checked 
+            if (t.value) { //Deletion Process - If 'Yes' is clicked
+                DeleteProduct(productId);
+            }
+            else { //If 'No' is clicked
+                t.dismiss === Swal.DismissReason.cancel && Swal.fire
+                    ({
+                        type: "error",
+                        title: "Cancelled!",
+                        text: "Product Data is safe :)",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+    });
+
+    //Product Master Delete From DB
+    function DeleteProduct(productId) {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/DeleteProduct",
+            data: '{productId : ' + productId + ' }',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                ReloadProductMasterData();
+                Swal.fire({
+                    type: "success",
+                    title: "Deleted!",
+                    text: "Product Data has been deleted.",
+                    confirmButtonClass: "btn btn-success"
+                });
+            },
+            failure: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Product Data cannot been deleted, as server cannot process the request currently.",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            },
+            error: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Product Data cannot been deleted, as unexpected condition occured!",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+        return false;
+    }
+
+    //*********************************//
+    //PRODUCT MASTER CODE SECTION END  //
+    //*********************************//
+
+    //========================================================================//
 
 });
 

@@ -80,7 +80,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _companyMaster = new MasterDataBL();
             List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0,"ALL").mainCompanyData;
             return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -138,7 +137,6 @@ namespace XandaPOS.Controllers
         #region CustomerMaster
         public ActionResult CustomerMaster()
         {
-            //This will show the data layout for Customer Master
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCustomerMasterGrid(0));
         }
@@ -149,7 +147,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _custMaster = new MasterDataBL();
             List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid(0);
             return Json(new { CustMasterList = custMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -198,7 +195,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _empMaster = new MasterDataBL();
             List<EmployeeMasterVM> empMasterList = _empMaster.LoadEmployeeMasterGrid(0);
             return Json(new { EmpMasterList = empMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -247,7 +243,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _helperMaster = new MasterDataBL();
             List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(0);
             return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -296,7 +291,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _prodGroupMaster = new MasterDataBL();
             List<ProductGroupMasterVM> prodGrpMasterList = _prodGroupMaster.LoadProductGroupMasterGrid(0);
             return Json(new { ProdGrpMasterList = prodGrpMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -336,7 +330,47 @@ namespace XandaPOS.Controllers
         public ActionResult ProductMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadProductMasterGrid());
+            return View(_masterDataBL.LoadProductMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadProductMaster()
+        {
+            MasterDataBL _productMaster = new MasterDataBL();
+            ProductMasterVM productMasterList = _productMaster.LoadProductMasterGrid(0);
+            return Json(new { ProductMasterList = productMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddProduct(POS_PRODUCT_MASTER productData)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.AddProductMaster(productData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetProductDataForEdit(int productID)
+        {
+            MasterDataBL _productMaster = new MasterDataBL();
+            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID,"EDIT").mainProductData;
+            return Json(new { ProdMasterList = prodMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(POS_PRODUCT_MASTER productData)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.UpdateProductMaster(productData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(int productId)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.DeleteProductMaster(productId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
@@ -353,7 +387,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _warehouseMaster = new MasterDataBL();
             List<WarehouseMasterVM> warehouseMasterList = _warehouseMaster.LoadWarehouseMasterGrid(0);
             return Json(new { WarehouseMasterList = warehouseMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -390,23 +423,6 @@ namespace XandaPOS.Controllers
         #endregion
 
 
-        //public JsonResult GetCustomer(string custId)
-        //{
-        //    List<CustomerMasterVM> lstCustomerData = new List<CustomerMasterVM>();
-        //    lstCustomerData = custDBContext.CustomerData.ToList();
-        //    return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
-        //}
 
-        //public ActionResult LoadCustomerGrid()
-        //{
-        //    //var datasource = OrderRepository.GetAllRecords().ToList();
-
-        //    return Json("s", JsonRequestBehavior.AllowGet);
-        //}
-
-        //public ActionResult ProductGroupMaster()
-        //{
-        //    return View();
-        //}
     }
 }

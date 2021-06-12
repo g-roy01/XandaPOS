@@ -122,8 +122,6 @@ namespace XandaPOS.Business
             using (var db = new xandaposEntities())
             {
                 var posBrandMaster = db.POS_BRAND_MASTER;
-                //var posProdGrpMaster = db.POS_PRODUCT_GROUP_MASTER;
-
                 var list = posBrandMaster.ToList();
 
                 if (brandID > 0)
@@ -203,7 +201,6 @@ namespace XandaPOS.Business
 
                     lstBrandMaster.Add(_brandMaster);
                 }
-                //return lstBrandMasterVM;
 
                 BrandMasterVM _brandMasterVM = new BrandMasterVM();
                 _brandMasterVM.mainBrandData = lstBrandMaster;
@@ -212,7 +209,6 @@ namespace XandaPOS.Business
 
                 return _brandMasterVM;
             }
-            
         }
 
         //Add Brand Master
@@ -871,8 +867,6 @@ namespace XandaPOS.Business
                     {
                         retVal.helper_active = false;
                     }
-                    //retVal.helper_active = helperData.helper_active;
-
                     db.SaveChanges();
                 }
                 message = "SUCCESS";
@@ -918,7 +912,6 @@ namespace XandaPOS.Business
                 var posProductGroupMaster = db.POS_PRODUCT_GROUP_MASTER;
                 var list = posProductGroupMaster.ToList();
 
-                if(prodGrpId == null)
                 if (prodGrpId > 0) //If we want a single data
                 {
                     list.Clear();
@@ -1008,47 +1001,129 @@ namespace XandaPOS.Business
 
         #region PRODUCT MASTER
         //Load Product Grid
-        public List<ProductMasterVM> LoadProductMasterGrid()
+        public ProductMasterVM LoadProductMasterGrid(int prodId,string operation = "GET")
         {
-            List<ProductMasterVM> lstProductMasterVM = new List<ProductMasterVM>();
+            List<ProductMasterData> lstProductMasterData = new List<ProductMasterData>();
 
             using (var db = new xandaposEntities())
             {
                 var posProductMaster = db.POS_PRODUCT_MASTER;
-                var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
-                var posProductGroupMaster = db.POS_PRODUCT_GROUP_MASTER;
-                var posCompanyMaster = db.POS_COMPANY_MASTER;
-
                 var list = posProductMaster.ToList();
+
+                if (prodId > 0)
+                {
+                    list.Clear();
+                    var productList = posProductMaster.Where(x => x.product_id == prodId).FirstOrDefault();
+                    list.Add(productList);
+                }
+
                 foreach (var item in list)
                 {
-                    ProductMasterVM _productMasterVM = new ProductMasterVM();
-                    _productMasterVM.product_id = item.product_id;
-                    _productMasterVM.product_name = item.product_name.Trim();
+                    ProductMasterData _productMasterData = new ProductMasterData();
+                    _productMasterData.product_id = item.product_id;
+                    _productMasterData.product_name = StrCleanDataOrEmpty(item.product_name);
 
-                    _productMasterVM.product_type_id = item.product_type;
-                    var prodTypeName = posMasterTableHelperMaster
-                                        .Where(m => m.helper_id.Equals(item.product_type)).Select(s => s)
-                                        .Where(m => m.helper_link_master_table.Equals("POS_PRODUCT_MASTER")).Select(m => m.helper_name);
-                    _productMasterVM.product_type_name = prodTypeName.FirstOrDefault().ToString().Trim();
+                    string prodTypeHelperName = "";
+                    try
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            //If we push item.product_type = null or it gets any garbage value
+                            prodTypeHelperName = FetchMasterTableHelperList("POS_PRODUCT_MASTER")
+                                                     .Where(x => x.helper_id == item.product_type).FirstOrDefault().helper_name;
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            prodTypeHelperName = item.product_type.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            prodTypeHelperName = "";
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            prodTypeHelperName = "NA";
+                        }
+                    }
+                    _productMasterData.product_type_name = StrCleanDataOrEmpty(prodTypeHelperName);
 
-                    _productMasterVM.product_group_id = item.product_group;
-                    var prodGroupName = posProductGroupMaster.Where(m => m.prod_grp_id.Equals(item.product_group)).Select(m => m.prod_grp_name);
-                    _productMasterVM.product_group_name = prodGroupName.FirstOrDefault().ToString().Trim();
+                    string prodGroupHelperName = "";
+                    try
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            if (item.product_group == null)
+                            {
+                                prodGroupHelperName = "";
+                            }
+                            else
+                            {
+                                prodGroupHelperName = LoadProductGroupMasterGrid(item.product_group.GetValueOrDefault()).FirstOrDefault().prod_grp_name;
+                            }
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            prodGroupHelperName = item.product_group.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            prodGroupHelperName = "";
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            prodGroupHelperName = "NA";
+                        }
+                    }
+                    _productMasterData.product_group_name = StrCleanDataOrEmpty(prodGroupHelperName);
 
-                    _productMasterVM.product_company_id = item.product_company;
-                    var prodCompName = posCompanyMaster.Where(m => m.comp_id.Equals(item.product_company)).Select(m => m.comp_name);
-                    _productMasterVM.product_company_name = prodCompName.FirstOrDefault().ToString().Trim();
+                    string companyNameHelper = "";
+                    try
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            companyNameHelper = FetchCompanyList().mainCompanyData.Where(x => x.comp_id == item.product_company.GetValueOrDefault()).FirstOrDefault().comp_name;
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            companyNameHelper = item.product_company.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (operation.Equals("GET"))
+                        {
+                            companyNameHelper = "";
+                        }
+                        if (operation.Equals("EDIT"))
+                        {
+                            companyNameHelper = "NA";
+                        }
+                    }
+                    _productMasterData.product_company_name = StrCleanDataOrEmpty(companyNameHelper);
 
-                    _productMasterVM.product_details = item.product_details.Trim();
-                    if(string.IsNullOrEmpty(item.product_image_link))
-                        _productMasterVM.product_image_link = "NO IMAGE LINKED";
+                    _productMasterData.product_details = StrCleanDataOrEmpty(item.product_details);
+
+                    if (string.IsNullOrEmpty(item.product_image_link))
+                        _productMasterData.product_image_link = "NO IMAGE LINKED";
                     else
-                        _productMasterVM.product_image_link = item.product_image_link.Trim();
+                        _productMasterData.product_image_link = StrCleanDataOrEmpty(item.product_image_link);
 
-                    lstProductMasterVM.Add(_productMasterVM);
+                    lstProductMasterData.Add(_productMasterData);
                 }
-                return lstProductMasterVM;
+
+                ProductMasterVM _productMasterVM = new ProductMasterVM();
+                _productMasterVM.mainProductData = lstProductMasterData;
+                _productMasterVM.companyDetails = FetchCompanyList().mainCompanyData;
+                _productMasterVM.prodGrpDetails = LoadProductGroupMasterGrid(0);
+                _productMasterVM.helperDetails = FetchMasterTableHelperList("POS_PRODUCT_MASTER");
+
+                return _productMasterVM;
             }
         }
 
@@ -1083,19 +1158,15 @@ namespace XandaPOS.Business
                     var retVal = db.POS_PRODUCT_MASTER.Where(x => x.product_id == prodData.product_id).FirstOrDefault();
 
                     retVal.product_id = prodData.product_id;
-                    retVal.product_name = prodData.product_name.Trim();
-
+                    retVal.product_name = StrCleanDataOrEmpty(prodData.product_name);
                     retVal.product_type = prodData.product_type;
-
-                    retVal.product_group = prodData.product_group;
-                    
+                    retVal.product_group = prodData.product_group;  
                     retVal.product_company = prodData.product_company;
-
-                    retVal.product_details = prodData.product_details.Trim();
+                    retVal.product_details = StrCleanDataOrEmpty(prodData.product_details);
                     if (string.IsNullOrEmpty(prodData.product_image_link))
                         retVal.product_image_link = "NO IMAGE LINKED";
                     else
-                        retVal.product_image_link = prodData.product_image_link.Trim();
+                        retVal.product_image_link = StrCleanDataOrEmpty(prodData.product_image_link);
 
                     db.SaveChanges();
                 }

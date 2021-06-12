@@ -9,13 +9,7 @@ namespace XandaPOS.Models
     {
         public int brand_id { get; set; }
         public string brand_name { get; set; }
-
-        //public int brand_company { get; set; }
-
         public string brand_company_name { get; set; }
-
-        //public int? brand_product_group_id { get; set; }
-
         public string brand_product_group_name { get; set; }
     }
 
