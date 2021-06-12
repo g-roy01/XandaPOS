@@ -1,3 +1,109 @@
+//Warehouse Master Grid Refresh
+function ReloadWarehouseMasterData() {
+    //Check the table class
+    jQuery(".tableWarehouseLoad tbody tr").remove();
+
+    jQuery.ajax({
+        url: "/Masterdata/GetReloadWarehouseMaster",
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            //var item = '';
+            jQuery.each(data.WarehouseMasterList, function (i, item) {
+                var row =
+                    "<tr class='kt-table-row kt-table-row-level-0'>"
+                    + "<td id ='WarehouseName_" + item.warehouse_id + "'>" + item.warehouse_name + "</td >"
+                    + "<td id='WarehouseAddr_" + item.warehouse_id + "'>" + item.warehouse_address + "</td >"
+                    + "<td id='WarehousePin_" + item.warehouse_id + "'>" + item.warehouse_pin + "</td >"
+                    + "<td id='WarehousePhone_" + item.warehouse_id + "'>" + item.warehouse_phone + "</td >"
+                    + "<td id='WarehouseCode_" + item.warehouse_id + "'>" + item.warehouse_code + "</td >"
+                    + "<td>"
+                    + "<div class='card-toolbar text-right'>"
+                    + "<button class='btn p-0 shadow-none' type='button' id='dropdowneditButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
+                    + "<span class='svg-icon'>"
+                    + "<svg width='20px' height='20px' viewBox='0 0 16 16' class='bi bi-three-dots text-body' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
+                    + "<path fill-rule='evenodd' d='M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z'></path>"
+                    + "</svg>"
+                    + "</span>"
+                    + "</button>"
+                    + "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdowneditButton' style='position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;'>"
+                    + "<a href='javascript:void(0)' class='dropdown-item click-edit WarehouseEditButton' id='WarehouseEdit_" + item.warehouse_id + "' data-toggle='tooltip' title='' data-placement='right' data-original-title='Check out more demos'>Edit</a>"
+                    + "<a class='dropdown-item confirm-delete WarehouseDeleteButton' id='WarehouseDelete_" + item.warehouse_id + "' title='Delete' href='#'>Delete</a>"
+                    + "</div>"
+                    + "</div>"
+                    + "</td >"
+                    + "</tr >";
+
+
+                jQuery(".tableWarehouseLoad tbody").append(row);
+            });
+        },
+        failure: function (response) {
+            //alert(response.responseText);
+        },
+        error: function (response) {
+            //Insert error handling code here
+        }
+    });
+    return false;
+}
+
+//Company Master Grid Refresh
+function ReloadEmployeeMasterData() {
+    //Check the table class
+    jQuery(".tableEmployeeLoad tbody tr").remove();
+
+    jQuery.ajax({
+        url: "/Masterdata/GetReloadEmployeeMaster",
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            //var item = '';
+            jQuery.each(data.EmpMasterList, function (i, item) {
+                var row =
+                    "<tr class='kt-table-row kt-table-row-level-0'>"
+                    + "<td id ='EmpName_" + item.emp_id + "'>" + item.emp_name + "</td >"
+                    + "<td class='' id='EmpAddr_" + item.emp_id + "'>" + item.emp_addr + "</td >"
+                    + "<td class='' id='EmpPin_" + item.emp_id + "'>" + item.emp_pin + "</td >"
+                    + "<td class='' id='EmpPhone_" + item.emp_id + "'>" + item.emp_phone + "</td >"
+                    + "<td class='' id='EmpEmail_" + item.emp_id + "'>" + item.emp_email + "</td >"
+                    + "<td class='' id='EmpGovtIdType_" + item.emp_id + "'>" + item.emp_govt_id_type + "</td >"
+                    + "<td class='' id='EmpGovtIdNo_" + item.emp_id + "'>" + item.emp_govt_id_no + "</td >"
+                    + "<td class='' id='EmpJoinDate_" + item.emp_id + "'>" + item.emp_join_date + "</td >"
+                    + "<td class='' id='EmpResignDate_" + item.emp_id + "'>" + item.emp_resign_date + "</td >"
+                    + "<td>"
+                    + "<div class='card-toolbar text-right'>"
+                    + "<button class='btn p-0 shadow-none' type='button' id='dropdowneditButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
+                    + "<span class='svg-icon'>"
+                    + "<svg width='20px' height='20px' viewBox='0 0 16 16' class='bi bi-three-dots text-body' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>"
+                    + "<path fill-rule='evenodd' d='M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z'></path>"
+                    + "</svg>"
+                    + "</span>"
+                    + "</button>"
+                    + "<div class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdowneditButton' style='position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;'>"
+                    + "<a href='javascript:void(0)' class='dropdown-item click-edit EmpEditButton' id='EmpEdit_" + item.emp_id + "' data-toggle='tooltip' title='' data-placement='right' data-original-title='Check out more demos'>Edit</a>"
+                    + "<a class='dropdown-item confirm-delete EmpDeleteButton' id='EmpDelete_" + item.emp_id + "' title='Delete' href='#'>Delete</a>"
+                    + "</div>"
+                    + "</div>"
+                    + "</td >"
+                    + "</tr >";
+
+
+                jQuery(".tableEmployeeLoad tbody").append(row);
+            });
+        },
+        failure: function (response) {
+            //alert(response.responseText);
+        },
+        error: function (response) {
+            //Insert error handling code here
+        }
+    });
+    return false;
+}
+
 //Company Master Grid Refresh
 function ReloadCompanyMasterData() {
     //Check the table class
@@ -1272,9 +1378,451 @@ jQuery(document).ready(function () {
         return false;
     }
 
+    //*******************************//
+    //BRAND MASTER CODE SECTION END  //
+    //*******************************//
+
+    //========================================================================//
+
+    //***********************************//
+    //EMPLOYEE MASTER CODE SECTION START  //
+    //***********************************//
+
+    //Employee Master Add Panel Open
+    jQuery('#kt_notes_panel_toggle_employee').on("click", function (e) {
+
+        //The script has been used from script.bundle.js
+        //For all the Add Panel this code must be used to open the edit panel
+        jQuery('#kt_notes_panel').addClass('offcanvas-on');
+
+        //Cleaning the Helper Add Field
+        jQuery("#EmpNameAdd").val('');
+        jQuery('#EmpAddressAdd').val('');
+        jQuery("#EmpPinAdd").val('');
+        jQuery("#EmpPhnDataAdd").val('');
+        jQuery('#EmpEmailDataAdd').val('');
+        jQuery("#EmpGovtIdTypeAdd").val('');
+        jQuery("#EmpGovtIdNoAdd").val('');
+        jQuery('#EmpJoinDateAdd').val('');
+        jQuery("#EmpResignDateAdd").val('');
+
+        //Setting focus to the Helper Name field
+        jQuery("#EmpNameAdd").focus();
+    });
+
+    //Employee Master Add To DB
+    jQuery("#AddBtnEmployee").click(function () {
+        var employeeMaster = new Object(); //{}; 
+
+        //employeeMaster.emp_id = '';
+        employeeMaster.emp_name = jQuery("#EmpNameAdd").val();
+        employeeMaster.emp_addr = jQuery('#EmpAddressAdd').val();
+        employeeMaster.emp_pin = jQuery("#EmpPinAdd").val();
+        employeeMaster.emp_phone = jQuery("#EmpPhnDataAdd").val();
+        employeeMaster.emp_email = jQuery('#EmpEmailDataAdd').val();
+        employeeMaster.emp_govt_id_type = jQuery("#EmpGovtIdTypeAdd").val();
+        employeeMaster.emp_govt_id_no = jQuery("#EmpGovtIdNoAdd").val();
+        employeeMaster.emp_join_date = jQuery('#EmpJoinDateAdd').val();
+        employeeMaster.emp_resign_date = jQuery("#EmpResignDateAdd").val();
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/AddEmployee",
+            data: JSON.stringify(employeeMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                jQuery('#kt_notes_panel').removeClass('offcanvas-on');
+                ReloadEmployeeMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Employee Master Edit Panel Open
+    jQuery(document).on('click', '.EmpEditButton', function () {
+
+        //The script has been used from script.bundle.js
+        //For all the Edit Panel this code must be used to open the edit panel
+        jQuery('.editpopup').addClass('offcanvas-on');
+
+        //Cleaning Edit Panel Field for any old data
+        jQuery("#EmpEditName").val('');
+        jQuery('#EmpEditAddress').val('');
+        jQuery("#EmpEditPin").val('');
+        jQuery("#EmpEditPhnData").val('');
+        jQuery('#EmpEditEmailData').val('');
+        jQuery("#EmpEditGovtIdType").val('');
+        jQuery("#EmpEditGovtIdNo").val('');
+        jQuery('#EmpEditJoinDate').val('');
+        jQuery("#EmpEditResignDate").val('');
+
+        var buttonID = jQuery(this).attr("id");
+        var id = buttonID.substring(8); //EmpEdit_
+
+        //jQuery('.modal_pre_loader').show();
+        jQuery.ajax({
+            url: "/Masterdata/GetEmployeeDataForEdit",
+            data: '{empID : ' + id + '}',
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                jQuery("#EmpEditId").val(data.EmpMasterList[0].emp_id);
+                jQuery("#EmpEditName").val(data.EmpMasterList[0].emp_name);
+                jQuery("#EmpEditAddress").val(data.EmpMasterList[0].emp_addr);
+                jQuery("#EmpEditPin").val(data.EmpMasterList[0].emp_pin);
+                jQuery("#EmpEditPhnData").val(data.EmpMasterList[0].emp_phone);
+                jQuery("#EmpEditEmailData").val(data.EmpMasterList[0].emp_email);
+                jQuery("#EmpEditGovtIdType").val(data.EmpMasterList[0].emp_govt_id_type);
+                jQuery("#EmpEditGovtIdNo").val(data.EmpMasterList[0].emp_govt_id_no);
+                jQuery("#EmpEditJoinDate").val(data.EmpMasterList[0].emp_join_date);
+                jQuery("#EmpEditResignDate").val(data.EmpMasterList[0].emp_resign_date);
+
+                //ajaxStop();
+            },
+            failure: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Employee Master Edit To DB
+    jQuery("#EditBtnEmployee").click(function () {
+        var empMaster = new Object();
+
+        empMaster.emp_id = jQuery("#EmpEditId").val();
+        empMaster.emp_name = jQuery("#EmpEditName").val();
+        empMaster.emp_addr = jQuery("#EmpEditAddress").val();
+        empMaster.emp_pin = jQuery("#EmpEditPin").val();
+        empMaster.emp_phone = jQuery("#EmpEditPhnData").val();
+        empMaster.emp_email = jQuery("#EmpEditEmailData").val();
+        empMaster.emp_govt_id_type = jQuery("#EmpEditGovtIdType").val();
+        empMaster.emp_govt_id_no = jQuery("#EmpEditGovtIdNo").val();
+        empMaster.emp_join_date = jQuery("#EmpEditJoinDate").val();
+        empMaster.emp_resign_date = jQuery("#EmpEditResignDate").val();
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/EditEmployee",
+            data: JSON.stringify(empMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //alert(data.Message);
+                jQuery('.editpopup').removeClass('offcanvas-on');
+                ReloadEmployeeMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Employee Master Delete Button Setup
+    jQuery(document).on('click', '.EmpDeleteButton', function () {
+        var buttonID = jQuery(this).attr("id");
+        var empId = buttonID.substring(10); //EmpDelete_
+
+        //The code has been used from sweetalert1.js
+        //This will launch the pop-up for deletion
+        Swal.fire({
+            title: "Are you sure ?",
+            text: "Employee data will be deleted!",
+            type: "warning", showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonClass: "btn btn-primary",
+            cancelButtonClass: "btn btn-danger ml-1",
+            buttonsStyling: !1
+        }).then(function (t) {
+            //Here the click operation will be checked 
+            if (t.value) { //Deletion Process - If 'Yes' is clicked
+                DeleteEmployee(empId);
+            }
+            else { //If 'No' is clicked
+                t.dismiss === Swal.DismissReason.cancel && Swal.fire
+                    ({
+                        type: "error",
+                        title: "Cancelled!",
+                        text: "Employee Data is safe :)",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+    });
+
+    //Employee Master Delete From DB
+    function DeleteEmployee(empId) {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/DeleteEmployee",
+            data: '{empId : ' + empId + ' }',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                ReloadEmployeeMasterData();
+                Swal.fire({
+                    type: "success",
+                    title: "Deleted!",
+                    text: "Employee Data has been deleted.",
+                    confirmButtonClass: "btn btn-success"
+                });
+            },
+            failure: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Employee Data cannot been deleted, as server cannot process the request currently.",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            },
+            error: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Employee Data cannot been deleted, as unexpected condition occured!",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+        return false;
+    }
+
+    //**********************************//
+    //EMPLOYEE MASTER CODE SECTION END  //
+    //**********************************//
+
+    //========================================================================//
+
+    //*************************************//
+    //WAREHOUSE MASTER CODE SECTION START  //
+    //*************************************//
+
+    //Warehouse Master Add Panel Open
+    jQuery('#kt_notes_panel_toggle_warehouse').on("click", function (e) {
+        
+        //The script has been used from script.bundle.js
+        //For all the Add Panel this code must be used to open the edit panel
+        jQuery('#kt_notes_panel').addClass('offcanvas-on');
+
+        //Cleaning the Helper Add Field
+        jQuery("#WarehouseNameAdd").val('');
+        jQuery('#WarehouseAddressAdd').val('');
+        jQuery("#WarehousePinCodeAdd").val('');
+        jQuery("#WarehousePhoneAdd").val('');
+        jQuery('#WarehouseCodeAdd').val('');
+ 
+        //Setting focus to the Helper Name field
+        jQuery("#WarehouseNameAdd").focus();
+    });
+
+    //Warehouse Master Add To DB
+    jQuery("#AddBtnWarehouse").click(function () {
+        var warehouseMaster = new Object(); //{}; 
+
+        //warehouseMaster.warehouse_id = '';
+        warehouseMaster.warehouse_name = jQuery("#WarehouseNameAdd").val();
+        warehouseMaster.warehouse_address = jQuery('#WarehouseAddressAdd').val();
+        warehouseMaster.warehouse_pin = jQuery("#WarehousePinCodeAdd").val();
+        warehouseMaster.warehouse_phone = jQuery("#WarehousePhoneAdd").val();
+        warehouseMaster.warehouse_code = jQuery('#WarehouseCodeAdd').val();
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/AddWarehouse",
+            data: JSON.stringify(warehouseMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (msg) {
+                jQuery('#kt_notes_panel').removeClass('offcanvas-on');
+                ReloadWarehouseMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Warehouse Master Edit Panel Open
+    jQuery(document).on('click', '.WarehouseEditButton', function () {
+
+        //The script has been used from script.bundle.js
+        //For all the Edit Panel this code must be used to open the edit panel
+        jQuery('.editpopup').addClass('offcanvas-on');
+
+        //Cleaning Edit Panel Field for any old data
+        jQuery("#WarehouseEditName").val('');
+        jQuery('#WarehouseEditAddress').val('');
+        jQuery("#WarehouseEditPin").val('');
+        jQuery("#WarehouseEditPhone").val('');
+        jQuery('#WarehouseEditCode').val('');
+
+        var buttonID = jQuery(this).attr("id");
+        var id = buttonID.substring(14); //WarehouseEdit_
+
+        //jQuery('.modal_pre_loader').show();
+        jQuery.ajax({
+            url: "/Masterdata/GetWarehouseDataForEdit",
+            data: '{warehouseID : ' + id + '}',
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                jQuery("#WarehouseEditId").val(data.WarehouseMasterList[0].warehouse_id);
+                jQuery("#WarehouseEditName").val(data.WarehouseMasterList[0].warehouse_name);
+                jQuery("#WarehouseEditAddress").val(data.WarehouseMasterList[0].warehouse_address);
+                jQuery("#WarehouseEditPin").val(data.WarehouseMasterList[0].warehouse_pin);
+                jQuery("#WarehouseEditPhone").val(data.WarehouseMasterList[0].warehouse_phone);
+                jQuery("#WarehouseEditCode").val(data.WarehouseMasterList[0].warehouse_code);
+
+                //ajaxStop();
+            },
+            failure: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //jQuery('.modal_pre_loader').hide();
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Warehouse Master Edit To DB
+    jQuery("#EditBtnWarehouse").click(function () {
+        var warehouseMaster = new Object();
+
+        warehouseMaster.warehouse_id = jQuery("#WarehouseEditId").val();
+        warehouseMaster.warehouse_name = jQuery("#WarehouseEditName").val();
+        warehouseMaster.warehouse_address = jQuery("#WarehouseEditAddress").val();
+        warehouseMaster.warehouse_pin = jQuery("#WarehouseEditPin").val();
+        warehouseMaster.warehouse_phone = jQuery("#WarehouseEditPhone").val();
+        warehouseMaster.warehouse_code = jQuery("#WarehouseEditCode").val();
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/EditWarehouse",
+            data: JSON.stringify(warehouseMaster),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //alert(data.Message);
+                jQuery('.editpopup').removeClass('offcanvas-on');
+                ReloadWarehouseMasterData();
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+            },
+            error: function (response) {
+                //Insert error handling code here
+            }
+        });
+        return false;
+    });
+
+    //Warehouse Master Delete Button Setup
+    jQuery(document).on('click', '.WarehouseDeleteButton', function () {
+        var buttonID = jQuery(this).attr("id");
+        var warehouseId = buttonID.substring(16); //WarehouseDelete_
+
+        //The code has been used from sweetalert1.js
+        //This will launch the pop-up for deletion
+        Swal.fire({
+            title: "Are you sure ?",
+            text: "Warehouse data will be deleted!",
+            type: "warning", showCancelButton: !0,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonClass: "btn btn-primary",
+            cancelButtonClass: "btn btn-danger ml-1",
+            buttonsStyling: !1
+        }).then(function (t) {
+            //Here the click operation will be checked 
+            if (t.value) { //Deletion Process - If 'Yes' is clicked
+                DeleteWarehouse(warehouseId);
+            }
+            else { //If 'No' is clicked
+                t.dismiss === Swal.DismissReason.cancel && Swal.fire
+                    ({
+                        type: "error",
+                        title: "Cancelled!",
+                        text: "Warehouse Data is safe :)",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+    });
+
+    //Employee Master Delete From DB
+    function DeleteWarehouse(warehouseId) {
+
+        jQuery.ajax({
+            type: "POST",
+            url: "/Masterdata/DeleteWarehouse",
+            data: '{warehouseId : ' + warehouseId + ' }',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                ReloadWarehouseMasterData();
+                Swal.fire({
+                    type: "success",
+                    title: "Deleted!",
+                    text: "Warehouse Data has been deleted.",
+                    confirmButtonClass: "btn btn-success"
+                });
+            },
+            failure: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Warehouse Data cannot been deleted, as server cannot process the request currently.",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            },
+            error: function (response) {
+                Swal.fire
+                    ({
+                        type: "warning",
+                        title: "Deletion Fail!",
+                        text: "Warehouse Data cannot been deleted, as unexpected condition occured!",
+                        confirmButtonClass: "btn btn-success"
+                    });
+            }
+        });
+        return false;
+    }
+
+
 
 });
-
 
 //Insert data
 

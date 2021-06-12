@@ -14,7 +14,8 @@ namespace XandaPOS.Models
         public string emp_phone { get; set; }
         public string emp_govt_id_type { get; set; }
         public string emp_govt_id_no { get; set; }
-        public Nullable<System.DateTime> emp_join_date { get; set; }
-        public Nullable<System.DateTime> emp_resign_date { get; set; }
+        public string emp_join_date { get; set; }
+        public string emp_resign_date { get; set; }
+        public string emp_email { get; set; }
     }
 }

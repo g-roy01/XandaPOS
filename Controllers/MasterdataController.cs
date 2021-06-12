@@ -189,7 +189,48 @@ namespace XandaPOS.Controllers
         public ActionResult EmployeeMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadEmployeeMasterGrid());
+            return View(_masterDataBL.LoadEmployeeMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadEmployeeMaster()
+        {
+            MasterDataBL _empMaster = new MasterDataBL();
+            List<EmployeeMasterVM> empMasterList = _empMaster.LoadEmployeeMasterGrid(0);
+            return Json(new { EmpMasterList = empMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddEmployee(POS_EMPLOYEE_MASTER empData)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.AddEmployeeMaster(empData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetEmployeeDataForEdit(int empID)
+        {
+            MasterDataBL _empMaster = new MasterDataBL();
+            List<EmployeeMasterVM> empMasterList = _empMaster.LoadEmployeeMasterGrid(empID);
+            return Json(new { EmpMasterList = empMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditEmployee(POS_EMPLOYEE_MASTER empData)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.UpdateEmployeeMaster(empData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEmployee(int empId)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.DeleteEmployeeMaster(empId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
@@ -303,7 +344,48 @@ namespace XandaPOS.Controllers
         public ActionResult WarehouseMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadWarehouseMasterGrid());
+            return View(_masterDataBL.LoadWarehouseMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadWarehouseMaster()
+        {
+            MasterDataBL _warehouseMaster = new MasterDataBL();
+            List<WarehouseMasterVM> warehouseMasterList = _warehouseMaster.LoadWarehouseMasterGrid(0);
+            return Json(new { WarehouseMasterList = warehouseMasterList, JsonRequestBehavior.AllowGet });
+            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddWarehouse(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.AddWarehouseMaster(warehouseData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetWarehouseDataForEdit(int warehouseID)
+        {
+            MasterDataBL _warehouseMaster = new MasterDataBL();
+            List<WarehouseMasterVM> warehouseMasterList = _warehouseMaster.LoadWarehouseMasterGrid(warehouseID);
+            return Json(new { WarehouseMasterList = warehouseMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditWarehouse(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.UpdateWarehouseMaster(warehouseData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWarehouse(int warehouseId)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.DeleteWarehouseMaster(warehouseId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
