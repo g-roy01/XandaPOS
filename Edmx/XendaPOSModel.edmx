@@ -80,6 +80,36 @@
           <Property Name="product_company" Type="int" />
           <Property Name="product_details" Type="nchar" MaxLength="150" />
           <Property Name="product_image_link" Type="nchar" MaxLength="150" />
+          <Property Name="product_code" Type="nchar" MaxLength="10" />
+          <Property Name="product_default_cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pos_PurchaseOrder_Main">
+          <Key>
+            <PropertyRef Name="purchase_id" />
+          </Key>
+          <Property Name="purchase_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="warehouse_id" Type="int" />
+          <Property Name="supplier_id" Type="int" />
+          <Property Name="purchase_status" Type="int" />
+          <Property Name="shipping_cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="purchase_prod_sheet_id" Type="int" />
+          <Property Name="discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="tax" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="notes" Type="text" />
+        </EntityType>
+        <EntityType Name="pos_PurchaseOrder_Sheet">
+          <Key>
+            <PropertyRef Name="purchase_prod_sheet_id" />
+          </Key>
+          <Property Name="purchase_prod_sheet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="purchase_order_main_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="product_order_qty" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="product_receive_qty" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="product_cost_actual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tax_id" Type="int" />
+          <Property Name="tax_percent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="POS_WAREHOUSE_MASTER">
           <Key>
@@ -113,6 +143,8 @@
           <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pos_PurchaseOrder_Main" EntityType="Self.pos_PurchaseOrder_Main" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pos_PurchaseOrder_Sheet" EntityType="Self.pos_PurchaseOrder_Sheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="Self.POS_WAREHOUSE_MASTER" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -183,18 +215,6 @@
           <Property Name="prod_grp_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="prod_grp_type" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="POS_PRODUCT_MASTER">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="product_type" Type="Int32" />
-          <Property Name="product_group" Type="Int32" />
-          <Property Name="product_company" Type="Int32" />
-          <Property Name="product_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
-          <Property Name="product_image_link" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="POS_WAREHOUSE_MASTER">
           <Key>
             <PropertyRef Name="warehouse_id" />
@@ -213,7 +233,6 @@
           <EntitySet Name="POS_EMPLOYEE_MASTER" EntityType="Self.POS_EMPLOYEE_MASTER" />
           <EntitySet Name="POS_MASTER_TABLE_HELPER" EntityType="Self.POS_MASTER_TABLE_HELPER" />
           <EntitySet Name="POS_PRODUCT_GROUP_MASTER" EntityType="Self.POS_PRODUCT_GROUP_MASTER" />
-          <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" />
           <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="Self.POS_WAREHOUSE_MASTER" />
           <FunctionImport Name="sp_AddNewCustomer">
             <Parameter Name="custName" Mode="In" Type="String" />
@@ -228,7 +247,52 @@
             <Parameter Name="prodGroupType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetNewProdGrpId" ReturnType="Collection(String)" />
+          <EntitySet Name="pos_PurchaseOrder_Main" EntityType="xandaposModel.pos_PurchaseOrder_Main" />
+          <EntitySet Name="pos_PurchaseOrder_Sheet" EntityType="xandaposModel.pos_PurchaseOrder_Sheet" />
+          <EntitySet Name="POS_PRODUCT_MASTER" EntityType="xandaposModel.POS_PRODUCT_MASTER" />
         </EntityContainer>
+        <EntityType Name="pos_PurchaseOrder_Main">
+          <Key>
+            <PropertyRef Name="purchase_id" />
+          </Key>
+          <Property Name="purchase_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="warehouse_id" Type="Int32" />
+          <Property Name="supplier_id" Type="Int32" />
+          <Property Name="purchase_status" Type="Int32" />
+          <Property Name="shipping_cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="purchase_prod_sheet_id" Type="Int32" />
+          <Property Name="discount" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="tax" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="pos_PurchaseOrder_Sheet">
+          <Key>
+            <PropertyRef Name="purchase_prod_sheet_id" />
+          </Key>
+          <Property Name="purchase_prod_sheet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="purchase_order_main_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="product_order_qty" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="product_receive_qty" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="product_cost_actual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="tax_id" Type="Int32" />
+          <Property Name="tax_percent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="POS_PRODUCT_MASTER">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="product_type" Type="Int32" />
+          <Property Name="product_group" Type="Int32" />
+          <Property Name="product_company" Type="Int32" />
+          <Property Name="product_details" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="product_image_link" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="product_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="product_default_cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -305,19 +369,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="POS_PRODUCT_MASTER">
-            <EntityTypeMapping TypeName="xandaposModel.POS_PRODUCT_MASTER">
-              <MappingFragment StoreEntitySet="POS_PRODUCT_MASTER">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_type" ColumnName="product_type" />
-                <ScalarProperty Name="product_group" ColumnName="product_group" />
-                <ScalarProperty Name="product_company" ColumnName="product_company" />
-                <ScalarProperty Name="product_details" ColumnName="product_details" />
-                <ScalarProperty Name="product_image_link" ColumnName="product_image_link" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="POS_WAREHOUSE_MASTER">
             <EntityTypeMapping TypeName="xandaposModel.POS_WAREHOUSE_MASTER">
               <MappingFragment StoreEntitySet="POS_WAREHOUSE_MASTER">
@@ -333,6 +384,51 @@
           <FunctionImportMapping FunctionImportName="sp_AddNewCustomer" FunctionName="xandaposModel.Store.sp_AddNewCustomer" />
           <FunctionImportMapping FunctionImportName="sp_AddNewProductGroup" FunctionName="xandaposModel.Store.sp_AddNewProductGroup" />
           <FunctionImportMapping FunctionImportName="sp_GetNewProdGrpId" FunctionName="xandaposModel.Store.sp_GetNewProdGrpId" />
+          <EntitySetMapping Name="pos_PurchaseOrder_Main">
+            <EntityTypeMapping TypeName="xandaposModel.pos_PurchaseOrder_Main">
+              <MappingFragment StoreEntitySet="pos_PurchaseOrder_Main">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="tax" ColumnName="tax" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="purchase_prod_sheet_id" ColumnName="purchase_prod_sheet_id" />
+                <ScalarProperty Name="shipping_cost" ColumnName="shipping_cost" />
+                <ScalarProperty Name="purchase_status" ColumnName="purchase_status" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="warehouse_id" ColumnName="warehouse_id" />
+                <ScalarProperty Name="purchase_id" ColumnName="purchase_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pos_PurchaseOrder_Sheet">
+            <EntityTypeMapping TypeName="xandaposModel.pos_PurchaseOrder_Sheet">
+              <MappingFragment StoreEntitySet="pos_PurchaseOrder_Sheet">
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="tax_percent" ColumnName="tax_percent" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
+                <ScalarProperty Name="product_cost_actual" ColumnName="product_cost_actual" />
+                <ScalarProperty Name="product_receive_qty" ColumnName="product_receive_qty" />
+                <ScalarProperty Name="product_order_qty" ColumnName="product_order_qty" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="purchase_order_main_id" ColumnName="purchase_order_main_id" />
+                <ScalarProperty Name="purchase_prod_sheet_id" ColumnName="purchase_prod_sheet_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_PRODUCT_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_PRODUCT_MASTER">
+              <MappingFragment StoreEntitySet="POS_PRODUCT_MASTER">
+                <ScalarProperty Name="product_default_cost" ColumnName="product_default_cost" />
+                <ScalarProperty Name="product_code" ColumnName="product_code" />
+                <ScalarProperty Name="product_image_link" ColumnName="product_image_link" />
+                <ScalarProperty Name="product_details" ColumnName="product_details" />
+                <ScalarProperty Name="product_company" ColumnName="product_company" />
+                <ScalarProperty Name="product_group" ColumnName="product_group" />
+                <ScalarProperty Name="product_type" ColumnName="product_type" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

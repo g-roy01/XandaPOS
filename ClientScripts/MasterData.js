@@ -19,6 +19,8 @@ function ReloadProductMasterData() {
                     + "<td id='ProductCompanyName_" + item.product_id + "'>" + item.product_company_name + "</td >"
                     + "<td id='ProductDetails_" + item.product_id + "'>" + item.product_details + "</td >"
                     + "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    + "<td id='ProductCode_" + item.product_id + "'>" + item.product_code + "</td >"
+                    + "<td id='ProductDefaultCost_" + item.product_id + "'>" + Number(item.product_default_cost).toFixed(2) + "</td >"
                     + "<td>"
                     + "<div class='card-toolbar text-right'>"
                     + "<button class='btn p-0 shadow-none' type='button' id='dropdowneditButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
@@ -1896,6 +1898,8 @@ jQuery(document).ready(function () {
         jQuery("#ProdCompanyNameAdd").val('NA');
         jQuery('#ProductDetailsAdd').val('');
         jQuery('#ProductImageAdd').val('');
+        jQuery('#ProductCodeAdd').val('');
+        jQuery('#ProductDefaultCostAdd').val('');
 
         //Setting focus to the Helper Name field
         jQuery("#ProductNameAdd").focus();
@@ -1911,8 +1915,9 @@ jQuery(document).ready(function () {
         productMaster.product_group = jQuery("#ProdGrpNameAdd").val();
         productMaster.product_company = jQuery("#ProdCompanyNameAdd").val();
         productMaster.product_details = jQuery('#ProductDetailsAdd').val();
-        productMaster.product_image_link = jQuery('#ProductImageAdd').val('');
-
+        productMaster.product_image_link = jQuery('#ProductImageAdd').val();
+        productMaster.product_code = jQuery('#ProductCodeAdd').val();
+        productMaster.product_default_cost = jQuery('#ProductDefaultCostAdd').val();
 
         jQuery.ajax({
             type: "POST",
@@ -1948,6 +1953,8 @@ jQuery(document).ready(function () {
         jQuery("#ProdEditCompanyName").val('NA');
         jQuery('#ProductEditDetails').val('');
         jQuery('#ProductEditImage').val('');
+        jQuery('#ProductEditCode').val('');
+        jQuery('#ProductEditDefaultCost').val('');
 
         var buttonID = jQuery(this).attr("id");
         var id = buttonID.substring(12); //ProductEdit_
@@ -1967,6 +1974,9 @@ jQuery(document).ready(function () {
                 jQuery("#ProdEditCompanyName").val(data.ProdMasterList[0].product_company_name);
                 jQuery("#ProductEditDetails").val(data.ProdMasterList[0].product_details);
                 jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
+                jQuery("#ProductEditCode").val(data.ProdMasterList[0].product_code);
+                jQuery("#ProductEditDefaultCost").val(Number(data.ProdMasterList[0].product_default_cost).toFixed(2));
+
                 //ajaxStop();
             },
             failure: function (response) {
@@ -1992,6 +2002,8 @@ jQuery(document).ready(function () {
         productMaster.product_company = jQuery("#ProdEditCompanyName").val();
         productMaster.product_details = jQuery("#ProductEditDetails").val();
         productMaster.product_image_link = jQuery("#ProductEditImage").val();
+        productMaster.product_code = jQuery("#ProductEditCode").val();
+        productMaster.product_default_cost = jQuery("#ProductEditDefaultCost").val();
 
         jQuery.ajax({
             type: "POST",

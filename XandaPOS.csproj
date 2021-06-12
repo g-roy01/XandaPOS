@@ -130,11 +130,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\MasterDataBL.cs" />
+    <Compile Include="Business\OrdersDataBL.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterdataController.cs" />
     <Compile Include="BusinessData\DataLayer.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Edmx\POS_BRAND_MASTER.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
@@ -154,6 +156,12 @@
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\POS_PRODUCT_MASTER.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\pos_PurchaseOrder_Main.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\pos_PurchaseOrder_Sheet.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\POS_WAREHOUSE_MASTER.cs">
@@ -1312,6 +1320,9 @@
     <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
     <None Include="Views\Masterdata\CompanySupplierMaster.cshtml" />
     <Content Include="Views\Masterdata\CompanyVendorMaster.cshtml" />
+    <Content Include="Views\Orders\PurchaseOrder.cshtml" />
+    <Content Include="Views\Orders\ReceiveOrder.cshtml" />
+    <Content Include="Views\Orders\SellOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

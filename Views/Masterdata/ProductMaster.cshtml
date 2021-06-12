@@ -92,38 +92,42 @@
                                                         <th class="">Product Company</th>
                                                         <th class="">Product Details</th>
                                                         <th class="">Product Image Link</th>
+                                                        <th class="">Product Code</th>
+                                                        <th class="">Product Default Cost</th>
                                                         <th class="no-sort text-right">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
                                                     @foreach (var product in Model.mainProductData)
                                                     {
-                                                        <tr class="kt-table-row kt-table-row-level-0">
-                                                            <td id="@( "ProductName_" +product.product_id)">@product.product_name</td>
-                                                            <td id="@( "ProductTypeName_" +product.product_id)">@product.product_type_name</td>
-                                                            <td id="@( "ProductGroupName_" +product.product_id)">@product.product_group_name</td>
-                                                            <td id="@( "ProductCompanyName_" +product.product_id)">@product.product_company_name</td>
-                                                            <td id="@( "ProductDetails_" +product.product_id)">@product.product_details</td>
-                                                            <td id="@( "ProductImageLink_" +product.product_id)">@product.product_image_link</td>
+                                                    <tr class="kt-table-row kt-table-row-level-0">
+                                                        <td id="@( "ProductName_" +product.product_id)">@product.product_name</td>
+                                                        <td id="@( "ProductTypeName_" +product.product_id)">@product.product_type_name</td>
+                                                        <td id="@( "ProductGroupName_" +product.product_id)">@product.product_group_name</td>
+                                                        <td id="@( "ProductCompanyName_" +product.product_id)">@product.product_company_name</td>
+                                                        <td id="@( "ProductDetails_" +product.product_id)">@product.product_details</td>
+                                                        <td id="@( "ProductImageLink_" +product.product_id)">@product.product_image_link</td>
+                                                        <td id="@( "ProductCode_" +product.product_id)">@product.product_code</td>
+                                                        <td id="@( "ProductDefaultCost_" +product.product_id)">@product.product_default_cost</td>
 
-                                                            <td>
-                                                                <div class="card-toolbar text-right">
-                                                                    <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="svg-icon">
-                                                                            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
-                                                                            </svg>
-                                                                        </span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit ProductEditButton" id="@( "ProductEdit_" + product.product_id)" data-toggle="tooltip" title="" data-placement="right"
-                                                                           data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete ProductDeleteButton" id="@( "ProductDelete_" + product.product_id)" title="Delete" href="#">Delete</a>
-                                                                    </div>
+                                                        <td>
+                                                            <div class="card-toolbar text-right">
+                                                                <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="svg-icon">
+                                                                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit ProductEditButton" id="@( "ProductEdit_" + product.product_id)" data-toggle="tooltip" title="" data-placement="right"
+                                                                       data-original-title="Check out more demos">Edit</a>
+                                                                    <a class="dropdown-item confirm-delete ProductDeleteButton" id="@( "ProductDelete_" + product.product_id)" title="Delete" href="#">Delete</a>
                                                                 </div>
-                                                            </td>
+                                                            </div>
+                                                        </td>
 
-                                                        </tr>
+                                                    </tr>
                                                     }
 
                                                 </tbody>
@@ -212,6 +216,16 @@
                     <input type="text" name="ProdName" class="form-control" id="ProductImageAdd">
                     <small class="form-text text-muted">Please Enter Product Image Details</small>
                 </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Code</label>
+                    <input type="text" name="ProdCode" class="form-control" id="ProductCodeAdd">
+                    <small class="form-text text-muted">Please Enter Product Code</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Default Cost (in $)</label>
+                    <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductDefaultCostAdd">
+                    <small class="form-text text-muted">Please Enter Product Default Cost</small>
+                </div>
             </div>
         </div>
 
@@ -283,7 +297,14 @@
                     <label class="text-dark">Product Image Link</label>
                     <input type="text" name="ProdName" class="form-control" id="ProductEditImage">
                 </div>
-
+                <div class="form-group">
+                    <label class="text-dark">Product Code</label>
+                    <input type="text" name="ProdCode" class="form-control" id="ProductEditCode">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Default Cost (in $)</label>
+                    <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductEditDefaultCost">
+                </div>
             </div>
         </div>
 

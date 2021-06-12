@@ -1034,7 +1034,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            prodTypeHelperName = item.product_type.ToString();
+                            if (item.product_type == null)
+                                prodTypeHelperName = "NA";
+                            else
+                                prodTypeHelperName = item.product_type.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1066,7 +1069,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            prodGroupHelperName = item.product_group.ToString();
+                            if (item.product_group == null)
+                                prodGroupHelperName = "NA";
+                            else
+                                prodGroupHelperName = item.product_group.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1091,7 +1097,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            companyNameHelper = item.product_company.ToString();
+                            if (item.product_company == null)
+                                companyNameHelper = "NA";
+                            else
+                                companyNameHelper = item.product_company.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1113,6 +1122,9 @@ namespace XandaPOS.Business
                         _productMasterData.product_image_link = "NO IMAGE LINKED";
                     else
                         _productMasterData.product_image_link = StrCleanDataOrEmpty(item.product_image_link);
+
+                    _productMasterData.product_code = StrCleanDataOrEmpty(item.product_code);
+                    _productMasterData.product_default_cost = item.product_default_cost;
 
                     lstProductMasterData.Add(_productMasterData);
                 }
@@ -1167,7 +1179,8 @@ namespace XandaPOS.Business
                         retVal.product_image_link = "NO IMAGE LINKED";
                     else
                         retVal.product_image_link = StrCleanDataOrEmpty(prodData.product_image_link);
-
+                    retVal.product_code = StrCleanDataOrEmpty(prodData.product_code);
+                    retVal.product_default_cost = prodData.product_default_cost;
                     db.SaveChanges();
                 }
                 message = "SUCCESS";

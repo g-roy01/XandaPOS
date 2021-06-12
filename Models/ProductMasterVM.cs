@@ -10,19 +10,18 @@ namespace XandaPOS.Models
         public int product_id { get; set; }
         public string product_name { get; set; }
 
-        //public int? product_type_id { get; set; }
         //Linked with helper_master
         public string product_type_name { get; set; }
         
-        //public int? product_group_id { get; set; }
         //Linked with product_group_master
         public string product_group_name { get; set; }
         
-        //public int? product_company_id { get; set; }
         //Linked with company_master
         public string product_company_name { get; set; }
         public string product_details { get; set; }
         public string product_image_link { get; set; }
+        public string product_code { get; set; }
+        public decimal product_default_cost { get; set; }
     }
 
     public class ProductMasterVM
