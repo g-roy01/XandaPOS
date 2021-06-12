@@ -23,5 +23,6 @@ namespace XandaPOS.Edmx
         public string emp_govt_id_no { get; set; }
         public Nullable<System.DateTime> emp_join_date { get; set; }
         public Nullable<System.DateTime> emp_resign_date { get; set; }
+        public string emp_email { get; set; }
     }
 }

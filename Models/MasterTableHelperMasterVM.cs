@@ -11,6 +11,6 @@ namespace XandaPOS.Models
         public string helper_name { get; set; }
         public string helper_link_master_table { get; set; }
         public string helper_details { get; set; }
-        public bool helper_active { get; set; }
+        public string helper_active { get; set; } //This would be string as we are going to show it as active/deactive. NOTE - Field in DB is bool
     }
 }

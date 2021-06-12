@@ -47,8 +47,9 @@
           <Property Name="emp_phone" Type="nchar" MaxLength="15" />
           <Property Name="emp_govt_id_type" Type="nchar" MaxLength="50" />
           <Property Name="emp_govt_id_no" Type="nchar" MaxLength="30" />
-          <Property Name="emp_join_date" Type="datetime" />
-          <Property Name="emp_resign_date" Type="datetime" />
+          <Property Name="emp_join_date" Type="date" />
+          <Property Name="emp_resign_date" Type="date" />
+          <Property Name="emp_email" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="POS_MASTER_TABLE_HELPER">
           <Key>
@@ -160,8 +161,9 @@
           <Property Name="emp_phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
           <Property Name="emp_govt_id_type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="emp_govt_id_no" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="emp_join_date" Type="DateTime" Precision="3" />
-          <Property Name="emp_resign_date" Type="DateTime" Precision="3" />
+          <Property Name="emp_join_date" Type="DateTime" Precision="0" />
+          <Property Name="emp_resign_date" Type="DateTime" Precision="0" />
+          <Property Name="emp_email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="POS_MASTER_TABLE_HELPER">
           <Key>
@@ -270,6 +272,7 @@
           <EntitySetMapping Name="POS_EMPLOYEE_MASTER">
             <EntityTypeMapping TypeName="xandaposModel.POS_EMPLOYEE_MASTER">
               <MappingFragment StoreEntitySet="POS_EMPLOYEE_MASTER">
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
                 <ScalarProperty Name="emp_id" ColumnName="emp_id" />
                 <ScalarProperty Name="emp_name" ColumnName="emp_name" />
                 <ScalarProperty Name="emp_addr" ColumnName="emp_addr" />

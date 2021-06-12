@@ -30,7 +30,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetReloadBrandMaster()
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(0);
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(0);
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -46,7 +46,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetBrandDataForEdit(int brandID)
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            List<BrandMasterVM> brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID);
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID,"EDIT");
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -71,32 +71,72 @@ namespace XandaPOS.Controllers
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("ALL"));
+            return View(_masterDataBL.LoadCompanyMasterGrid(0,"ALL"));
         }
+
+        [HttpPost]
+        public JsonResult GetReloadCompanyMaster()
+        {
+            MasterDataBL _companyMaster = new MasterDataBL();
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0,"ALL").mainCompanyData;
+            return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddCompany(POS_COMPANY_MASTER companyData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.AddCompanyMaster(companyData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetCompanyDataForEdit(int companyID)
+        {
+            MasterDataBL _companyMaster = new MasterDataBL();
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID,"ALL","EDIT").mainCompanyData;
+            return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditCompany(POS_COMPANY_MASTER companyData)
+        {
+            MasterDataBL companyMaster = new MasterDataBL();
+            string message = companyMaster.UpdateCompanyMaster(companyData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCompany(int compId)
+        {
+            MasterDataBL companyMaster = new MasterDataBL();
+            string message = companyMaster.DeleteCompanyMaster(compId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
         #endregion
 
         #region CompanyVendorMaster
-        public ActionResult CompanyVendorMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
-        }
+        //public ActionResult CompanyVendorMaster()
+        //{
+        //    MasterDataBL _masterDataBL = new MasterDataBL();
+        //    return View(_masterDataBL.LoadCompanyMasterGrid("VENDOR"));
+        //}
 
         #endregion
 
         #region CompanySupplierMaster
-        public ActionResult CompanySupplierMaster()
-        {
-            MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
-        }
+        //public ActionResult CompanySupplierMaster()
+        //{
+        //    MasterDataBL _masterDataBL = new MasterDataBL();
+        //    return View(_masterDataBL.LoadCompanyMasterGrid("SUPPLIER"));
+        //}
 
         #endregion
 
         #region CustomerMaster
         public ActionResult CustomerMaster()
         {
-            //This will show the data layout for Customer Master
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadCustomerMasterGrid(0));
         }
@@ -107,7 +147,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _custMaster = new MasterDataBL();
             List<CustomerMasterVM> custMasterList = _custMaster.LoadCustomerMasterGrid(0);
             return Json(new { CustMasterList = custMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -147,7 +186,47 @@ namespace XandaPOS.Controllers
         public ActionResult EmployeeMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadEmployeeMasterGrid());
+            return View(_masterDataBL.LoadEmployeeMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadEmployeeMaster()
+        {
+            MasterDataBL _empMaster = new MasterDataBL();
+            List<EmployeeMasterVM> empMasterList = _empMaster.LoadEmployeeMasterGrid(0);
+            return Json(new { EmpMasterList = empMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddEmployee(POS_EMPLOYEE_MASTER empData)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.AddEmployeeMaster(empData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetEmployeeDataForEdit(int empID)
+        {
+            MasterDataBL _empMaster = new MasterDataBL();
+            List<EmployeeMasterVM> empMasterList = _empMaster.LoadEmployeeMasterGrid(empID);
+            return Json(new { EmpMasterList = empMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditEmployee(POS_EMPLOYEE_MASTER empData)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.UpdateEmployeeMaster(empData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEmployee(int empId)
+        {
+            MasterDataBL empMaster = new MasterDataBL();
+            string message = empMaster.DeleteEmployeeMaster(empId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
@@ -155,7 +234,47 @@ namespace XandaPOS.Controllers
         public ActionResult MasterTableHelperMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadMasterTableHelperMasterGrid());
+            return View(_masterDataBL.LoadMasterTableHelperMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadHelperMaster()
+        {
+            MasterDataBL _helperMaster = new MasterDataBL();
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(0);
+            return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddHelper(POS_MASTER_TABLE_HELPER helperData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.AddMasterTableHelperMaster(helperData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetHelperDataForEdit(int helperID)
+        {
+            MasterDataBL _helperMaster = new MasterDataBL();
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID,"EDIT");
+            return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditHelper(POS_MASTER_TABLE_HELPER helperData)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.UpdateMasterTableHelperMaster(helperData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteHelper(int helperId)
+        {
+            MasterDataBL helperMaster = new MasterDataBL();
+            string message = helperMaster.DeleteMasterTableHelperMaster(helperId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
@@ -172,7 +291,6 @@ namespace XandaPOS.Controllers
             MasterDataBL _prodGroupMaster = new MasterDataBL();
             List<ProductGroupMasterVM> prodGrpMasterList = _prodGroupMaster.LoadProductGroupMasterGrid(0);
             return Json(new { ProdGrpMasterList = prodGrpMasterList, JsonRequestBehavior.AllowGet });
-            //return Json(new { Customer = "ABC", JsonRequestBehavior.AllowGet });
         }
 
         [HttpPost]
@@ -212,7 +330,47 @@ namespace XandaPOS.Controllers
         public ActionResult ProductMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadProductMasterGrid());
+            return View(_masterDataBL.LoadProductMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadProductMaster()
+        {
+            MasterDataBL _productMaster = new MasterDataBL();
+            ProductMasterVM productMasterList = _productMaster.LoadProductMasterGrid(0);
+            return Json(new { ProductMasterList = productMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddProduct(POS_PRODUCT_MASTER productData)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.AddProductMaster(productData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetProductDataForEdit(int productID)
+        {
+            MasterDataBL _productMaster = new MasterDataBL();
+            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID,"EDIT").mainProductData;
+            return Json(new { ProdMasterList = prodMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(POS_PRODUCT_MASTER productData)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.UpdateProductMaster(productData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(int productId)
+        {
+            MasterDataBL productMaster = new MasterDataBL();
+            string message = productMaster.DeleteProductMaster(productId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
@@ -220,28 +378,51 @@ namespace XandaPOS.Controllers
         public ActionResult WarehouseMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadWarehouseMasterGrid());
+            return View(_masterDataBL.LoadWarehouseMasterGrid(0));
+        }
+
+        [HttpPost]
+        public JsonResult GetReloadWarehouseMaster()
+        {
+            MasterDataBL _warehouseMaster = new MasterDataBL();
+            List<WarehouseMasterVM> warehouseMasterList = _warehouseMaster.LoadWarehouseMasterGrid(0);
+            return Json(new { WarehouseMasterList = warehouseMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult AddWarehouse(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.AddWarehouseMaster(warehouseData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public JsonResult GetWarehouseDataForEdit(int warehouseID)
+        {
+            MasterDataBL _warehouseMaster = new MasterDataBL();
+            List<WarehouseMasterVM> warehouseMasterList = _warehouseMaster.LoadWarehouseMasterGrid(warehouseID);
+            return Json(new { WarehouseMasterList = warehouseMasterList, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult EditWarehouse(POS_WAREHOUSE_MASTER warehouseData)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.UpdateWarehouseMaster(warehouseData);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWarehouse(int warehouseId)
+        {
+            MasterDataBL warehouseMaster = new MasterDataBL();
+            string message = warehouseMaster.DeleteWarehouseMaster(warehouseId);
+            return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
         #endregion
 
 
-        //public JsonResult GetCustomer(string custId)
-        //{
-        //    List<CustomerMasterVM> lstCustomerData = new List<CustomerMasterVM>();
-        //    lstCustomerData = custDBContext.CustomerData.ToList();
-        //    return Json(lstCustomerData, JsonRequestBehavior.AllowGet);
-        //}
 
-        //public ActionResult LoadCustomerGrid()
-        //{
-        //    //var datasource = OrderRepository.GetAllRecords().ToList();
-
-        //    return Json("s", JsonRequestBehavior.AllowGet);
-        //}
-
-        //public ActionResult ProductGroupMaster()
-        //{
-        //    return View();
-        //}
     }
 }
