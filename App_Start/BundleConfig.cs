@@ -27,7 +27,8 @@ namespace XandaPOS
                       "~/Content/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js",
                       "~/Content/assets/api/quill/quill.min.js",
                        "~/Content/api/multiple-select/multiple-select.min.js",
-                      "~/Content/assets/api/datatable/jquery.dataTables.min.js" 
+                      "~/Content/assets/api/datatable/jquery.dataTables.min.js",
+                      "~/Content/assets/api/select2/select2.min.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
@@ -38,8 +39,9 @@ namespace XandaPOS
                     "~/Content/assets/js/script.bundle.js"
                     ));
 
-            bundles.Add(new ScriptBundle("~/bundles/masterDataJS").Include(
-                   "~/ClientScripts/MasterData.js"
+            bundles.Add(new ScriptBundle("~/bundles/ClientScriptsJS").Include(
+                   "~/ClientScripts/MasterData.js",
+                   "~/ClientScripts/OrdersData.js"
                    ));
 
 
@@ -56,7 +58,9 @@ namespace XandaPOS
                       "~/Content/assets/css/style.css",
                       "~/Content/assets/api/pace/pace-theme-flat-top.css",
                       "~/Content/assets/api/mcustomscrollbar/jquery.mCustomScrollbar.css",
-                      "~/Content/assets/api/datatable/jquery.dataTables.min.css"));
+                      "~/Content/assets/api/datatable/jquery.dataTables.min.css",
+                      "~/Content/assets/api/select2/select2.min.css"
+                      ));
         }
     }
 }

@@ -191,6 +191,7 @@
     <Compile Include="Models\DBContextMaster.cs" />
     <Compile Include="Models\EmployeeMasterVM.cs" />
     <Compile Include="Models\MasterTableHelperMasterVM.cs" />
+    <Compile Include="Models\OrdersModel\PuchaseOrderMainVM.cs" />
     <Compile Include="Models\ProductGroupMasterVM.cs" />
     <Compile Include="Models\ProductMasterVM.cs" />
     <Compile Include="Models\WarehouseMasterVM.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientScripts\OrdersData.js" />
     <Content Include="Content\assets\api\apexcharts\apexcharts.js" />
     <Content Include="Content\assets\api\apexcharts\scriptcharts.js" />
     <Content Include="Content\assets\api\datatable\jquery.dataTables.min.css" />
