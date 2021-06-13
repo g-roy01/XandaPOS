@@ -65,15 +65,12 @@
                             <form>
                                 <div class="form-group row">
                                     <div class="col-md-12">
-                                        <label class="text-body" >Current Date Time</label>
-                                        <fieldset class="form-group mb-3">
+                                        @*<h4>Purchase Order Details</h4>*@
+                                        <label class="text-body" ><h4>Purchase Order Details</h4></label>
+                                        @*<label class="text-body" >Current Date Time</label>*@
+                                        @*<fieldset class="form-group mb-3">
                                             <input type="datetime-local" name="ProdName" class="form-control" id="PurchaseOrderDateTime" style="width:240px;">
-                                            @*<select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-                                                <option value="AL">5522-655</option>
-
-                                                <option value="WY">00151-444</option>
-                                            </select>*@
-                                        </fieldset>
+                                        </fieldset>*@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-body">Select Warehouse</label>
@@ -110,28 +107,26 @@
                                             </select>*@
                                         </fieldset>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label class="text-body">Purchase Status</label>
                                         <fieldset class="form-group mb-3">
                                             <select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-                                                <option value="AL">Recieved</option>
-
-                                                <option value="WY">Partial</option>
-
-                                                <option value="WY">Pending</option>
+                                                <option value="1">Recieved</option>
+                                                <option value="2">Partial</option>
+                                                <option value="3">Pending</option>
                                             </select>
                                         </fieldset>
                                     </div>
-                                    <div class="col-md-6">
+                                    @*<div class="col-md-6">
                                         <label class="text-body">Attach Document</label>
                                         <fieldset class="form-group mb-3 border-dark rounded p-1">
                                             <input type="file" class="d-block w-100" id="img" name="img" accept="image/*">
                                         </fieldset>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="text-body">Shupping Cost</label>
+                                    </div>*@
+                                    <div class="col-md-3">
+                                        <label class="text-body">Shipping Cost (in $)</label>
                                         <fieldset class="form-group mb-3">
-                                            <input type="text" name="text" value="$50" class="form-control bg-white">
+                                            <input type="text" name="text" value="" class="form-control bg-white">
                                         </fieldset>
                                     </div>
 
@@ -146,9 +141,20 @@
                         <div class="card-body overflow-hidden">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <label class="text-body"><h4>Add Purchase Order Products</h4></label>
+                                </div>
+                                <div class="col-md-12">
                                     <label class="text-body">Select Product</label>
                                     <fieldset class="form-group mb-3 d-flex">
-                                        <input type="text" name="text" class="form-control bg-white" value="Polo Sweatshirt">
+                                        @*<input type="text" name="text" class="form-control bg-white" value="Polo Sweatshirt">
+                                        <a href="javascript:void(0)" class="btn-secondary btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center">ADD</a>*@
+                                        <select class="arabic-select w-100 mb-3 h-30px" id="BrandCompanyAdd">
+                                            @*<option value="NA" selected>--Select Product--</option>*@
+                                            @foreach (var product in Model.mainProductList)
+                                            {
+                                                <option value="@product.product_id">@product.product_name</option>
+                                            }
+                                        </select>
                                         <a href="javascript:void(0)" class="btn-secondary btn ml-2 white pt-1 pb-1 d-flex align-items-center justify-content-center">ADD</a>
                                     </fieldset>
                                 </div>
@@ -186,74 +192,6 @@
                                                     </td>
                                                     <td class="">
                                                         <input type="text" class="form-control" id="basicInput4" placeholder="Enter Quantity" value="20%">
-                                                    </td>
-                                                    <td class="">
-                                                        <fieldset class="form-group mb-0">
-                                                            <select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-                                                                <option value="AL">vat@10</option>
-
-                                                                <option value="WY">vat@15</option>
-                                                            </select>
-                                                        </fieldset>
-                                                    </td>
-                                                    <td class="">15</td>
-                                                    <td class="">192.00</td>
-                                                    <td class="text-right">
-                                                        <a href="#" class="confirm-delete" title="Delete">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-
-                                                </tr>
-                                                <tr class="">
-
-                                                    <td class="">tv</td>
-                                                    <td class="">5000</td>
-                                                    <td class=" text-center">
-                                                        <input type="number" class="form-control" id="basicInput44" placeholder="Enter Quantity" value="2">
-                                                    </td>
-                                                    <td class=" text-center">
-                                                        <input type="number" class="form-control" id="basicInput5" placeholder="Enter Quantity" value="2">
-                                                    </td>
-                                                    <td class=" ">
-                                                        <input type="text" class="form-control" id="basicInput6" placeholder="Enter Quantity" value="$200">
-                                                    </td>
-                                                    <td class="">
-                                                        <input type="text" class="form-control" id="basicInput7" placeholder="Enter Quantity" value="20%">
-                                                    </td>
-                                                    <td class="">
-                                                        <fieldset class="form-group mb-0">
-                                                            <select class="js-example-basic-single js-states form-control bg-transparent" name="state">
-                                                                <option value="AL">vat@10</option>
-
-                                                                <option value="WY">vat@15</option>
-                                                            </select>
-                                                        </fieldset>
-                                                    </td>
-                                                    <td class="">15</td>
-                                                    <td class="">192.00</td>
-                                                    <td class="text-right">
-                                                        <a href="#" class="confirm-delete" title="Delete">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    </td>
-
-                                                </tr>
-                                                <tr class="">
-
-                                                    <td class="">Mackbook</td>
-                                                    <td class="">2500</td>
-                                                    <td class=" text-center">
-                                                        <input type="number" class="form-control" id="basicInput8" placeholder="Enter Quantity" value="2">
-                                                    </td>
-                                                    <td class=" text-center">
-                                                        <input type="number" class="form-control" id="basicInput9" placeholder="Enter Quantity" value="2">
-                                                    </td>
-                                                    <td class=" ">
-                                                        <input type="text" class="form-control" id="basicInput89" placeholder="Enter Quantity" value="$200">
-                                                    </td>
-                                                    <td class="">
-                                                        <input type="text" class="form-control" id="basicInput98" placeholder="Enter Quantity" value="20%">
                                                     </td>
                                                     <td class="">
                                                         <fieldset class="form-group mb-0">

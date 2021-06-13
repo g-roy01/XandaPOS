@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="xandaposModel.pos_PurchaseOrder_Main" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="xandaposModel.pos_PurchaseOrder_Sheet" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="xandaposModel.POS_PRODUCT_MASTER" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="xandaposModel.POS_TAX_MASTER" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

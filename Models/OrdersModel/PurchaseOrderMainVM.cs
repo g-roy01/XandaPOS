@@ -25,5 +25,7 @@ namespace XandaPOS.Models.OrdersModel
         public List<WarehouseMasterVM> warehouseList { get; set; }
         public List<CompanyMasterData> supplierList { get; set; }
         public List<PurchaseOrderSheetVM> purchaseOrderSheetDetails { get; set; }
+        public List<TaxMasterVM> taxList { get; set; }
+        public List<ProductMasterData> mainProductList { get; set; }
     }
 }

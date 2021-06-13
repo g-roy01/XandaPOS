@@ -164,6 +164,9 @@
     <Compile Include="Edmx\pos_PurchaseOrder_Sheet.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Edmx\POS_TAX_MASTER.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Edmx\POS_WAREHOUSE_MASTER.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
@@ -190,6 +193,7 @@
     <Compile Include="Models\MasterdataModel\CustomerMasterVM.cs" />
     <Compile Include="Models\MasterdataModel\EmployeeMasterVM.cs" />
     <Compile Include="Models\MasterdataModel\MasterTableHelperMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\TaxMasterVM.cs" />
     <Compile Include="Models\OrdersModel\PurchaseOrderMainVM.cs" />
     <Compile Include="Models\MasterdataModel\ProductGroupMasterVM.cs" />
     <Compile Include="Models\MasterdataModel\ProductMasterVM.cs" />
@@ -1105,6 +1109,7 @@
     <Content Include="Content\images\revolution_layer_slider_demo_9\Slider_01_02.jpg" />
     <Content Include="Content\js\mc-validate.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="DatabaseScripts\xandapos_06132021.sql" />
     <Content Include="Edmx\XendaPOSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>XendaPOSModel.edmx</DependentUpon>

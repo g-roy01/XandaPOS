@@ -41,7 +41,7 @@ namespace XandaPOS.Business
 
                     lstCustomerMasterVM.Add(_customerMasterVM);
                 }
-                return lstCustomerMasterVM;
+                return lstCustomerMasterVM.OrderBy(a=>a.cust_name).ToList();
             } 
         }
 
@@ -115,7 +115,7 @@ namespace XandaPOS.Business
         #region BRAND MASTER
         
         //Load Brand Grid
-        public BrandMasterVM LoadBrandMasterGrid(int brandID, string operation = "GET")
+        public BrandMasterVM LoadBrandMasterGrid(int brandID = 0, string operation = "GET")
         {
             List<BrandMasterData> lstBrandMaster = new List<BrandMasterData>();
 
@@ -203,7 +203,7 @@ namespace XandaPOS.Business
                 }
 
                 BrandMasterVM _brandMasterVM = new BrandMasterVM();
-                _brandMasterVM.mainBrandData = lstBrandMaster;
+                _brandMasterVM.mainBrandData = lstBrandMaster.OrderBy(a => a.brand_name).ToList();
                 _brandMasterVM.companyDetails = FetchCompanyList().mainCompanyData;
                 _brandMasterVM.prodGrpDetails = LoadProductGroupMasterGrid(0);
 
@@ -355,7 +355,7 @@ namespace XandaPOS.Business
                 }
 
                 CompanyMasterVM _compMasterVM = new CompanyMasterVM();
-                _compMasterVM.mainCompanyData = lstCompanyMasterVM;
+                _compMasterVM.mainCompanyData = lstCompanyMasterVM.OrderBy(a => a.comp_name).ToList();
                 _compMasterVM.companyHelper = FetchMasterTableHelperList("POS_COMPANY_MASTER");
 
                 return _compMasterVM;
@@ -401,14 +401,14 @@ namespace XandaPOS.Business
                 }
 
                 CompanyMasterVM _compMasterVM = new CompanyMasterVM();
-                _compMasterVM.mainCompanyData = lstCompanyMasterVM;
+                _compMasterVM.mainCompanyData = lstCompanyMasterVM.OrderBy(a => a.comp_name).ToList();
                 _compMasterVM.companyHelper = FetchMasterTableHelperList("POS_COMPANY_MASTER");
 
                 return _compMasterVM;
             }
         }
 
-        //Fetch Supplier Company Details for Destination Tables
+        //Fetch Company Type Details for Destination Tables
         public List<CompanyMasterData> FetchCompanyTypeList(string companyType)
         {
             //companyType could be - "SUPPLIER","VENDOR"
@@ -452,7 +452,7 @@ namespace XandaPOS.Business
                 }
             }
 
-            return _companyTypeDetailsList;
+            return _companyTypeDetailsList.OrderBy(a => a.comp_name).ToList();
         }
 
         //Add Company Master
@@ -560,7 +560,7 @@ namespace XandaPOS.Business
 
                     lstEmployeeMasterVM.Add(_employeeMasterVM);
                 }
-                return lstEmployeeMasterVM;
+                return lstEmployeeMasterVM.OrderBy(a => a.emp_name).ToList();
             }
         }
 
@@ -758,7 +758,7 @@ namespace XandaPOS.Business
 
                     lstMasterTableHelperMasterVM.Add(_masterTableHelperMasterVM);
                 }
-                return lstMasterTableHelperMasterVM;
+                return lstMasterTableHelperMasterVM.OrderBy(a => a.helper_name).ToList();
             }
         }
 
@@ -787,7 +787,7 @@ namespace XandaPOS.Business
 
                     lstMasterTableHelperMasterVM.Add(_masterTableHelperMasterVM);
                 }
-                return lstMasterTableHelperMasterVM;
+                return lstMasterTableHelperMasterVM.OrderBy(a => a.helper_name).ToList();
             }
         }
 
@@ -974,7 +974,7 @@ namespace XandaPOS.Business
 
                     lstProductGroupMasterVM.Add(_productGroupMasterVM);
                 }
-                return lstProductGroupMasterVM;
+                return lstProductGroupMasterVM.OrderBy(a => a.prod_grp_name).ToList();
             }
         }
         
@@ -1047,7 +1047,7 @@ namespace XandaPOS.Business
 
         #region PRODUCT MASTER
         //Load Product Grid
-        public ProductMasterVM LoadProductMasterGrid(int prodId,string operation = "GET")
+        public ProductMasterVM LoadProductMasterGrid(int prodId=0, string operation = "GET")
         {
             List<ProductMasterData> lstProductMasterData = new List<ProductMasterData>();
 
@@ -1176,7 +1176,7 @@ namespace XandaPOS.Business
                 }
 
                 ProductMasterVM _productMasterVM = new ProductMasterVM();
-                _productMasterVM.mainProductData = lstProductMasterData;
+                _productMasterVM.mainProductData = lstProductMasterData.OrderBy(a => a.product_name).ToList();
                 _productMasterVM.companyDetails = FetchCompanyList().mainCompanyData;
                 _productMasterVM.prodGrpDetails = LoadProductGroupMasterGrid(0);
                 _productMasterVM.helperDetails = FetchMasterTableHelperList("POS_PRODUCT_MASTER");
@@ -1260,9 +1260,35 @@ namespace XandaPOS.Business
         }
         #endregion
 
+        #region TAX MASTER (CURRENTLY NO SCREEN - WILL BE USED AS HELPER ONLY)
+        public List<TaxMasterVM> LoadTaxMasterList()
+        {
+            List<TaxMasterVM> _taxMasterList = new List<TaxMasterVM>();
+            using(var db = new xandaposEntities())
+            {
+                //Get only active Tax details only
+                var taxMaster = db.POS_TAX_MASTER.Where(x=>x.tax_active_status == true).ToList();
+                TaxMasterVM taxMasterVM = new TaxMasterVM();
+
+                foreach (var item in taxMaster)
+                {
+                    taxMasterVM.tax_id = item.tax_id;
+                    taxMasterVM.tax_name = StrCleanDataOrEmpty(item.tax_name);
+                    taxMasterVM.tax_percent = item.tax_percent;
+                    taxMasterVM.tax_description = StrCleanDataOrEmpty(item.tax_description);
+                    taxMasterVM.tax_active_status = item.tax_active_status;
+
+                    _taxMasterList.Add(taxMasterVM);
+                }
+            }
+            return _taxMasterList.OrderBy(a => a.tax_name).ToList();
+        }
+
+        #endregion
+
         #region WAREHOUSE MASTER
         //Load Warehouse Grid
-        public List<WarehouseMasterVM> LoadWarehouseMasterGrid(int warehouseId)
+        public List<WarehouseMasterVM> LoadWarehouseMasterGrid(int warehouseId=0)
         {
             List<WarehouseMasterVM> lstWarehouseMasterVM = new List<WarehouseMasterVM>();
 
@@ -1290,7 +1316,7 @@ namespace XandaPOS.Business
 
                     lstWarehouseMasterVM.Add(_warehouseMasterVM);
                 }
-                return lstWarehouseMasterVM;
+                return lstWarehouseMasterVM.OrderBy(a => a.warehouse_name).ToList();
             }
         }
 

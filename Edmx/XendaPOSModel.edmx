@@ -96,6 +96,7 @@
           <Property Name="discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="tax" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="notes" Type="text" />
+          <Property Name="purchase_timestamp" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="pos_PurchaseOrder_Sheet">
           <Key>
@@ -110,6 +111,16 @@
           <Property Name="tax_id" Type="int" />
           <Property Name="tax_percent" Type="decimal" Precision="5" Scale="2" />
           <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="POS_TAX_MASTER">
+          <Key>
+            <PropertyRef Name="tax_id" />
+          </Key>
+          <Property Name="tax_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tax_name" Type="nvarchar" MaxLength="10" />
+          <Property Name="tax_description" Type="nvarchar" MaxLength="50" />
+          <Property Name="tax_percent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="tax_active_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="POS_WAREHOUSE_MASTER">
           <Key>
@@ -145,6 +156,7 @@
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="Self.POS_PRODUCT_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pos_PurchaseOrder_Main" EntityType="Self.pos_PurchaseOrder_Main" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pos_PurchaseOrder_Sheet" EntityType="Self.pos_PurchaseOrder_Sheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_TAX_MASTER" EntityType="Self.POS_TAX_MASTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_WAREHOUSE_MASTER" EntityType="Self.POS_WAREHOUSE_MASTER" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -250,6 +262,7 @@
           <EntitySet Name="pos_PurchaseOrder_Main" EntityType="xandaposModel.pos_PurchaseOrder_Main" />
           <EntitySet Name="pos_PurchaseOrder_Sheet" EntityType="xandaposModel.pos_PurchaseOrder_Sheet" />
           <EntitySet Name="POS_PRODUCT_MASTER" EntityType="xandaposModel.POS_PRODUCT_MASTER" />
+          <EntitySet Name="POS_TAX_MASTER" EntityType="xandaposModel.POS_TAX_MASTER" />
         </EntityContainer>
         <EntityType Name="pos_PurchaseOrder_Main">
           <Key>
@@ -264,6 +277,7 @@
           <Property Name="discount" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="tax" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="purchase_timestamp" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="pos_PurchaseOrder_Sheet">
           <Key>
@@ -292,6 +306,16 @@
           <Property Name="product_image_link" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
           <Property Name="product_code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="product_default_cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="POS_TAX_MASTER">
+          <Key>
+            <PropertyRef Name="tax_id" />
+          </Key>
+          <Property Name="tax_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tax_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tax_description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tax_percent" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="tax_active_status" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -387,6 +411,7 @@
           <EntitySetMapping Name="pos_PurchaseOrder_Main">
             <EntityTypeMapping TypeName="xandaposModel.pos_PurchaseOrder_Main">
               <MappingFragment StoreEntitySet="pos_PurchaseOrder_Main">
+                <ScalarProperty Name="purchase_timestamp" ColumnName="purchase_timestamp" />
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="tax" ColumnName="tax" />
                 <ScalarProperty Name="discount" ColumnName="discount" />
@@ -426,6 +451,17 @@
                 <ScalarProperty Name="product_type" ColumnName="product_type" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_TAX_MASTER">
+            <EntityTypeMapping TypeName="xandaposModel.POS_TAX_MASTER">
+              <MappingFragment StoreEntitySet="POS_TAX_MASTER">
+                <ScalarProperty Name="tax_active_status" ColumnName="tax_active_status" />
+                <ScalarProperty Name="tax_percent" ColumnName="tax_percent" />
+                <ScalarProperty Name="tax_description" ColumnName="tax_description" />
+                <ScalarProperty Name="tax_name" ColumnName="tax_name" />
+                <ScalarProperty Name="tax_id" ColumnName="tax_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

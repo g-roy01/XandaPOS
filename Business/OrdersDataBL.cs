@@ -23,8 +23,11 @@ namespace XandaPOS.Business
             {
 
             }
-            _purchaseOrderMainVM.warehouseList = _masterDataRepo.LoadWarehouseMasterGrid(0).OrderBy(m => m.warehouse_name).ToList();
-            _purchaseOrderMainVM.supplierList = _masterDataRepo.FetchCompanyTypeList("SUPPLIER").OrderBy(m => m.comp_name).ToList();
+            _purchaseOrderMainVM.warehouseList = _masterDataRepo.LoadWarehouseMasterGrid();
+            _purchaseOrderMainVM.supplierList = _masterDataRepo.FetchCompanyTypeList("SUPPLIER");
+            //_purchaseOrderMainVM.taxList = _masterDataRepo.LoadTaxMasterList();
+            _purchaseOrderMainVM.mainProductList = _masterDataRepo.LoadProductMasterGrid().mainProductData;
+
             return _purchaseOrderMainVM; 
         }
 

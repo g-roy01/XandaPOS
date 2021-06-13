@@ -23,5 +23,6 @@ namespace XandaPOS.Edmx
         public decimal discount { get; set; }
         public decimal tax { get; set; }
         public string notes { get; set; }
+        public System.DateTime purchase_timestamp { get; set; }
     }
 }
