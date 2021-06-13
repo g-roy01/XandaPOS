@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using XandaPOS.Edmx;
 
-namespace XandaPOS.Models
+namespace XandaPOS.Models.MasterdataModel
 {
     public class CustomerMasterVM
     {

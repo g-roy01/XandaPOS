@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using XandaPOS.Business;
+using XandaPOS.Edmx;
+using XandaPOS.Models.OrdersModel; 
 
 namespace XandaPOS.Controllers
 {
@@ -16,7 +19,8 @@ namespace XandaPOS.Controllers
 
         public ActionResult PurchaseOrder()
         {
-            return View();
+            OrdersDataBL _masterDataRepo = new OrdersDataBL();
+            return View(_masterDataRepo.LoadPurchaseOrderMainGrid());
         }
 
         public ActionResult ReceiveOrder()

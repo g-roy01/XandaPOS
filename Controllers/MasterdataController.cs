@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XandaPOS.Business;
-using XandaPOS.Models;
+using XandaPOS.Models.MasterdataModel;
 using XandaPOS.BusinessData;
 using XandaPOS.Edmx;
 using System.Data.Entity;

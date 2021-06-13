@@ -185,17 +185,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BrandMasterVM.cs" />
-    <Compile Include="Models\CompanyMasterVM.cs" />
-    <Compile Include="Models\CustomerMasterVM.cs" />
-    <Compile Include="Models\DBContextMaster.cs" />
-    <Compile Include="Models\EmployeeMasterVM.cs" />
-    <Compile Include="Models\MasterTableHelperMasterVM.cs" />
-    <Compile Include="Models\OrdersModel\PuchaseOrderMainVM.cs" />
-    <Compile Include="Models\ProductGroupMasterVM.cs" />
-    <Compile Include="Models\ProductMasterVM.cs" />
-    <Compile Include="Models\WarehouseMasterVM.cs" />
-    <Compile Include="Models\XendaPOSDBContext.cs" />
+    <Compile Include="Models\MasterdataModel\BrandMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\CompanyMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\CustomerMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\EmployeeMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\MasterTableHelperMasterVM.cs" />
+    <Compile Include="Models\OrdersModel\PurchaseOrderMainVM.cs" />
+    <Compile Include="Models\MasterdataModel\ProductGroupMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\ProductMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\WarehouseMasterVM.cs" />
+    <Compile Include="Models\OrdersModel\PurchaseOrderSheetVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

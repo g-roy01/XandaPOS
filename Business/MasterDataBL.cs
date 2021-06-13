@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using XandaPOS.Edmx;
-using XandaPOS.Models;
+using XandaPOS.Models.MasterdataModel;
 
 namespace XandaPOS.Business
 {
@@ -289,7 +289,7 @@ namespace XandaPOS.Business
             using (var db = new xandaposEntities())
             {
                 var posCompanyMaster = db.POS_COMPANY_MASTER;
-                var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
+                //var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
                 //For CompanyType = ALL
                 var list = posCompanyMaster.ToList();
@@ -372,7 +372,6 @@ namespace XandaPOS.Business
             using (var db = new xandaposEntities())
             {
                 var posCompanyMaster = db.POS_COMPANY_MASTER;
-                var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
                 //For CompanyType = ALL
                 var list = posCompanyMaster.ToList();
@@ -407,6 +406,53 @@ namespace XandaPOS.Business
 
                 return _compMasterVM;
             }
+        }
+
+        //Fetch Supplier Company Details for Destination Tables
+        public List<CompanyMasterData> FetchCompanyTypeList(string companyType)
+        {
+            //companyType could be - "SUPPLIER","VENDOR"
+            List<CompanyMasterData> _companyTypeDetailsList = new List<CompanyMasterData>();
+            List<MasterTableHelperMasterVM> _companyHelperMaster = FetchMasterTableHelperList("POS_COMPANY_MASTER");
+
+            var companyTypeId = 0;
+            try
+            {
+                companyTypeId = _companyHelperMaster.Where(x => x.helper_name.ToUpper().Equals(companyType)).Select(s => s.helper_id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                companyTypeId = 0;
+            }
+
+            using (var db = new xandaposEntities())
+            {
+                var compMasterList = db.POS_COMPANY_MASTER.Where(x => x.comp_type == companyTypeId).ToList();
+
+                foreach (var item in compMasterList)
+                {
+                    CompanyMasterData _companyMaster = new CompanyMasterData();
+                    _companyMaster.comp_id = item.comp_id;
+                    _companyMaster.comp_name = StrCleanDataOrEmpty(item.comp_name);
+                    _companyMaster.comp_address = StrCleanDataOrEmpty(item.comp_address);
+                    _companyMaster.comp_pin = StrCleanDataOrEmpty(item.comp_pin);
+                    _companyMaster.comp_regn_no = StrCleanDataOrEmpty(item.comp_regn_no);
+
+                    string helperName = "";
+                    try
+                    {
+                        helperName = _companyHelperMaster.Where(x => x.helper_id == item.comp_type).FirstOrDefault().helper_name;
+                    }
+                    catch (Exception ex)
+                    {
+                        helperName = "";
+                    }
+                    _companyMaster.comp_type_name = StrCleanDataOrEmpty(helperName);
+                    _companyTypeDetailsList.Add(_companyMaster);
+                }
+            }
+
+            return _companyTypeDetailsList;
         }
 
         //Add Company Master
