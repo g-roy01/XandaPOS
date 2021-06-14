@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\MasterDataBL.cs" />
     <Compile Include="Business\OrdersDataBL.cs" />
+    <Compile Include="ClientLibrary\ImageHelper\ImageHelperMain.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -187,7 +188,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ImageHelper\ImageHelperMain.cs" />
     <Compile Include="Models\MasterdataModel\BrandMasterVM.cs" />
     <Compile Include="Models\MasterdataModel\CompanyMasterVM.cs" />
     <Compile Include="Models\MasterdataModel\CustomerMasterVM.cs" />
