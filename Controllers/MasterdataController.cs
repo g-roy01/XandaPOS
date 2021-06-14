@@ -458,7 +458,19 @@ namespace XandaPOS.Controllers
                     Directory.CreateDirectory(Path.GetDirectoryName(newFileLocation));
                 }
 
+
+                string var1 = DateTime.Now.ToString("MMddyyyyHHmmss");
+                int var2 = (int)Math.Truncate((DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
+                var randomFileName = string.Concat(var1, var2.ToString());
+
+                
+                string filePartName = GetImageNameFromFilePath(fileName);
+                newFileLocation = newFileLocation.Replace(filePartName, randomFileName);
+
                 img.Save(newFileLocation);
+
+                newFileName = newFileName.Replace(filePartName, randomFileName);
+
                 return Json(new { success = true, avatarFileLocation = newFileName });
             }
             catch (Exception ex)
@@ -473,6 +485,23 @@ namespace XandaPOS.Controllers
             if (file == null) return false;
             return file.ContentType.Contains("image") ||
                 _imageHelper.ImageFileExtensions.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
+
+        private string GetImageNameFromFilePath(string fileName)
+        {
+            ImageHelperMain _imageHelper = new ImageHelperMain();
+            // Define destination
+            var serverPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
+
+            //string replacementString = _imageHelper.TempFolder + "/";
+            fileName = fileName.Replace(_imageHelper.TempFolder + @"/", "");
+            string newFileName = "";
+            if (fileName.EndsWith(".jpg")) //if .jpg Image
+            {   //This step is imp to make sure the .jpg substring is always at the end
+                newFileName = string.Concat(fileName, " ");
+            }
+            newFileName = newFileName.Replace(".jpg ", "");
+            return newFileName;
         }
 
         private string GetTempSavedFilePath(HttpPostedFileBase file)

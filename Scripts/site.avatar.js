@@ -13,9 +13,7 @@ var jcrop_api,
 var maxSizeAllowed = 4;     // Upload limit in MB
 var maxSizeInBytes = maxSizeAllowed * 1024 * 1024;
 var keepUploadBox = false;  // ToDo - Remove if you want to keep the upload box
-//var keepCropBox = false;    // ToDo - Remove if you want to keep the crop box
-
-
+var keepCropBox = false;    // ToDo - Remove if you want to keep the crop box
 
 jQuery(function () {
     if (typeof jQuery('#avatar-upload-form') !== undefined) {
@@ -31,7 +29,7 @@ jQuery(function () {
                         jQuery('#avatar-upload-form').submit();
                     } else {
                         // File too large
-                        $('#avatar-upload-form .upload-file-notice').addClass('bg-danger');
+                        jQuery('#avatar-upload-form .upload-file-notice').addClass('bg-danger');
                     }
                 }
             }
@@ -51,16 +49,16 @@ function initAvatarUpload() {
         success: function (data) {
             updateProgress(100);
             if (data.success === false) {
-                $('#status').html(data.errorMessage);
+                jQuery('#status').html(data.errorMessage);
             } else {
                 jQuery('#preview-pane .preview-container img').attr('src', data.fileName);
                 var img = jQuery('#crop-avatar-target');
                 img.attr('src', data.fileName);
 
                 if (!keepUploadBox) {
-                    //jQuery('#avatar-upload-box').addClass('hidden');
+                    jQuery('#avatar-upload-box').addClass('hidden');
                 }
-                //jQuery('#avatar-crop-box').removeClass('hidden');
+                jQuery('#avatar-crop-box').removeClass('hidden');
                 initAvatarCrop(img);
             }
         },
@@ -105,7 +103,7 @@ function initAvatarCrop(img) {
         var pcnt = jQuery('#preview-pane .preview-container');
         xsize = pcnt.width();
         ysize = pcnt.height();
-        //jQuery('#preview-pane').appendTo(jcrop_api.ui.holder);
+        jQuery('#preview-pane').appendTo(jcrop_api.ui.holder);
         jcrop_api.focus();
     });
 }
@@ -141,12 +139,12 @@ function saveAvatar() {
         }
     }).done(function (data) {
         if (data.success === true) {
-            $('#avatar-result img').attr('src', data.avatarFileLocation);
+            jQuery('#avatar-result img').attr('src', data.avatarFileLocation);
 
-            $('#avatar-result').removeClass('hidden');
+            jQuery('#avatar-result').removeClass('hidden');
 
             if (!keepCropBox) {
-                $('#avatar-crop-box').addClass('hidden');
+                jQuery('#avatar-crop-box').addClass('hidden');
             }
         } else {
             alert(data.errorMessage)

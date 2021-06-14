@@ -1338,6 +1338,7 @@
     <Content Include="Views\Orders\SellOrder.cshtml" />
     <Content Include="Views\Masterdata\_Upload.cshtml" />
     <Content Include="Views\Masterdata\Upload.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

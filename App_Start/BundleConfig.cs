@@ -55,9 +55,9 @@ namespace XandaPOS
                       ));
 
             bundles.Add(new StyleBundle("~/Content/ImagehandlerCSS").Include(
-                      "~/Content/jquery.Jcrop.css",
-                      "~/Content/site.css",
-                      "~/Content/site.avatar.css"
+                      "~/Content/css/jquery.Jcrop.css",
+                      "~/Content/css/site.css",
+                      "~/Content/css/site.avatar.css"
                       ));
 
             
