@@ -21,6 +21,7 @@ namespace XandaPOS
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include( 
                       "~/Content/assets/api/jqueryvalidate/jquery.validate.min.js",
+                      //"~/Content/assets/api/jquery/jquery-3.4.1.js",
                       //"~/Content/assets/api/apexcharts/apexcharts.js",
                       "~/Content/assets/api/apexcharts/scriptcharts.js",
                       "~/Content/assets/api/pace/pace.js",
@@ -46,11 +47,20 @@ namespace XandaPOS
 
 
 
+            bundles.Add(new ScriptBundle("~/bundles/ImagehandlerJS").Include(
+                      "~/Scripts/jquery.form.js",
+                      "~/Scripts/jquery.Jcrop.js",
+                      "~/Scripts/site.avatar.js",
+                      "~/Scripts/respond.js"
+                      ));
 
+            bundles.Add(new StyleBundle("~/Content/ImagehandlerCSS").Include(
+                      "~/Content/jquery.Jcrop.css",
+                      "~/Content/site.css",
+                      "~/Content/site.avatar.css"
+                      ));
 
-
-
-
+            
 
 
 
