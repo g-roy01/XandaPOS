@@ -1897,9 +1897,42 @@ jQuery(document).ready(function () {
         jQuery("#ProdGrpNameAdd").val('NA');
         jQuery("#ProdCompanyNameAdd").val('NA');
         jQuery('#ProductDetailsAdd').val('');
-        jQuery('#ProductImageAdd').val('');
+        jQuery('#ProductImageNameAdd').val('');
+        //jQuery('#ProductImageAdd').val('');
         jQuery('#ProductCodeAdd').val('');
         jQuery('#ProductDefaultCostAdd').val('');
+
+
+        jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
+
+        jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
+        jQuery('.jcrop-holder').css('background', '');
+        //jQuery('.jcrop-holder').css('height', '0px');
+        //jQuery('.jcrop-holder').css('width', '0px');
+
+
+        //jQuery('.jcrop-holder').removeAttr('style');
+        //jQuery('#crop-avatar-target').attr('src', '#3');
+
+        //FILE UPLOAD CLEARING
+        
+        jQuery('#imageUploadHolder').val('');
+
+        jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
+
+        jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'black');
+
+        jQuery('.upload-percent-bar').width('0%');
+        jQuery('.upload-percent-value').html('0%');
+
+
+        jQuery('#avatar-crop-box').css('display', 'none');
+        jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
+        jQuery('#Preview_panel_header').css('display', 'none'); //Cropping portion live panel header
+
+        jQuery('#finalImage').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
 
         //Setting focus to the Helper Name field
         jQuery("#ProductNameAdd").focus();
@@ -1915,7 +1948,7 @@ jQuery(document).ready(function () {
         productMaster.product_group = jQuery("#ProdGrpNameAdd").val();
         productMaster.product_company = jQuery("#ProdCompanyNameAdd").val();
         productMaster.product_details = jQuery('#ProductDetailsAdd').val();
-        productMaster.product_image_link = jQuery('#ProductImageAdd').val();
+        productMaster.product_image_link = jQuery('#ProductImageNameAdd').val();
         productMaster.product_code = jQuery('#ProductCodeAdd').val();
         productMaster.product_default_cost = jQuery('#ProductDefaultCostAdd').val();
 
@@ -2107,6 +2140,44 @@ jQuery(document).ready(function () {
     //========================================================================//
 
 });
+
+
+function UploadProductImageAdd() {
+    var img = jQuery('#preview-pane .preview-container img');
+    jQuery('#avatar-crop-box button').addClass('disabled');
+
+    jQuery.ajax({
+        type: "POST",
+        url: "/Masterdata/UploadProductImageAdd",
+        traditional: true,
+        data: {
+            w: img.css('width'),
+            h: img.css('height'),
+            l: img.css('marginLeft'),
+            t: img.css('marginTop'),
+            fileName: img.attr('src')
+        }
+    }).done(function (data) {
+        if (data.success === true) {
+            //ORIGINAL CODE
+            jQuery('#avatar-result img').attr('src', data.avatarFileLocation);
+
+            //UPDATED CODE
+            jQuery(data.ImageHoldeNameId).val(data.ActualSavedFileName);
+
+            jQuery('#avatar-result').removeClass('hidden');
+
+            if (!keepCropBox) {
+                jQuery('#avatar-crop-box').addClass('hidden');
+            }
+        } else {
+            alert(data.errorMessage)
+        }
+    }).fail(function (e) {
+        alert('Cannot upload avatar at this time');
+    });
+}
+
 
 //Insert data
 

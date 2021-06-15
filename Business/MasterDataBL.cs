@@ -1413,3 +1413,4 @@ namespace XandaPOS.Business
         #endregion
     }
 }
+

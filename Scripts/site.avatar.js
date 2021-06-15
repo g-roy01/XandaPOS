@@ -16,7 +16,14 @@ var keepUploadBox = false;  // ToDo - Remove if you want to keep the upload box
 var keepCropBox = false;    // ToDo - Remove if you want to keep the crop box
 
 jQuery(function () {
-    if (typeof jQuery('#avatar-upload-form') !== undefined) {
+    //jQuery(document).on('Click', '#imageUploadHolder', function () {
+    //    console.log('Image Reuploaded');
+    //    initAvatarUpload();
+    //});
+    //console.log(typeof jQuery('#avatar-upload-form'));
+
+    //if (typeof jQuery('#avatar-upload-form') !== undefined) {
+
         initAvatarUpload();
         jQuery('#avatar-max-size').html(maxSizeAllowed);
         jQuery('#avatar-upload-form input:file').on("change", function (e) {
@@ -24,17 +31,39 @@ jQuery(function () {
             for (var x in files) {
                 if (files[x].name != "item" && typeof files[x].name != "undefined") {
                     if (files[x].size <= maxSizeInBytes) {
+
                         // Submit the selected file
-                        jQuery('#avatar-upload-form .upload-file-notice').removeClass('bg-danger');
+                        //jQuery('#avatar-upload-form .upload-file-notice').removeClass('bg-danger');
+
+                        //jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
+                        jQuery('#avatar-upload-form .upload-file-notice').text('Uploading...');
+
+                        jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
+                        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'black');
+
                         jQuery('#avatar-upload-form').submit();
                     } else {
                         // File too large
-                        jQuery('#avatar-upload-form .upload-file-notice').addClass('bg-danger');
+                        jQuery('#avatar-upload-form .upload-file-notice').text('Image Size > 4 MB');
+                        //jQuery('#avatar-upload-form .upload-file-notice').addClass('bg-danger');
+                        jQuery('#avatar-upload-form .upload-file-notice').css('background','red');
+                        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'white');
+
+                        jQuery('.upload-percent-bar').width('0%');
+                        jQuery('.upload-percent-value').html('0%');
+
+                        jQuery('#avatar-crop-box').css('display', 'none');
+
+
                     }
                 }
             }
         });
-    }
+    //}
+    //else {
+    //    console.log('Upload Start');
+    //    initAvatarUpload();  
+    //}
 });
 
 function initAvatarUpload() {
@@ -54,6 +83,15 @@ function initAvatarUpload() {
                 jQuery('#preview-pane .preview-container img').attr('src', data.fileName);
                 var img = jQuery('#crop-avatar-target');
                 img.attr('src', data.fileName);
+
+                jQuery('#avatar-upload-form .upload-file-notice').text('Image Uploaded');
+
+                jQuery('#avatar-crop-box').css('display', 'block');
+                jQuery('#Preview_pane').css('display', 'block'); //Added - The Preview Panel Will Be Shown
+                jQuery('.jcrop-holder img').css('display', 'block'); // Added  - This Portion Will Show the Image Uploaded, Initially It Will Be Hidden On Panel Load
+                jQuery('.jcrop-holder img').attr('src', data.fileName); //Added - To Update Image Show When New Image Is Uploaded | If Removed Then New Image Will Not Be Updated If Image Is Re-Uploaded
+                jQuery('#Preview_panel_header').css('display', 'block'); //Added - To Show The Preview Panel Header
+                
 
                 if (!keepUploadBox) {
                     jQuery('#avatar-upload-box').addClass('hidden');
@@ -122,34 +160,38 @@ function updatePreviewPane(c) {
     }
 }
 
-function saveAvatar() {
-    var img = jQuery('#preview-pane .preview-container img');
-    jQuery('#avatar-crop-box button').addClass('disabled');
+//function saveAvatar() {
+//    var img = jQuery('#preview-pane .preview-container img');
+//    jQuery('#avatar-crop-box button').addClass('disabled');
 
-    jQuery.ajax({
-        type: "POST",
-        url: "/Masterdata/Save",
-        traditional: true,
-        data: {
-            w: img.css('width'),
-            h: img.css('height'),
-            l: img.css('marginLeft'),
-            t: img.css('marginTop'),
-            fileName: img.attr('src')
-        }
-    }).done(function (data) {
-        if (data.success === true) {
-            jQuery('#avatar-result img').attr('src', data.avatarFileLocation);
+//    jQuery.ajax({
+//        type: "POST",
+//        url: "/Masterdata/Save",
+//        traditional: true,
+//        data: {
+//            w: img.css('width'),
+//            h: img.css('height'),
+//            l: img.css('marginLeft'),
+//            t: img.css('marginTop'),
+//            fileName: img.attr('src')
+//        }
+//    }).done(function (data) {
+//        if (data.success === true) {
+//            //ORIGINAL CODE
+//            jQuery('#avatar-result img').attr('src', data.avatarFileLocation);
 
-            jQuery('#avatar-result').removeClass('hidden');
+//            //UPDATED CODE
+//            jQuery(data.ImageHoldeNameId).val(data.avatarFileLocation);
 
-            if (!keepCropBox) {
-                jQuery('#avatar-crop-box').addClass('hidden');
-            }
-        } else {
-            alert(data.errorMessage)
-        }
-    }).fail(function (e) {
-        alert('Cannot upload avatar at this time');
-    });
-}
+//            jQuery('#avatar-result').removeClass('hidden');
+
+//            if (!keepCropBox) {
+//                jQuery('#avatar-crop-box').addClass('hidden');
+//            }
+//        } else {
+//            alert(data.errorMessage)
+//        }
+//    }).fail(function (e) {
+//        alert('Cannot upload avatar at this time');
+//    });
+//}

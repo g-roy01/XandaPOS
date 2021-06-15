@@ -9,7 +9,7 @@
     display: block;
     border: 1px #000 solid;*/
     position:relative;
-    top:230px;
+    top:150px;
     width:100px;
     height:100px;
     z-index: 1;
@@ -19,6 +19,8 @@
 
     #preview-pane .preview-container {
         /* Dimesnions of the cropped window - must match backend definitions */
+        position: relative;
+        left:140px;
         width: 100px; /* ToDo - size of the crop window*/
         height: 100px; /* ToDo - size of the crop window*/
         overflow: hidden;

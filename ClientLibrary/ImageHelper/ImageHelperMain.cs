@@ -16,7 +16,7 @@ namespace XandaPOS.ClientLibrary.ImageHelper
 
 
         // Width of initially uploaded image (scale is preserved so height is calculated).
-        private const int _avatarScreenWidth = 400;  // ToDo - Change the value of the width of the image on the screen
+        private const int _avatarScreenWidth = 250;  // ToDo - Change the value of the width of the image on the screen
 
         private const string _tempFolder = "/Temp"; //Location Where Image Will Be Temporaryily Stored Before Uploading
         private const string _mapTempFolder = "~" + _tempFolder;

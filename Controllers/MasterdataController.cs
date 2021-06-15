@@ -331,10 +331,40 @@ namespace XandaPOS.Controllers
         #region ProductMaster
 
         #region PRODUCT MAIN METHODS
+
+        [HttpGet]
         public ActionResult ProductMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadProductMasterGrid(0));
+        }
+
+        [HttpGet]
+        public ActionResult _ProductMaster()
+        {
+            return PartialView();
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductMaster(IEnumerable<HttpPostedFileBase> files)
+        {
+
+            ImageHelperMain _imageHelper = new ImageHelperMain();
+
+            var serverPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
+            if (files == null || !files.Any())
+                return Json(new { success = false, errorMessage = "No file uploaded." });
+
+            var file = files.FirstOrDefault();  // get ONE only
+            if (file == null || !_imageHelper.IsImage(file))
+                return Json(new { success = false, errorMessage = "File is of wrong format." });
+
+            if (file.ContentLength <= 0)
+                return Json(new { success = false, errorMessage = "File cannot be zero length." });
+
+            var webPath = _imageHelper.GetTempSavedFilePath(file, serverPath);
+
+            return Json(new { success = true, fileName = webPath.Replace("\\", "/") }); // success
         }
 
         [HttpPost]
@@ -417,7 +447,7 @@ namespace XandaPOS.Controllers
 
 
         [HttpPost]
-        public ActionResult Save(string t, string l, string h, string w, string fileName)
+        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName)
         {
             //t - Image Margin Top
             //l - Image Margin Left
@@ -432,7 +462,14 @@ namespace XandaPOS.Controllers
                 
                 string serverSavedNewFile = _imageHelper.SaveImageInServer(t, l, h, w, fileName, _tempPath, _destinationPath);
 
-                return Json(new { success = true, avatarFileLocation = serverSavedNewFile });
+                string actualSavedFileName = serverSavedNewFile;
+                var var1 = _imageHelper.AvatarPath + "\\";
+                if (serverSavedNewFile.StartsWith(var1, false, System.Globalization.CultureInfo.InvariantCulture))
+                {
+                    actualSavedFileName = string.Concat(@" ", actualSavedFileName);
+                    actualSavedFileName = actualSavedFileName.Replace(@" " + var1, "");
+                }
+                return Json(new { success = true, avatarFileLocation = serverSavedNewFile, ImageHoldeNameId = "#ProductImageNameAdd", ActualSavedFileName = actualSavedFileName });
             }
             catch (Exception ex)
             {
