@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -125,7 +124,7 @@ namespace XandaPOS.ClientLibrary.ImageHelper
 
                 newFileName = newFileName.Replace(filePartName, randomFileName);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -206,7 +205,7 @@ namespace XandaPOS.ClientLibrary.ImageHelper
             return Path.GetFileName(img.FileName);
         }
 
-        public void CleanUpTempFolder(int hoursOld,string httpContextServerPath)
+        public void CleanUpTempFolder(int hoursOld, string httpContextServerPath)
         {
             try
             {

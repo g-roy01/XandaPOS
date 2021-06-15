@@ -4,12 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XandaPOS.Business;
-using XandaPOS.Models.MasterdataModel;
 using XandaPOS.ClientLibrary.ImageHelper;
 using XandaPOS.Edmx;
-using System.Data.Entity;
-using System.IO;
-using System.Web.Helpers;
+using XandaPOS.Models.MasterdataModel;
 
 namespace XandaPOS.Controllers
 {
@@ -48,7 +45,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetBrandDataForEdit(int brandID)
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID,"EDIT");
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID, "EDIT");
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -73,14 +70,14 @@ namespace XandaPOS.Controllers
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid(0,"ALL"));
+            return View(_masterDataBL.LoadCompanyMasterGrid(0, "ALL"));
         }
 
         [HttpPost]
         public JsonResult GetReloadCompanyMaster()
         {
             MasterDataBL _companyMaster = new MasterDataBL();
-            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0,"ALL").mainCompanyData;
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0, "ALL").mainCompanyData;
             return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -96,7 +93,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetCompanyDataForEdit(int companyID)
         {
             MasterDataBL _companyMaster = new MasterDataBL();
-            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID,"ALL","EDIT").mainCompanyData;
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID, "ALL", "EDIT").mainCompanyData;
             return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -259,7 +256,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetHelperDataForEdit(int helperID)
         {
             MasterDataBL _helperMaster = new MasterDataBL();
-            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID,"EDIT");
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID, "EDIT");
             return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -339,11 +336,11 @@ namespace XandaPOS.Controllers
             return View(_masterDataBL.LoadProductMasterGrid(0));
         }
 
-        [HttpGet]
-        public ActionResult _ProductMaster()
-        {
-            return PartialView();
-        }
+        //[HttpGet]
+        //public ActionResult _ProductMaster()
+        //{
+        //    return PartialView();
+        //}
 
         [HttpPost]
         public JsonResult GetReloadProductMaster()
@@ -365,7 +362,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetProductDataForEdit(int productID)
         {
             MasterDataBL _productMaster = new MasterDataBL();
-            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID,"EDIT").mainProductData;
+            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID, "EDIT").mainProductData;
             return Json(new { ProdMasterList = prodMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -423,7 +420,7 @@ namespace XandaPOS.Controllers
                 ImageHelperMain _imageHelper = new ImageHelperMain();
                 var _tempPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
                 var _destinationPath = HttpContext.Server.MapPath(_imageHelper.AvatarPath);
-                
+
                 string serverSavedNewFile = _imageHelper.SaveImageInServer(t, l, h, w, fileName, _tempPath, _destinationPath);
 
                 string actualSavedFileName = serverSavedNewFile;

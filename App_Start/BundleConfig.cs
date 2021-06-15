@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace XandaPOS
 {
@@ -19,7 +18,7 @@ namespace XandaPOS
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/scripts").Include( 
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                       "~/Content/assets/api/jqueryvalidate/jquery.validate.min.js",
                       //"~/Content/assets/api/jquery/jquery-3.4.1.js",
                       //"~/Content/assets/api/apexcharts/apexcharts.js",
@@ -51,6 +50,7 @@ namespace XandaPOS
                       "~/Scripts/jquery.form.js",
                       "~/Scripts/jquery.Jcrop.js",
                       "~/Scripts/ProductScripts/site.avatar.productadd.js",
+                      "~/Scripts/ProductScripts/site.avatar.productedit.js",
                       "~/Scripts/respond.js"
                       ));
 
@@ -61,7 +61,7 @@ namespace XandaPOS
                       "~/Content/css/site.avatar.css"
                       ));
 
-            
+
 
 
 

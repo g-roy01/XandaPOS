@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace XandaPOS.Models.MasterdataModel
 {
@@ -12,10 +9,10 @@ namespace XandaPOS.Models.MasterdataModel
 
         //Linked with helper_master
         public string product_type_name { get; set; }
-        
+
         //Linked with product_group_master
         public string product_group_name { get; set; }
-        
+
         //Linked with company_master
         public string product_company_name { get; set; }
         public string product_details { get; set; }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using XandaPOS.Models.MasterdataModel;
+﻿using XandaPOS.Edmx;
 using XandaPOS.Models.OrdersModel;
-using XandaPOS.Edmx;
 
 namespace XandaPOS.Business
 {
@@ -28,7 +23,7 @@ namespace XandaPOS.Business
             //_purchaseOrderMainVM.taxList = _masterDataRepo.LoadTaxMasterList();
             _purchaseOrderMainVM.mainProductList = _masterDataRepo.LoadProductMasterGrid().mainProductData;
 
-            return _purchaseOrderMainVM; 
+            return _purchaseOrderMainVM;
         }
 
         #endregion

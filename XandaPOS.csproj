@@ -1306,6 +1306,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ProductScripts\site.avatar.productedit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\ProductScripts\site.avatar.productadd.js" />
     <Content Include="Web.config" />
@@ -1340,6 +1341,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\GenericScripts\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

@@ -1902,31 +1902,31 @@ jQuery(document).ready(function () {
         jQuery('#ProductCodeAdd').val('');
         jQuery('#ProductDefaultCostAdd').val('');
 
-        //IMAGE EDIT SECTION SETUP START
+        //IMAGE EDIT SECTION SETUP START - PRODUCT ADD
         jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
 
         jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
         jQuery('.jcrop-holder').css('background', '');
 
-                    //FILE UPLOAD CLEARING
-        jQuery('#imageUploadHolder').val('');
-        jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
+         //************************FILE UPLOAD CLEARING
+        jQuery('#imageUploadHolderProductAdd').val('');
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').text('Max Size: 4 MB');
 
-        jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
-        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'black');
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').css('color', 'black');
 
         jQuery('.upload-percent-bar').width('0%');
         jQuery('.upload-percent-value').html('0%');
 
 
-        jQuery('#avatar-crop-box').css('display', 'none');
-        jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('#avatar-crop-box-productadd').css('display', 'none');
+        //jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
         jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
-        jQuery('#Preview_panel_header').css('display', 'none'); //Cropping portion live panel header
+        jQuery('#Preview_panel_header_productadd').css('display', 'none'); //Cropping portion live panel header
 
-        jQuery('#finalImage').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+        jQuery('#finalImageProductAdd').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
 
-        //IMAGE EDIT SECTION SETUP END
+        //IMAGE EDIT SECTION SETUP END - PRODUCT ADD
 
         //Setting focus to the Helper Name field
         jQuery("#ProductNameAdd").focus();
@@ -1984,31 +1984,39 @@ jQuery(document).ready(function () {
         jQuery('#ProductEditDefaultCost').val('');
 
 
-        //IMAGE EDIT SECTION SETUP START
+        //IMAGE EDIT SECTION SETUP START - PRODUCT EDIT
         jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
 
         jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
         jQuery('.jcrop-holder').css('background', '');
 
-                        //FILE UPLOAD CLEARING
-        jQuery('#imageUploadHolder').val('');
-        jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
+        //************************FILE UPLOAD CLEARING
+        jQuery('#imageUploadHolderProductEdit').val('');
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').text('Max Size: 4 MB');
 
-        jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
-        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'black');
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').css('color', 'black');
 
         jQuery('.upload-percent-bar').width('0%');
         jQuery('.upload-percent-value').html('0%');
 
 
-        jQuery('#avatar-crop-box').css('display', 'none');
-        jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('#avatar-crop-box-productedit').css('display', 'none');
+        //jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
         jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
-        jQuery('#Preview_panel_header').css('display', 'none'); //Cropping portion live panel header
+        jQuery('#Preview_panel_header_productedit').css('display', 'none'); //Cropping portion live panel header
 
-        jQuery('#finalImage').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+        jQuery('#finalImageProductEdit').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
 
-        //IMAGE EDIT SECTION SETUP END
+        //IMAGE EDIT SECTION SETUP END - PRODUCT EDIT
+
+
+
+
+
+
+
+
 
         var buttonID = jQuery(this).attr("id");
         var id = buttonID.substring(12); //ProductEdit_
@@ -2028,9 +2036,8 @@ jQuery(document).ready(function () {
                 jQuery("#ProdEditCompanyName").val(data.ProdMasterList[0].product_company_name);
                 jQuery("#ProductEditDetails").val(data.ProdMasterList[0].product_details);
                 jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
-                jQuery('#finalImage').css('display', 'block');
-                jQuery('#finalImage').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link); //On Edit Panel Open Here Last Image will be Shown
-                //jQuery("#finalImage").val('/Avatars/' + data.ProdMasterList[0].product_image_link); 
+                //jQuery('#finalImageProductEdit').css('display', 'block');
+                //jQuery('#finalImageProductEdit').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link); //On Edit Panel Open Here Last Image will be Shown
                 jQuery("#ProductEditCode").val(data.ProdMasterList[0].product_code);
                 jQuery("#ProductEditDefaultCost").val(Number(data.ProdMasterList[0].product_default_cost).toFixed(2));
 
@@ -2167,8 +2174,14 @@ jQuery(document).ready(function () {
 
 
 function UploadProductImageAdd() {
-    var img = jQuery('#preview-pane .preview-container img');
-    jQuery('#avatar-crop-box button').addClass('disabled');
+    var img = jQuery('#preview-pane-productadd .preview-container img');
+    jQuery('#avatar-crop-box-productadd button').addClass('disabled');
+    console.log('UploadProductImageAdd()');
+    console.log(img.attr('src'));
+    console.log(img.css('width'));
+    console.log(img.css('height'));
+    console.log(img.css('marginLeft'));
+    console.log(img.css('marginTop'));
 
     jQuery.ajax({
         type: "POST",
@@ -2184,15 +2197,15 @@ function UploadProductImageAdd() {
     }).done(function (data) {
         if (data.success === true) {
             //ORIGINAL CODE
-            jQuery('#avatar-result img').attr('src', data.avatarFileLocation);
+            jQuery('#avatar-result-productadd img').attr('src', data.avatarFileLocation);
 
             //UPDATED CODE
             jQuery(data.ImageHoldeNameId).val(data.ActualSavedFileName);
 
-            jQuery('#avatar-result').removeClass('hidden');
+            jQuery('#avatar-result-productadd').removeClass('hidden');
 
             if (!keepCropBox) {
-                jQuery('#avatar-crop-box').addClass('hidden');
+                jQuery('#avatar-crop-box-productadd').addClass('hidden');
             }
         } else {
             alert(data.errorMessage)
@@ -2202,6 +2215,47 @@ function UploadProductImageAdd() {
     });
 }
 
+function UploadProductImageEdit() {
+    var img = jQuery('#preview-pane-productedit .preview-container img');
+    jQuery('#avatar-crop-box-productedit button').addClass('disabled');
+    console.log('UploadProductImageEdit()');
+    console.log(img.attr('src'));
+    console.log(img.css('width'));
+    console.log(img.css('height'));
+    console.log(img.css('marginLeft'));
+    console.log(img.css('marginTop'));
+
+    jQuery.ajax({
+        type: "POST",
+        url: "/Masterdata/UploadProductImageAdd",
+        traditional: true,
+        data: {
+            w: img.css('width'),
+            h: img.css('height'),
+            l: img.css('marginLeft'),
+            t: img.css('marginTop'),
+            fileName: img.attr('src')
+        }
+    }).done(function (data) {
+        if (data.success === true) {
+            //ORIGINAL CODE
+            jQuery('#avatar-result-productedit img').attr('src', data.avatarFileLocation);
+
+            //UPDATED CODE
+            jQuery(data.ImageHoldeNameId).val(data.ActualSavedFileName);
+
+            jQuery('#avatar-result-productedit').removeClass('hidden');
+
+            if (!keepCropBox) {
+                jQuery('#avatar-crop-box-productedit').addClass('hidden');
+            }
+        } else {
+            alert(data.errorMessage)
+        }
+    }).fail(function (e) {
+        alert('Cannot upload avatar at this time');
+    });
+}
 
 //Insert data
 

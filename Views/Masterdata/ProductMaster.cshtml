@@ -219,8 +219,8 @@
                 <div class="form-group">
                     <label class="text-dark">Product Image</label>
                     <input type="text" name="ProdImage" class="form-control" id="ProductImageNameAdd" style="" placeholder="Image Name Here" disabled="disabled">
-                    <div id="avatar-result" class="hidden">
-                        <img src="#" id="finalImage" alt="" />
+                    <div id="avatar-result-productadd" class="hidden">
+                        <img src="#" id="finalImageProductAdd" alt="" />
                     </div>
                     <small class="form-text text-muted">Please Upload The Image From Below First (If Image is uploaded)</small>
                 </div>
@@ -248,13 +248,13 @@
     <section id="avatar-upload-box">
         @using (Ajax.BeginForm("ProductMaster", "Masterdata",
             new AjaxOptions() { HttpMethod = "POST" },
-            new { enctype = "multipart/form-data", id = "avatar-upload-form" }))
+            new { enctype = "multipart/form-data", id = "avatar-upload-productadd-form" }))
         {
             @Html.AntiForgeryToken()
             @*<div style="border:1px solid black">*@
-            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolder" /><br>
+            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolderProductAdd" /><br>
             @*</div>*@
-            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size"></span> MB</div>
+            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size-productadd"></span> MB</div>
         }
         <div class="upload-progress col-md-6 hidden">
             <div class="upload-percent-value pull-left">0%</div>
@@ -262,13 +262,13 @@
         </div>
         <div id="upload-status"></div>
     </section>
-    <section id="avatar-crop-box" class="hidden">
+    <section id="avatar-crop-box-productadd" class="hidden">
         <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageAdd() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
         <p>
-            <img src="#" id="crop-avatar-target" alt="Uploaded image" />
+            <img src="#" id="crop-avatar-target-productadd" alt="Uploaded image" />
             @*ORIGINAL CODE - THIS CODE MUST NOT BE COMMENTED*@
-        <div id="preview-pane" style="display:block;border:0px">
-            <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header">Preview Window</div>
+        <div id="preview-pane-productadd" style="display:block;border:0px">
+            <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header_productadd">Preview Window</div>
             <div class="preview-container">
                 <img src="#" class="jcrop-preview" alt="" />
             </div>
@@ -277,15 +277,10 @@
         </p>
         
     </section>
-    @*FINAL IMAGE SHOWN HERE*@
-    @*<div id="avatar-result" class="hidden">
-        <img src="#" id="finalImage" alt="" />
-    </div>*@
-
 
 </div>
 
-    @*EDIT BRAND MASTER PANEL*@
+    @*EDIT PRODUCT MASTER PANEL*@
 <div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
         <h4 class="font-size-h4 font-weight-bold m-0">
@@ -349,8 +344,8 @@
                     <label class="text-dark">Product Image Link</label>
                     <label class="text-dark">Product Image</label>
                     <input type="text" name="ProdImage" class="form-control" id="ProductEditImage" style="" placeholder="Image Name Here" disabled="disabled">
-                    <div id="avatar-result" class="hidden">
-                        <img src="#" id="finalImage" alt="" />
+                    <div id="avatar-result-productedit" class="hidden">
+                        <img src="#" id="finalImageProductEdit" alt="" />
                     </div>
                     <small class="form-text text-muted">Edited Image To Be Uploaded From Below (If Image is uploaded)</small>
 
@@ -378,13 +373,13 @@
     <section id="avatar-upload-box">
         @using (Ajax.BeginForm("ProductMaster", "Masterdata",
             new AjaxOptions() { HttpMethod = "POST" },
-            new { enctype = "multipart/form-data", id = "avatar-upload-edit-form" }))
+            new { enctype = "multipart/form-data", id = "avatar-upload-productedit-form" }))
         {
             @Html.AntiForgeryToken()
             @*<div style="border:1px solid black">*@
-            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolder" /><br>
+            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolderProductEdit" /><br>
             @*</div>*@
-            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size"></span> MB</div>
+            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size-productedit"></span> MB</div>
         }
         <div class="upload-progress col-md-6 hidden">
             <div class="upload-percent-value pull-left">0%</div>
@@ -392,13 +387,13 @@
         </div>
         <div id="upload-status"></div>
     </section>
-    <section id="avatar-crop-box" class="hidden">
-        <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageAdd() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
+    <section id="avatar-crop-box-productedit" class="hidden">
+        <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageEdit() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
         <p>
-            <img src="#" id="crop-avatar-target" alt="Uploaded image" />
+            <img src="#" id="crop-avatar-target-productedit" alt="Uploaded image" />
             @*ORIGINAL CODE - THIS CODE MUST NOT BE COMMENTED*@
-            <div id="preview-pane" style="display:block;border:0px">
-                <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header">Preview Window</div>
+            <div id="preview-pane-productedit" style="display:block;border:0px">
+                <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header_productedit">Preview Window</div>
                 <div class="preview-container">
                     <img src="#" class="jcrop-preview" alt="" />
                 </div>
