@@ -50,9 +50,10 @@ namespace XandaPOS
             bundles.Add(new ScriptBundle("~/bundles/ImagehandlerJS").Include(
                       "~/Scripts/jquery.form.js",
                       "~/Scripts/jquery.Jcrop.js",
-                      "~/Scripts/site.avatar.js",
+                      "~/Scripts/ProductScripts/site.avatar.productadd.js",
                       "~/Scripts/respond.js"
                       ));
+
 
             bundles.Add(new StyleBundle("~/Content/ImagehandlerCSS").Include(
                       "~/Content/css/jquery.Jcrop.css",

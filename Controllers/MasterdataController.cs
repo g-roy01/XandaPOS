@@ -345,28 +345,6 @@ namespace XandaPOS.Controllers
             return PartialView();
         }
 
-        [ValidateAntiForgeryToken]
-        public ActionResult ProductMaster(IEnumerable<HttpPostedFileBase> files)
-        {
-
-            ImageHelperMain _imageHelper = new ImageHelperMain();
-
-            var serverPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
-            if (files == null || !files.Any())
-                return Json(new { success = false, errorMessage = "No file uploaded." });
-
-            var file = files.FirstOrDefault();  // get ONE only
-            if (file == null || !_imageHelper.IsImage(file))
-                return Json(new { success = false, errorMessage = "File is of wrong format." });
-
-            if (file.ContentLength <= 0)
-                return Json(new { success = false, errorMessage = "File cannot be zero length." });
-
-            var webPath = _imageHelper.GetTempSavedFilePath(file, serverPath);
-
-            return Json(new { success = true, fileName = webPath.Replace("\\", "/") }); // success
-        }
-
         [HttpPost]
         public JsonResult GetReloadProductMaster()
         {
@@ -411,22 +389,9 @@ namespace XandaPOS.Controllers
 
         #region PRODUCT IMAGE MANAGEMENT
 
-        [HttpGet]
-        public ActionResult Upload()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult _Upload()
-        {
-            return PartialView();
-        }
-
         [ValidateAntiForgeryToken]
-        public ActionResult _Upload(IEnumerable<HttpPostedFileBase> files)
+        public ActionResult ProductMaster(IEnumerable<HttpPostedFileBase> files)
         {
-            
             ImageHelperMain _imageHelper = new ImageHelperMain();
 
             var serverPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
@@ -440,11 +405,10 @@ namespace XandaPOS.Controllers
             if (file.ContentLength <= 0)
                 return Json(new { success = false, errorMessage = "File cannot be zero length." });
 
-            var webPath = _imageHelper.GetTempSavedFilePath(file,serverPath);
+            var webPath = _imageHelper.GetTempSavedFilePath(file, serverPath);
 
             return Json(new { success = true, fileName = webPath.Replace("\\", "/") }); // success
         }
-
 
         [HttpPost]
         public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName)

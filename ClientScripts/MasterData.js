@@ -1902,22 +1902,14 @@ jQuery(document).ready(function () {
         jQuery('#ProductCodeAdd').val('');
         jQuery('#ProductDefaultCostAdd').val('');
 
-
+        //IMAGE EDIT SECTION SETUP START
         jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
 
         jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
         jQuery('.jcrop-holder').css('background', '');
-        //jQuery('.jcrop-holder').css('height', '0px');
-        //jQuery('.jcrop-holder').css('width', '0px');
 
-
-        //jQuery('.jcrop-holder').removeAttr('style');
-        //jQuery('#crop-avatar-target').attr('src', '#3');
-
-        //FILE UPLOAD CLEARING
-        
+                    //FILE UPLOAD CLEARING
         jQuery('#imageUploadHolder').val('');
-
         jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
 
         jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
@@ -1933,6 +1925,8 @@ jQuery(document).ready(function () {
         jQuery('#Preview_panel_header').css('display', 'none'); //Cropping portion live panel header
 
         jQuery('#finalImage').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+
+        //IMAGE EDIT SECTION SETUP END
 
         //Setting focus to the Helper Name field
         jQuery("#ProductNameAdd").focus();
@@ -1989,6 +1983,33 @@ jQuery(document).ready(function () {
         jQuery('#ProductEditCode').val('');
         jQuery('#ProductEditDefaultCost').val('');
 
+
+        //IMAGE EDIT SECTION SETUP START
+        jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
+
+        jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
+        jQuery('.jcrop-holder').css('background', '');
+
+                        //FILE UPLOAD CLEARING
+        jQuery('#imageUploadHolder').val('');
+        jQuery('#avatar-upload-form .upload-file-notice').text('Max Size: 4 MB');
+
+        jQuery('#avatar-upload-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-form .upload-file-notice').css('color', 'black');
+
+        jQuery('.upload-percent-bar').width('0%');
+        jQuery('.upload-percent-value').html('0%');
+
+
+        jQuery('#avatar-crop-box').css('display', 'none');
+        jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
+        jQuery('#Preview_panel_header').css('display', 'none'); //Cropping portion live panel header
+
+        jQuery('#finalImage').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+
+        //IMAGE EDIT SECTION SETUP END
+
         var buttonID = jQuery(this).attr("id");
         var id = buttonID.substring(12); //ProductEdit_
 
@@ -2007,6 +2028,9 @@ jQuery(document).ready(function () {
                 jQuery("#ProdEditCompanyName").val(data.ProdMasterList[0].product_company_name);
                 jQuery("#ProductEditDetails").val(data.ProdMasterList[0].product_details);
                 jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
+                jQuery('#finalImage').css('display', 'block');
+                jQuery('#finalImage').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link); //On Edit Panel Open Here Last Image will be Shown
+                //jQuery("#finalImage").val('/Avatars/' + data.ProdMasterList[0].product_image_link); 
                 jQuery("#ProductEditCode").val(data.ProdMasterList[0].product_code);
                 jQuery("#ProductEditDefaultCost").val(Number(data.ProdMasterList[0].product_default_cost).toFixed(2));
 

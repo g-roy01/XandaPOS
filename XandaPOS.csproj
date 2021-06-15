@@ -1307,7 +1307,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\site.avatar.js" />
+    <Content Include="Scripts\ProductScripts\site.avatar.productadd.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1336,15 +1336,10 @@
     <Content Include="Views\Orders\PurchaseOrder.cshtml" />
     <Content Include="Views\Orders\ReceiveOrder.cshtml" />
     <Content Include="Views\Orders\SellOrder.cshtml" />
-    <Content Include="Views\Masterdata\_Upload.cshtml" />
-    <Content Include="Views\Masterdata\Upload.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Masterdata\_ProductMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Avatar\" />
-    <Folder Include="Temp\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>

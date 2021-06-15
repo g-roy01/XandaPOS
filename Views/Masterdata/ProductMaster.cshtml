@@ -286,80 +286,127 @@
 </div>
 
     @*EDIT BRAND MASTER PANEL*@
-    <div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
-        <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
-            <h4 class="font-size-h4 font-weight-bold m-0">
-                Edit Product
-            </h4>
-            <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary kt_notes_panel_close" id="kt_notes_panel_close2">
-                <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
-                </svg>
-            </a>
-        </div>
-        <form id="myform1">
-            <div class="row">
+<div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Edit Product
+        </h4>
+        <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary kt_notes_panel_close" id="kt_notes_panel_close2">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </a>
+    </div>
+    <form id="myform1">
+        <div class="row">
 
-                <div class="col-12">
-                    <div class="form-group">
-                        @*<label class="text-dark">Customer ID</label>*@
-                        <input type="text" name="text" class="form-control" value="" id="ProductEditId" style="visibility:hidden;">
+            <div class="col-12">
+                <div class="form-group">
+                    @*<label class="text-dark">Customer ID</label>*@
+                    <input type="text" name="text" class="form-control" value="" id="ProductEditId" style="visibility:hidden;">
 
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="text-dark">Product Name</label>
-                        <input type="text" name="ProdName" class="form-control" id="ProductEditName">
+                <div class="form-group">
+                    <label class="text-dark">Product Name</label>
+                    <input type="text" name="ProdName" class="form-control" id="ProductEditName">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Type Name</label>
+                    <select class="arabic-select w-100 mb-3 h-30px" id="ProductEditTypeName">
+                        <option value="NA" selected>--Select Product Type Name--</option>
+                        @foreach (var prodHelper in Model.helperDetails)
+                        {
+                            <option value="@prodHelper.helper_id">@prodHelper.helper_name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Group Name</label>
+                    <select class="arabic-select w-100 mb-3 h-30px" id="ProdEditGrpName">
+                        <option value="NA" selected>--Select Product Group Name--</option>
+                        @foreach (var prodgrp in Model.prodGrpDetails)
+                        {
+                            <option value="@prodgrp.prod_grp_id">@prodgrp.prod_grp_name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Company Name</label>
+                    <select class="arabic-select w-100 mb-3 h-30px" id="ProdEditCompanyName">
+                        <option value="NA" selected>--Select Company Name--</option>
+                        @foreach (var company in Model.companyDetails)
+                        {
+                            <option value="@company.comp_id">@company.comp_name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Details</label>
+                    <input type="text" name="ProdName" class="form-control" id="ProductEditDetails">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Image Link</label>
+                    <label class="text-dark">Product Image</label>
+                    <input type="text" name="ProdImage" class="form-control" id="ProductEditImage" style="" placeholder="Image Name Here" disabled="disabled">
+                    <div id="avatar-result" class="hidden">
+                        <img src="#" id="finalImage" alt="" />
                     </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Type Name</label>
-                        <select class="arabic-select w-100 mb-3 h-30px" id="ProductEditTypeName">
-                            <option value="NA" selected>--Select Product Type Name--</option>
-                            @foreach (var prodHelper in Model.helperDetails)
-                            {
-                                <option value="@prodHelper.helper_id">@prodHelper.helper_name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Group Name</label>
-                        <select class="arabic-select w-100 mb-3 h-30px" id="ProdEditGrpName">
-                            <option value="NA" selected>--Select Product Group Name--</option>
-                            @foreach (var prodgrp in Model.prodGrpDetails)
-                            {
-                                <option value="@prodgrp.prod_grp_id">@prodgrp.prod_grp_name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Company Name</label>
-                        <select class="arabic-select w-100 mb-3 h-30px" id="ProdEditCompanyName">
-                            <option value="NA" selected>--Select Company Name--</option>
-                            @foreach (var company in Model.companyDetails)
-                            {
-                                <option value="@company.comp_id">@company.comp_name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Details</label>
-                        <input type="text" name="ProdName" class="form-control" id="ProductEditDetails">
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Image Link</label>
-                        <input type="text" name="ProdName" class="form-control" id="ProductEditImage">
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Code</label>
-                        <input type="text" name="ProdCode" class="form-control" id="ProductEditCode">
-                    </div>
-                    <div class="form-group">
-                        <label class="text-dark">Product Default Cost (in $)</label>
-                        <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductEditDefaultCost">
-                    </div>
+                    <small class="form-text text-muted">Edited Image To Be Uploaded From Below (If Image is uploaded)</small>
+
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Code</label>
+                    <input type="text" name="ProdCode" class="form-control" id="ProductEditCode">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Default Cost (in $)</label>
+                    <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductEditDefaultCost">
                 </div>
             </div>
+        </div>
 
-            <button type="submit" id="EditBtnProduct" class="btn btn-primary">Update Product Details</button>
-        </form>
+        <button type="submit" id="EditBtnProduct" class="btn btn-primary">Update Product Details</button>
+    </form>
+
+    <br /><br />
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Upload Image Here
+        </h4>
     </div>
+    <section id="avatar-upload-box">
+        @using (Ajax.BeginForm("ProductMaster", "Masterdata",
+            new AjaxOptions() { HttpMethod = "POST" },
+            new { enctype = "multipart/form-data", id = "avatar-upload-edit-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @*<div style="border:1px solid black">*@
+            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolder" /><br>
+            @*</div>*@
+            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size"></span> MB</div>
+        }
+        <div class="upload-progress col-md-6 hidden">
+            <div class="upload-percent-value pull-left">0%</div>
+            <div class="upload-percent-bar pull-left"></div>
+        </div>
+        <div id="upload-status"></div>
+    </section>
+    <section id="avatar-crop-box" class="hidden">
+        <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageAdd() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
+        <p>
+            <img src="#" id="crop-avatar-target" alt="Uploaded image" />
+            @*ORIGINAL CODE - THIS CODE MUST NOT BE COMMENTED*@
+            <div id="preview-pane" style="display:block;border:0px">
+                <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header">Preview Window</div>
+                <div class="preview-container">
+                    <img src="#" class="jcrop-preview" alt="" />
+                </div>
+                <div style="height:5px; display:block;"></div>
+            </div>
+        </p>
+
+    </section>
+
+
+</div>
