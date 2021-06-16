@@ -1,4 +1,4 @@
-﻿@model  List<XandaPOS.Models.EmployeeMasterVM>
+﻿@model  List<XandaPOS.Models.MasterdataModel.EmployeeMasterVM>
 @{
     ViewBag.Title = "EmployeeMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="icons d-flex">
                                         <button class="btn ml-2 p-0"
-                                                id="kt_notes_panel_toggle" data-toggle="tooltip" title="" data-placement="right"
+                                                id="kt_notes_panel_toggle_employee" data-toggle="tooltip" title="" data-placement="right"
                                                 data-original-title="Check out more demos">
                                             <span class="bg-secondary h-30px font-size-h5 w-30px d-flex align-items-center justify-content-center  rounded-circle shadow-sm ">
 
@@ -83,13 +83,15 @@
                                 <div class="card-body">
                                     <div>
                                         <div class=" table-responsive" id="printableTable">
-                                            <table id="mainTable" class="display ">
+                                            <table id="mainTable" class="display tableEmployeeLoad">
 
                                                 <thead class="text-body">
                                                     <tr>
                                                         <th>Employee Name</th>
                                                         <th class="">Employee Address</th>
                                                         <th class="">Employee Pincode</th>
+                                                        <th class="">Employee Phone</th>
+                                                        <th class="">Employee Email</th>
                                                         <th class="">Employee Govt ID Type</th>
                                                         <th class="">Employee Govt ID No</th>
                                                         <th class="">Employee Joining Date</th>
@@ -98,20 +100,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
-                                                
-                                                @foreach (var employee in Model)
-                                                {
+
+                                                    @foreach (var employee in Model)
+                                                    {
                                                     <tr class="kt-table-row kt-table-row-level-0">
-                                                        <td>@employee.emp_name</td>
-                                                        <td class="">
-                                                            @employee.emp_addr
-                                                        </td>
-                                                        <td class="">@employee.emp_pin</td>
-                                                        <td class="">@employee.emp_phn</td>
-                                                        <td class="">@employee.emp_govt_id_type</td>
-                                                        <td class="">@employee.emp_govt_id_no</td>
-                                                        <td class="">@employee.emp_join_date</td>
-                                                        <td class="">@employee.emp_resign_date</td>
+                                                        <td id="@( "EmpName_" +employee.emp_id)">@employee.emp_name</td>
+                                                        <td class="" id="@( "EmpAddr_" +employee.emp_id)">@employee.emp_addr</td>
+                                                        <td class="" id="@( "EmpPin_" +employee.emp_id)">@employee.emp_pin</td>
+                                                        <td class="" id="@( "EmpPhone_" +employee.emp_id)">@employee.emp_phone</td>
+                                                        <td class="" id="@( "EmpEmail_" +employee.emp_id)">@employee.emp_email</td>
+                                                        <td class="" id="@( "EmpGovtIdType_" +employee.emp_id)">@employee.emp_govt_id_type</td>
+                                                        <td class="" id="@( "EmpGovtIdNo_" +employee.emp_id)">@employee.emp_govt_id_no</td>
+                                                        <td class="" id="@( "EmpJoinDate_" +employee.emp_id)">@employee.emp_join_date</td>
+                                                        <td class="" id="@( "EmpResignDate_" +employee.emp_id)">@employee.emp_resign_date</td>
                                                         <td>
                                                             <div class="card-toolbar text-right">
                                                                 <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -122,9 +123,9 @@
                                                                     </span>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit" id="click-edit2" data-toggle="tooltip" title="" data-placement="right"
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit EmpEditButton" id="@( "EmpEdit_" +employee.emp_id)" data-toggle="tooltip" title="" data-placement="right"
                                                                        data-original-title="Check out more demos">Edit</a>
-                                                                    <a class="dropdown-item confirm-delete" title="Delete" href="#">Delete</a>
+                                                                    <a class="dropdown-item confirm-delete EmpDeleteButton" id="@( "EmpDelete_" +employee.emp_id)" title="Delete" href="#">Delete</a>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -151,5 +152,144 @@
 
     </div>
 
+</div>
+
+@*ADD CUSTOMER MASTER PANEL*@
+<div id="kt_notes_panel" class="offcanvas offcanvas-right kt-color-panel p-5">
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Add Employee
+        </h4>
+        <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary" id="kt_notes_panel_close">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </a>
+    </div>
+    <form id="myform">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="text-dark">Employee Name</label>
+                    <input type="text" name="EmpName" class="form-control" id="EmpNameAdd">
+                    <small class="form-text text-muted">Please Enter Employee Name</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Employee Address</label>
+                    <input type="text" name="EmpAddress" class="form-control" id="EmpAddressAdd">
+                    <small class="form-text text-muted">Please Enter Address</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Pin</label>
+                    <input type="text" name="EmpPinCode" class="form-control" id="EmpPinAdd">
+                    <small class="form-text text-muted">Please Enter Pincode</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Phone</label>
+                    <input type="text" name="EmpPhnData" class="form-control" id="EmpPhnDataAdd">
+                    <small class="form-text text-muted">Please Enter Phone Number</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Email</label>
+                    <input type="email" name="EmpPhnData" class="form-control" id="EmpEmailDataAdd">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Govt. ID Type</label>
+                    <input type="text" name="EmpGovtIdType" class="form-control" id="EmpGovtIdTypeAdd">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Govt. ID No.</label>
+                    <input type="text" name="EmpGovtIdNo" class="form-control" id="EmpGovtIdNoAdd">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Join Date</label>
+                    <input type="date" name="EmpJoinDate" class="form-control" id="EmpJoinDateAdd">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Resign Date</label>
+                    <input type="date" name="EmpJoinDate" class="form-control" id="EmpResignDateAdd">
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="AddBtnEmployee" class="btn btn-primary">Add Employee</button>
+    </form>
+</div>
+
+@*EDIT CUSTOMER MASTER PANEL*@
+<div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Edit Employee
+        </h4>
+        <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-primary kt_notes_panel_close" id="kt_notes_panel_close2">
+            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </a>
+    </div>
+    <form id="myform1">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="form-group">
+                    @*<label class="text-dark">Employee ID</label>*@
+                    <input type="text" name="text" class="form-control" value="" id="EmpEditId" style="visibility:hidden;">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Employee Name</label>
+                    <input type="text" name="text" class="form-control" value="abc" id="EmpEditName">
+
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Employee Address</label>
+                    <input type="text" name="EmpAddress" class="form-control" id="EmpEditAddress">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Pin</label>
+                    <input type="text" name="EmpPinCode" class="form-control" id="EmpEditPin">
+                    <small class="form-text text-muted">Please Enter Pincode</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Phone</label>
+                    <input type="text" name="EmpPhnData" class="form-control" id="EmpEditPhnData">
+                    <small class="form-text text-muted">Please Enter Phone Number</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Email</label>
+                    <input type="email" name="EmpPhnData" class="form-control" id="EmpEditEmailData">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Govt. ID Type</label>
+                    <input type="text" name="EmpGovtIdType" class="form-control" id="EmpEditGovtIdType">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Govt. ID No.</label>
+                    <input type="text" name="EmpGovtIdNo" class="form-control" id="EmpEditGovtIdNo">
+                    <small class="form-text text-muted">Please Enter Email</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Join Date</label>
+                    <input type="date" name="EmpJoinDate" class="form-control" id="EmpEditJoinDate">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Employee Resign Date</label>
+                    <input type="date" name="EmpJoinDate" class="form-control" id="EmpEditResignDate">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" id="EditBtnEmployee" class="btn btn-primary">Update Employee Details</button>
+    </form>
 </div>
 

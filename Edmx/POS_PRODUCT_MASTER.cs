@@ -21,5 +21,7 @@ namespace XandaPOS.Edmx
         public Nullable<int> product_company { get; set; }
         public string product_details { get; set; }
         public string product_image_link { get; set; }
+        public string product_code { get; set; }
+        public decimal product_default_cost { get; set; }
     }
 }
