@@ -33,8 +33,11 @@ namespace XandaPOS.Edmx
         public virtual DbSet<POS_EMPLOYEE_MASTER> POS_EMPLOYEE_MASTER { get; set; }
         public virtual DbSet<POS_MASTER_TABLE_HELPER> POS_MASTER_TABLE_HELPER { get; set; }
         public virtual DbSet<POS_PRODUCT_GROUP_MASTER> POS_PRODUCT_GROUP_MASTER { get; set; }
-        public virtual DbSet<POS_PRODUCT_MASTER> POS_PRODUCT_MASTER { get; set; }
         public virtual DbSet<POS_WAREHOUSE_MASTER> POS_WAREHOUSE_MASTER { get; set; }
+        public virtual DbSet<pos_PurchaseOrder_Main> pos_PurchaseOrder_Main { get; set; }
+        public virtual DbSet<pos_PurchaseOrder_Sheet> pos_PurchaseOrder_Sheet { get; set; }
+        public virtual DbSet<POS_PRODUCT_MASTER> POS_PRODUCT_MASTER { get; set; }
+        public virtual DbSet<POS_TAX_MASTER> POS_TAX_MASTER { get; set; }
     
         public virtual int sp_AddNewCustomer(string custName, string custAddress, string custPin, string custPhone, string custEmail)
         {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using XandaPOS.Edmx;
-using XandaPOS.Models;
+using XandaPOS.Models.MasterdataModel;
 
 namespace XandaPOS.Business
 {
@@ -28,7 +27,7 @@ namespace XandaPOS.Business
                     var custData = posCustomerMaster.Where(x => x.cust_id == custID).FirstOrDefault();
                     list.Add(custData);
                 }
-                
+
                 foreach (var item in list)
                 {
                     CustomerMasterVM _customerMasterVM = new CustomerMasterVM();
@@ -41,8 +40,8 @@ namespace XandaPOS.Business
 
                     lstCustomerMasterVM.Add(_customerMasterVM);
                 }
-                return lstCustomerMasterVM;
-            } 
+                return lstCustomerMasterVM.OrderBy(a => a.cust_name).ToList();
+            }
         }
 
         //Add Customer Master
@@ -96,7 +95,7 @@ namespace XandaPOS.Business
             string message = "";
             try
             {
-                using(var db = new xandaposEntities())
+                using (var db = new xandaposEntities())
                 {
                     var retVal = db.POS_CUSTOMER_MASTER.Where(x => x.cust_id == custId).FirstOrDefault();
                     db.POS_CUSTOMER_MASTER.Remove(retVal);
@@ -104,7 +103,7 @@ namespace XandaPOS.Business
                 }
                 message = "SUCCESS";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 message = "FAIL";
             }
@@ -113,9 +112,9 @@ namespace XandaPOS.Business
         #endregion
 
         #region BRAND MASTER
-        
+
         //Load Brand Grid
-        public BrandMasterVM LoadBrandMasterGrid(int brandID, string operation = "GET")
+        public BrandMasterVM LoadBrandMasterGrid(int brandID = 0, string operation = "GET")
         {
             List<BrandMasterData> lstBrandMaster = new List<BrandMasterData>();
 
@@ -197,13 +196,13 @@ namespace XandaPOS.Business
                             prodGroupName = "NA";
                         }
                     }
-                   _brandMaster.brand_product_group_name = StrCleanDataOrEmpty(prodGroupName);
+                    _brandMaster.brand_product_group_name = StrCleanDataOrEmpty(prodGroupName);
 
                     lstBrandMaster.Add(_brandMaster);
                 }
 
                 BrandMasterVM _brandMasterVM = new BrandMasterVM();
-                _brandMasterVM.mainBrandData = lstBrandMaster;
+                _brandMasterVM.mainBrandData = lstBrandMaster.OrderBy(a => a.brand_name).ToList();
                 _brandMasterVM.companyDetails = FetchCompanyList().mainCompanyData;
                 _brandMasterVM.prodGrpDetails = LoadProductGroupMasterGrid(0);
 
@@ -230,7 +229,7 @@ namespace XandaPOS.Business
             }
             return message;
         }
-        
+
         //Update Brand Master
         public string UpdateBrandMaster(POS_BRAND_MASTER brandData)
         {
@@ -280,21 +279,21 @@ namespace XandaPOS.Business
 
         #region COMPANY MASTER
         //Load Company Grid
-        public CompanyMasterVM LoadCompanyMasterGrid(int companyID, string companyType = "ALL", string operation="GET")
+        public CompanyMasterVM LoadCompanyMasterGrid(int companyID, string companyType = "ALL", string operation = "GET")
         {
             //companyType - ALL, VENDOR, SUPPLIER
 
             List<CompanyMasterData> lstCompanyMasterVM = new List<CompanyMasterData>();
-            
+
             using (var db = new xandaposEntities())
             {
                 var posCompanyMaster = db.POS_COMPANY_MASTER;
-                var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
+                //var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
                 //For CompanyType = ALL
                 var list = posCompanyMaster.ToList();
 
-                if (operation.Equals("EDIT") && companyID>0)
+                if (operation.Equals("EDIT") && companyID > 0)
                 {
                     list.Clear();
                     var companyList = posCompanyMaster.Where(x => x.comp_id == companyID).FirstOrDefault();
@@ -322,7 +321,7 @@ namespace XandaPOS.Business
                 //    list = posCompanyMaster
                 //                .Where(m => m.comp_type.Equals(supplierTypeCode.FirstOrDefault())).Select(s => s).ToList();
                 //}
-                
+
                 foreach (var item in list)
                 {
                     CompanyMasterData _companyMaster = new CompanyMasterData();
@@ -355,7 +354,7 @@ namespace XandaPOS.Business
                 }
 
                 CompanyMasterVM _compMasterVM = new CompanyMasterVM();
-                _compMasterVM.mainCompanyData = lstCompanyMasterVM;
+                _compMasterVM.mainCompanyData = lstCompanyMasterVM.OrderBy(a => a.comp_name).ToList();
                 _compMasterVM.companyHelper = FetchMasterTableHelperList("POS_COMPANY_MASTER");
 
                 return _compMasterVM;
@@ -372,7 +371,6 @@ namespace XandaPOS.Business
             using (var db = new xandaposEntities())
             {
                 var posCompanyMaster = db.POS_COMPANY_MASTER;
-                var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
                 //For CompanyType = ALL
                 var list = posCompanyMaster.ToList();
@@ -402,11 +400,58 @@ namespace XandaPOS.Business
                 }
 
                 CompanyMasterVM _compMasterVM = new CompanyMasterVM();
-                _compMasterVM.mainCompanyData = lstCompanyMasterVM;
+                _compMasterVM.mainCompanyData = lstCompanyMasterVM.OrderBy(a => a.comp_name).ToList();
                 _compMasterVM.companyHelper = FetchMasterTableHelperList("POS_COMPANY_MASTER");
 
                 return _compMasterVM;
             }
+        }
+
+        //Fetch Company Type Details for Destination Tables
+        public List<CompanyMasterData> FetchCompanyTypeList(string companyType)
+        {
+            //companyType could be - "SUPPLIER","VENDOR"
+            List<CompanyMasterData> _companyTypeDetailsList = new List<CompanyMasterData>();
+            List<MasterTableHelperMasterVM> _companyHelperMaster = FetchMasterTableHelperList("POS_COMPANY_MASTER");
+
+            var companyTypeId = 0;
+            try
+            {
+                companyTypeId = _companyHelperMaster.Where(x => x.helper_name.ToUpper().Equals(companyType)).Select(s => s.helper_id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                companyTypeId = 0;
+            }
+
+            using (var db = new xandaposEntities())
+            {
+                var compMasterList = db.POS_COMPANY_MASTER.Where(x => x.comp_type == companyTypeId).ToList();
+
+                foreach (var item in compMasterList)
+                {
+                    CompanyMasterData _companyMaster = new CompanyMasterData();
+                    _companyMaster.comp_id = item.comp_id;
+                    _companyMaster.comp_name = StrCleanDataOrEmpty(item.comp_name);
+                    _companyMaster.comp_address = StrCleanDataOrEmpty(item.comp_address);
+                    _companyMaster.comp_pin = StrCleanDataOrEmpty(item.comp_pin);
+                    _companyMaster.comp_regn_no = StrCleanDataOrEmpty(item.comp_regn_no);
+
+                    string helperName = "";
+                    try
+                    {
+                        helperName = _companyHelperMaster.Where(x => x.helper_id == item.comp_type).FirstOrDefault().helper_name;
+                    }
+                    catch (Exception ex)
+                    {
+                        helperName = "";
+                    }
+                    _companyMaster.comp_type_name = StrCleanDataOrEmpty(helperName);
+                    _companyTypeDetailsList.Add(_companyMaster);
+                }
+            }
+
+            return _companyTypeDetailsList.OrderBy(a => a.comp_name).ToList();
         }
 
         //Add Company Master
@@ -491,7 +536,7 @@ namespace XandaPOS.Business
                 var posEmployeeMaster = db.POS_EMPLOYEE_MASTER;
                 var list = posEmployeeMaster.ToList();
 
-                if(empId > 0)
+                if (empId > 0)
                 {
                     list.Clear();
                     var empList = posEmployeeMaster.Where(x => x.emp_id == empId).FirstOrDefault();
@@ -514,7 +559,7 @@ namespace XandaPOS.Business
 
                     lstEmployeeMasterVM.Add(_employeeMasterVM);
                 }
-                return lstEmployeeMasterVM;
+                return lstEmployeeMasterVM.OrderBy(a => a.emp_name).ToList();
             }
         }
 
@@ -712,7 +757,7 @@ namespace XandaPOS.Business
 
                     lstMasterTableHelperMasterVM.Add(_masterTableHelperMasterVM);
                 }
-                return lstMasterTableHelperMasterVM;
+                return lstMasterTableHelperMasterVM.OrderBy(a => a.helper_name).ToList();
             }
         }
 
@@ -727,8 +772,8 @@ namespace XandaPOS.Business
                 var posMasterTableHelperMaster = db.POS_MASTER_TABLE_HELPER;
 
                 var list = posMasterTableHelperMaster
-                    .Where(x=>x.helper_link_master_table.Equals(helperLinkMasterTable)).Select(s=>s)
-                    .Where(x=>x.helper_active == true).ToList();
+                    .Where(x => x.helper_link_master_table.Equals(helperLinkMasterTable)).Select(s => s)
+                    .Where(x => x.helper_active == true).ToList();
 
                 foreach (var item in list)
                 {
@@ -736,12 +781,12 @@ namespace XandaPOS.Business
                     _masterTableHelperMasterVM.helper_id = item.helper_id;
                     _masterTableHelperMasterVM.helper_name = StrCleanDataOrEmpty(item.helper_name);
                     //_masterTableHelperMasterVM.helper_details = item.helper_details.Trim();
-                    _masterTableHelperMasterVM.helper_link_master_table = StrCleanDataOrEmpty(item.helper_link_master_table); 
+                    _masterTableHelperMasterVM.helper_link_master_table = StrCleanDataOrEmpty(item.helper_link_master_table);
                     //_masterTableHelperMasterVM.helper_active = item.helper_active;
 
                     lstMasterTableHelperMasterVM.Add(_masterTableHelperMasterVM);
                 }
-                return lstMasterTableHelperMasterVM;
+                return lstMasterTableHelperMasterVM.OrderBy(a => a.helper_name).ToList();
             }
         }
 
@@ -754,7 +799,7 @@ namespace XandaPOS.Business
                 using (var db = new xandaposEntities())
                 {
                     //Filtering the Master Table Data
-                    if(helperData.helper_link_master_table.Trim().Equals("Brand"))
+                    if (helperData.helper_link_master_table.Trim().Equals("Brand"))
                     {
                         helperData.helper_link_master_table = "POS_BRAND_MASTER";
                     }
@@ -788,7 +833,7 @@ namespace XandaPOS.Business
                     }
 
                     //Filtering the Helper Active Data
-                    if(helperData.helper_active) //Boolean Field
+                    if (helperData.helper_active) //Boolean Field
                     {
                         helperData.helper_active = true;
                     }
@@ -824,7 +869,7 @@ namespace XandaPOS.Business
                     retVal.helper_details = StrCleanDataOrEmpty(helperData.helper_details);
 
                     //retVal.helper_link_master_table = helperData.helper_link_master_table.Trim();
-                    
+
                     if (helperData.helper_link_master_table.Trim().Equals("Brand"))
                     {
                         retVal.helper_link_master_table = "POS_BRAND_MASTER";
@@ -928,10 +973,10 @@ namespace XandaPOS.Business
 
                     lstProductGroupMasterVM.Add(_productGroupMasterVM);
                 }
-                return lstProductGroupMasterVM;
+                return lstProductGroupMasterVM.OrderBy(a => a.prod_grp_name).ToList();
             }
         }
-        
+
         //Add Product Group Master
         public string AddProductGroupMaster(POS_PRODUCT_GROUP_MASTER prodGrpData)
         {
@@ -1001,7 +1046,7 @@ namespace XandaPOS.Business
 
         #region PRODUCT MASTER
         //Load Product Grid
-        public ProductMasterVM LoadProductMasterGrid(int prodId,string operation = "GET")
+        public ProductMasterVM LoadProductMasterGrid(int prodId = 0, string operation = "GET")
         {
             List<ProductMasterData> lstProductMasterData = new List<ProductMasterData>();
 
@@ -1034,7 +1079,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            prodTypeHelperName = item.product_type.ToString();
+                            if (item.product_type == null)
+                                prodTypeHelperName = "NA";
+                            else
+                                prodTypeHelperName = item.product_type.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1066,7 +1114,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            prodGroupHelperName = item.product_group.ToString();
+                            if (item.product_group == null)
+                                prodGroupHelperName = "NA";
+                            else
+                                prodGroupHelperName = item.product_group.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1091,7 +1142,10 @@ namespace XandaPOS.Business
                         }
                         if (operation.Equals("EDIT"))
                         {
-                            companyNameHelper = item.product_company.ToString();
+                            if (item.product_company == null)
+                                companyNameHelper = "NA";
+                            else
+                                companyNameHelper = item.product_company.ToString();
                         }
                     }
                     catch (Exception ex)
@@ -1114,11 +1168,14 @@ namespace XandaPOS.Business
                     else
                         _productMasterData.product_image_link = StrCleanDataOrEmpty(item.product_image_link);
 
+                    _productMasterData.product_code = StrCleanDataOrEmpty(item.product_code);
+                    _productMasterData.product_default_cost = item.product_default_cost;
+
                     lstProductMasterData.Add(_productMasterData);
                 }
 
                 ProductMasterVM _productMasterVM = new ProductMasterVM();
-                _productMasterVM.mainProductData = lstProductMasterData;
+                _productMasterVM.mainProductData = lstProductMasterData.OrderBy(a => a.product_name).ToList();
                 _productMasterVM.companyDetails = FetchCompanyList().mainCompanyData;
                 _productMasterVM.prodGrpDetails = LoadProductGroupMasterGrid(0);
                 _productMasterVM.helperDetails = FetchMasterTableHelperList("POS_PRODUCT_MASTER");
@@ -1160,14 +1217,15 @@ namespace XandaPOS.Business
                     retVal.product_id = prodData.product_id;
                     retVal.product_name = StrCleanDataOrEmpty(prodData.product_name);
                     retVal.product_type = prodData.product_type;
-                    retVal.product_group = prodData.product_group;  
+                    retVal.product_group = prodData.product_group;
                     retVal.product_company = prodData.product_company;
                     retVal.product_details = StrCleanDataOrEmpty(prodData.product_details);
                     if (string.IsNullOrEmpty(prodData.product_image_link))
                         retVal.product_image_link = "NO IMAGE LINKED";
                     else
                         retVal.product_image_link = StrCleanDataOrEmpty(prodData.product_image_link);
-
+                    retVal.product_code = StrCleanDataOrEmpty(prodData.product_code);
+                    retVal.product_default_cost = prodData.product_default_cost;
                     db.SaveChanges();
                 }
                 message = "SUCCESS";
@@ -1201,9 +1259,35 @@ namespace XandaPOS.Business
         }
         #endregion
 
+        #region TAX MASTER (CURRENTLY NO SCREEN - WILL BE USED AS HELPER ONLY)
+        public List<TaxMasterVM> LoadTaxMasterList()
+        {
+            List<TaxMasterVM> _taxMasterList = new List<TaxMasterVM>();
+            using (var db = new xandaposEntities())
+            {
+                //Get only active Tax details only
+                var taxMaster = db.POS_TAX_MASTER.Where(x => x.tax_active_status == true).ToList();
+                TaxMasterVM taxMasterVM = new TaxMasterVM();
+
+                foreach (var item in taxMaster)
+                {
+                    taxMasterVM.tax_id = item.tax_id;
+                    taxMasterVM.tax_name = StrCleanDataOrEmpty(item.tax_name);
+                    taxMasterVM.tax_percent = item.tax_percent;
+                    taxMasterVM.tax_description = StrCleanDataOrEmpty(item.tax_description);
+                    taxMasterVM.tax_active_status = item.tax_active_status;
+
+                    _taxMasterList.Add(taxMasterVM);
+                }
+            }
+            return _taxMasterList.OrderBy(a => a.tax_name).ToList();
+        }
+
+        #endregion
+
         #region WAREHOUSE MASTER
         //Load Warehouse Grid
-        public List<WarehouseMasterVM> LoadWarehouseMasterGrid(int warehouseId)
+        public List<WarehouseMasterVM> LoadWarehouseMasterGrid(int warehouseId = 0)
         {
             List<WarehouseMasterVM> lstWarehouseMasterVM = new List<WarehouseMasterVM>();
 
@@ -1231,7 +1315,7 @@ namespace XandaPOS.Business
 
                     lstWarehouseMasterVM.Add(_warehouseMasterVM);
                 }
-                return lstWarehouseMasterVM;
+                return lstWarehouseMasterVM.OrderBy(a => a.warehouse_name).ToList();
             }
         }
 
@@ -1312,7 +1396,7 @@ namespace XandaPOS.Business
         {
             return string.IsNullOrEmpty(strData) ? "" : strData.Trim();
         }
-        
+
         string DateToStringFormat_MM_DD_YYYY(DateTime? dateTimeValue)
         {
             if (dateTimeValue == null)
@@ -1328,3 +1412,4 @@ namespace XandaPOS.Business
         #endregion
     }
 }
+

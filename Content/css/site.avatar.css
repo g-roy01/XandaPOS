@@ -1,0 +1,72 @@
+﻿/* -------------------------------------
+    JCrop customization
+---------------------------------------- */
+
+/*#preview-pane {
+    position:relative;
+    top:150px;
+    width:100px;
+    height:100px;
+    z-index: 1;
+    display: block;
+    border: 1px #000 solid;
+}
+
+    #preview-pane .preview-container {
+        position: relative;
+        left:140px;
+        width: 100px;
+        height: 100px; 
+        overflow: hidden;
+    }*/
+
+#preview-pane-productadd {
+    position: relative;
+    top: 190px; /*For Some Images We may need this*/
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    display: block;
+    border: 1px #000 solid;
+}
+
+    #preview-pane-productadd .preview-container {
+        position: relative;
+        left: 140px;
+        width: 100px; /* ToDo - size of the crop window*/
+        height: 100px; /* ToDo - size of the crop window*/
+        overflow: hidden;
+    }
+
+#preview-pane-productedit {
+    position: relative;
+    top: 190px;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+    display: block;
+    border: 1px #000 solid;
+}
+
+    #preview-pane-productedit .preview-container {
+        position: relative;
+        left: 140px;
+        width: 100px; /* ToDo - size of the crop window*/
+        height: 100px; /* ToDo - size of the crop window*/
+        overflow: hidden;
+    }
+
+.upload-progress {
+    border: 1px #bbb solid;
+    padding: 0;
+}
+
+.upload-percent-value {
+    padding-left: 10px;
+    position: absolute;
+}
+
+.upload-percent-bar {
+    background-color: #bbb;
+    height: 20px;
+}

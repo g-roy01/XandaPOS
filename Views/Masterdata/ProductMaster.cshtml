@@ -1,4 +1,8 @@
-﻿@model  XandaPOS.Models.ProductMasterVM
+﻿@*@{ Html.RenderPartial("_ProductMaster"); }*@
+
+@model  XandaPOS.Models.MasterdataModel.ProductMasterVM
+
+@Styles.Render("~/Content/ImagehandlerCSS")
 @{
     ViewBag.Title = "ProductMaster";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -92,38 +96,43 @@
                                                         <th class="">Product Company</th>
                                                         <th class="">Product Details</th>
                                                         <th class="">Product Image Link</th>
+                                                        <th class="">Product Code</th>
+                                                        <th class="">Product Default Cost</th>
                                                         <th class="no-sort text-right">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="kt-table-tbody text-dark">
                                                     @foreach (var product in Model.mainProductData)
                                                     {
-                                                        <tr class="kt-table-row kt-table-row-level-0">
-                                                            <td id="@( "ProductName_" +product.product_id)">@product.product_name</td>
-                                                            <td id="@( "ProductTypeName_" +product.product_id)">@product.product_type_name</td>
-                                                            <td id="@( "ProductGroupName_" +product.product_id)">@product.product_group_name</td>
-                                                            <td id="@( "ProductCompanyName_" +product.product_id)">@product.product_company_name</td>
-                                                            <td id="@( "ProductDetails_" +product.product_id)">@product.product_details</td>
-                                                            <td id="@( "ProductImageLink_" +product.product_id)">@product.product_image_link</td>
+                                                    <tr class="kt-table-row kt-table-row-level-0">
+                                                        <td id="@( "ProductName_" +product.product_id)">@product.product_name</td>
+                                                        <td id="@( "ProductTypeName_" +product.product_id)">@product.product_type_name</td>
+                                                        <td id="@( "ProductGroupName_" +product.product_id)">@product.product_group_name</td>
+                                                        <td id="@( "ProductCompanyName_" +product.product_id)">@product.product_company_name</td>
+                                                        <td id="@( "ProductDetails_" +product.product_id)">@product.product_details</td>
+                                                        <td id="@( "ProductImageLink_" +product.product_id)"><img src="@("/Avatars/" + product.product_image_link )" height="50" width="50"/></td>
+                                                        @*<td id="@( "ProductImageLink_" +product.product_id)">@product.product_image_link</td>*@
+                                                        <td id="@( "ProductCode_" +product.product_id)">@product.product_code</td>
+                                                        <td id="@( "ProductDefaultCost_" +product.product_id)">@product.product_default_cost</td>
 
-                                                            <td>
-                                                                <div class="card-toolbar text-right">
-                                                                    <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <span class="svg-icon">
-                                                                            <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
-                                                                            </svg>
-                                                                        </span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                                        <a href="javascript:void(0)" class="dropdown-item click-edit ProductEditButton" id="@( "ProductEdit_" + product.product_id)" data-toggle="tooltip" title="" data-placement="right"
-                                                                           data-original-title="Check out more demos">Edit</a>
-                                                                        <a class="dropdown-item confirm-delete ProductDeleteButton" id="@( "ProductDelete_" + product.product_id)" title="Delete" href="#">Delete</a>
-                                                                    </div>
+                                                        <td>
+                                                            <div class="card-toolbar text-right">
+                                                                <button class="btn p-0 shadow-none" type="button" id="dropdowneditButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <span class="svg-icon">
+                                                                        <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-three-dots text-body" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </button>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdowneditButton" style="position: absolute; transform: translate3d(1001px, 111px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                                    <a href="javascript:void(0)" class="dropdown-item click-edit ProductEditButton" id="@( "ProductEdit_" + product.product_id)" data-toggle="tooltip" title="" data-placement="right"
+                                                                       data-original-title="Check out more demos">Edit</a>
+                                                                    <a class="dropdown-item confirm-delete ProductDeleteButton" id="@( "ProductDelete_" + product.product_id)" title="Delete" href="#">Delete</a>
                                                                 </div>
-                                                            </td>
+                                                            </div>
+                                                        </td>
 
-                                                        </tr>
+                                                    </tr>
                                                     }
 
                                                 </tbody>
@@ -208,18 +217,70 @@
                     <small class="form-text text-muted">Please Enter Product Details</small>
                 </div>
                 <div class="form-group">
-                    <label class="text-dark">Product Image Link</label>
-                    <input type="text" name="ProdName" class="form-control" id="ProductImageAdd">
-                    <small class="form-text text-muted">Please Enter Product Image Details</small>
+                    <label class="text-dark">Product Image</label>
+                    <input type="text" name="ProdImage" class="form-control" id="ProductImageNameAdd" style="" placeholder="Image Name Here" disabled="disabled">
+                    <div id="avatar-result-productadd" class="hidden">
+                        <img src="#" id="finalImageProductAdd" alt="" />
+                    </div>
+                    <small class="form-text text-muted">Please Upload The Image From Below First (If Image is uploaded)</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Code</label>
+                    <input type="text" name="ProdCode" class="form-control" id="ProductCodeAdd">
+                    <small class="form-text text-muted">Please Enter Product Code</small>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Default Cost (in $)</label>
+                    <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductDefaultCostAdd">
+                    <small class="form-text text-muted">Please Enter Product Default Cost</small>
                 </div>
             </div>
         </div>
 
         <button type="button" id="AddBtnProduct" class="btn btn-primary">Add Product</button>
     </form>
+    <br /><br />
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Upload Image Here
+        </h4>
+    </div>
+    <section id="avatar-upload-box">
+        @using (Ajax.BeginForm("ProductMaster", "Masterdata",
+            new AjaxOptions() { HttpMethod = "POST" },
+            new { enctype = "multipart/form-data", id = "avatar-upload-productadd-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @*<div style="border:1px solid black">*@
+            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolderProductAdd" /><br>
+            @*</div>*@
+            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size-productadd"></span> MB</div>
+        }
+        <div class="upload-progress col-md-6 hidden">
+            <div class="upload-percent-value pull-left">0%</div>
+            <div class="upload-percent-bar pull-left"></div>
+        </div>
+        <div id="upload-status"></div>
+    </section>
+    <section id="avatar-crop-box-productadd" class="hidden">
+        <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageAdd() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
+        <p>
+            <img src="#" id="crop-avatar-target-productadd" alt="Uploaded image" />
+            @*ORIGINAL CODE - THIS CODE MUST NOT BE COMMENTED*@
+        <div id="preview-pane-productadd" style="display:block;border:0px">
+            <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header_productadd">Preview Window</div>
+            <div class="preview-container">
+                <img src="#" class="jcrop-preview" alt="" />
+            </div>
+            <div style="height:5px; display:block;"></div>
+        </div>
+        </p>
+        
+    </section>
+
 </div>
 
-@*EDIT BRAND MASTER PANEL*@
+    @*EDIT PRODUCT MASTER PANEL*@
 <div id="kt_notes_panel2" class="editpopup offcanvas offcanvas-right kt-color-panel p-5">
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
         <h4 class="font-size-h4 font-weight-bold m-0">
@@ -281,12 +342,66 @@
                 </div>
                 <div class="form-group">
                     <label class="text-dark">Product Image Link</label>
-                    <input type="text" name="ProdName" class="form-control" id="ProductEditImage">
-                </div>
+                    <label class="text-dark">Product Image</label>
+                    <input type="text" name="ProdImage" class="form-control" id="ProductEditImage" style="" placeholder="Image Name Here" disabled="disabled">
+                    <div id="avatar-result-productedit" class="hidden">
+                        <img src="#" id="finalImageProductEdit" alt="" />
+                    </div>
+                    <small class="form-text text-muted">Edited Image To Be Uploaded From Below (If Image is uploaded)</small>
 
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Code</label>
+                    <input type="text" name="ProdCode" class="form-control" id="ProductEditCode">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Product Default Cost (in $)</label>
+                    <input type="number" name="ProdDefaultCost" placeholder="Format 1000.00" class="form-control" id="ProductEditDefaultCost">
+                </div>
             </div>
         </div>
 
-        <button type="submit" id="EditBtnProduct" class="btn btn-primary">Edit Product</button>
+        <button type="submit" id="EditBtnProduct" class="btn btn-primary">Update Product Details</button>
     </form>
+
+    <br /><br />
+    <div class="offcanvas-header d-flex align-items-center justify-content-between pb-3">
+        <h4 class="font-size-h4 font-weight-bold m-0">
+            Upload Image Here
+        </h4>
+    </div>
+    <section id="avatar-upload-box">
+        @using (Ajax.BeginForm("ProductMaster", "Masterdata",
+            new AjaxOptions() { HttpMethod = "POST" },
+            new { enctype = "multipart/form-data", id = "avatar-upload-productedit-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @*<div style="border:1px solid black">*@
+            <input type="file" name="files" style="display: block !important;" class="btn btn-primary" id="imageUploadHolderProductEdit" /><br>
+            @*</div>*@
+            <div class="upload-file-notice col-md-6">Max Size: <span id="avatar-max-size-productedit"></span> MB</div>
+        }
+        <div class="upload-progress col-md-6 hidden">
+            <div class="upload-percent-value pull-left">0%</div>
+            <div class="upload-percent-bar pull-left"></div>
+        </div>
+        <div id="upload-status"></div>
+    </section>
+    <section id="avatar-crop-box-productedit" class="hidden">
+        <p><button class="btn btn-default btn-primary" onclick=" UploadProductImageEdit() " style="position: relative;left:0px;top:5px;">Save Image</button></p>
+        <p>
+            <img src="#" id="crop-avatar-target-productedit" alt="Uploaded image" />
+            @*ORIGINAL CODE - THIS CODE MUST NOT BE COMMENTED*@
+            <div id="preview-pane-productedit" style="display:block;border:0px">
+                <div style="position: relative;top: 40px;height: 5px;font-size: medium;display: block;" id="Preview_panel_header_productedit">Preview Window</div>
+                <div class="preview-container">
+                    <img src="#" class="jcrop-preview" alt="" />
+                </div>
+                <div style="height:5px; display:block;"></div>
+            </div>
+        </p>
+
+    </section>
+
+
 </div>

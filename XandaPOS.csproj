@@ -130,11 +130,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\MasterDataBL.cs" />
+    <Compile Include="Business\OrdersDataBL.cs" />
+    <Compile Include="ClientLibrary\ImageHelper\ImageHelperMain.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterdataController.cs" />
-    <Compile Include="BusinessData\DataLayer.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Edmx\POS_BRAND_MASTER.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
@@ -154,6 +156,15 @@
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\POS_PRODUCT_MASTER.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\pos_PurchaseOrder_Main.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\pos_PurchaseOrder_Sheet.cs">
+      <DependentUpon>XendaPOSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\POS_TAX_MASTER.cs">
       <DependentUpon>XendaPOSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\POS_WAREHOUSE_MASTER.cs">
@@ -177,19 +188,55 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BrandMasterVM.cs" />
-    <Compile Include="Models\CompanyMasterVM.cs" />
-    <Compile Include="Models\CustomerMasterVM.cs" />
-    <Compile Include="Models\DBContextMaster.cs" />
-    <Compile Include="Models\EmployeeMasterVM.cs" />
-    <Compile Include="Models\MasterTableHelperMasterVM.cs" />
-    <Compile Include="Models\ProductGroupMasterVM.cs" />
-    <Compile Include="Models\ProductMasterVM.cs" />
-    <Compile Include="Models\WarehouseMasterVM.cs" />
-    <Compile Include="Models\XendaPOSDBContext.cs" />
+    <Compile Include="Models\MasterdataModel\BrandMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\CompanyMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\CustomerMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\EmployeeMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\MasterTableHelperMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\TaxMasterVM.cs" />
+    <Compile Include="Models\OrdersModel\PurchaseOrderMainVM.cs" />
+    <Compile Include="Models\MasterdataModel\ProductGroupMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\ProductMasterVM.cs" />
+    <Compile Include="Models\MasterdataModel\WarehouseMasterVM.cs" />
+    <Compile Include="Models\OrdersModel\PurchaseOrderSheetVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Avatars\061520212121011623772261.jpg" />
+    <Content Include="Avatars\061520212236101623776770.jpg" />
+    <Content Include="Avatars\061520212252461623777766.jpg" />
+    <Content Include="Avatars\061620210006581623782218.jpg" />
+    <Content Include="Avatars\061620210047421623784662.jpg" />
+    <Content Include="Avatars\061620210057041623785224.jpg" />
+    <Content Include="Avatars\061620210057561623785276.jpg" />
+    <Content Include="Avatars\061620210105401623785740.jpg" />
+    <Content Include="Avatars\061620210116291623786389.jpg" />
+    <Content Include="Avatars\061620210117491623786469.jpg" />
+    <Content Include="Avatars\061620210118401623786520.jpg" />
+    <Content Include="Avatars\061620210120251623786625.jpg" />
+    <Content Include="Avatars\061620210124511623786891.jpg" />
+    <Content Include="Avatars\061620210126051623786965.jpg" />
+    <Content Include="Avatars\061620210145571623788157.jpg" />
+    <Content Include="Avatars\061620210146121623788172.jpg" />
+    <Content Include="Avatars\061620210146311623788191.jpg" />
+    <Content Include="Avatars\061620210200241623789024.jpg" />
+    <Content Include="Avatars\061620210814261623811466.jpg" />
+    <Content Include="Avatars\061620210820331623811833.jpg" />
+    <Content Include="Avatars\061620210843031623813183.jpg" />
+    <Content Include="Avatars\061620210844151623813255.jpg" />
+    <Content Include="Avatars\061620210851311623813691.jpg" />
+    <Content Include="Avatars\061620210852211623813741.jpg" />
+    <Content Include="Avatars\061620210859161623814156.jpg" />
+    <Content Include="Avatars\061620211225271623826527.jpg" />
+    <Content Include="Avatars\061620211227501623826670.jpg" />
+    <Content Include="Avatars\061620211236271623827187.jpg" />
+    <Content Include="Avatars\061620211245571623827757.jpg" />
+    <Content Include="Avatars\061620211246401623827800.jpg" />
+    <Content Include="Avatars\061620211323301623830010.jpg" />
+    <Content Include="Avatars\061620211337101623830830.jpg" />
+    <Content Include="Avatars\061620211338271623830907.jpg" />
+    <Content Include="Avatars\061620211342581623831178.jpg" />
+    <Content Include="ClientScripts\OrdersData.js" />
     <Content Include="Content\assets\api\apexcharts\apexcharts.js" />
     <Content Include="Content\assets\api\apexcharts\scriptcharts.js" />
     <Content Include="Content\assets\api\datatable\jquery.dataTables.min.css" />
@@ -531,11 +578,14 @@
     <Content Include="Content\css\fancybox_sprite.png" />
     <Content Include="Content\css\fonts\slick.svg" />
     <Content Include="Content\css\green.css" />
+    <Content Include="Content\css\jquery.Jcrop.css" />
     <Content Include="Content\css\navy-blue.css" />
     <Content Include="Content\css\pink.css" />
     <Content Include="Content\css\red.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\rtl.css" />
+    <Content Include="Content\css\site.avatar.css" />
+    <Content Include="Content\css\Site.css" />
     <Content Include="Content\css\style-one.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\yellow.css" />
@@ -1096,6 +1146,7 @@
     <Content Include="Content\images\revolution_layer_slider_demo_9\Slider_01_02.jpg" />
     <Content Include="Content\js\mc-validate.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="DatabaseScripts\xandapos_06132021.sql" />
     <Content Include="Edmx\XendaPOSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>XendaPOSModel.edmx</DependentUpon>
@@ -1276,17 +1327,27 @@
     <Content Include="Edmx\XendaPOSModel.edmx.diagram">
       <DependentUpon>XendaPOSModel.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Content\assets\api\jquery\jquery-3.4.1.intellisense.js" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.js" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.min.js" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.slim.js" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.Jcrop.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ProductScripts\site.avatar.productedit.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\ProductScripts\site.avatar.productadd.js" />
+    <Content Include="Temp\IMG_20191129_082330.jpg" />
+    <Content Include="Temp\IMG_20191129_092938.jpg" />
+    <Content Include="Temp\IMG_20191129_095044.jpg" />
+    <Content Include="Temp\IMG_20191129_105141.jpg" />
+    <Content Include="Temp\IMG_20191130_094724.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1312,9 +1373,14 @@
     <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
     <None Include="Views\Masterdata\CompanySupplierMaster.cshtml" />
     <Content Include="Views\Masterdata\CompanyVendorMaster.cshtml" />
+    <Content Include="Views\Orders\PurchaseOrder.cshtml" />
+    <Content Include="Views\Orders\ReceiveOrder.cshtml" />
+    <Content Include="Views\Orders\SellOrder.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\GenericScripts\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -1323,8 +1389,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.slim.min.map" />
+    <Content Include="Content\assets\api\jquery\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -18,7 +18,10 @@ function ReloadProductMasterData() {
                     + "<td id='ProductGroupName_" + item.product_id + "'>" + item.product_group_name + "</td >"
                     + "<td id='ProductCompanyName_" + item.product_id + "'>" + item.product_company_name + "</td >"
                     + "<td id='ProductDetails_" + item.product_id + "'>" + item.product_details + "</td >"
-                    + "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    //+ "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    + "<td id='ProductImageLink_" + item.product_id + "'><img src='/Avatars/" + item.product_image_link + "' height='50' width='50' /></td >"
+                    + "<td id='ProductCode_" + item.product_id + "'>" + item.product_code + "</td >"
+                    + "<td id='ProductDefaultCost_" + item.product_id + "'>" + Number(item.product_default_cost).toFixed(2) + "</td >"
                     + "<td>"
                     + "<div class='card-toolbar text-right'>"
                     + "<button class='btn p-0 shadow-none' type='button' id='dropdowneditButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
@@ -1895,7 +1898,36 @@ jQuery(document).ready(function () {
         jQuery("#ProdGrpNameAdd").val('NA');
         jQuery("#ProdCompanyNameAdd").val('NA');
         jQuery('#ProductDetailsAdd').val('');
-        jQuery('#ProductImageAdd').val('');
+        jQuery('#ProductImageNameAdd').val('');
+        //jQuery('#ProductImageAdd').val('');
+        jQuery('#ProductCodeAdd').val('');
+        jQuery('#ProductDefaultCostAdd').val('');
+
+        //IMAGE EDIT SECTION SETUP START - PRODUCT ADD
+        jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
+
+        jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
+        jQuery('.jcrop-holder').css('background', '');
+
+         //************************FILE UPLOAD CLEARING
+        jQuery('#imageUploadHolderProductAdd').val('');
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').text('Max Size: 4 MB');
+
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-productadd-form .upload-file-notice').css('color', 'black');
+
+        jQuery('.upload-percent-bar').width('0%');
+        jQuery('.upload-percent-value').html('0%');
+
+
+        jQuery('#avatar-crop-box-productadd').css('display', 'none');
+        //jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
+        jQuery('#Preview_panel_header_productadd').css('display', 'none'); //Cropping portion live panel header
+
+        jQuery('#finalImageProductAdd').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+
+        //IMAGE EDIT SECTION SETUP END - PRODUCT ADD
 
         //Setting focus to the Helper Name field
         jQuery("#ProductNameAdd").focus();
@@ -1911,8 +1943,9 @@ jQuery(document).ready(function () {
         productMaster.product_group = jQuery("#ProdGrpNameAdd").val();
         productMaster.product_company = jQuery("#ProdCompanyNameAdd").val();
         productMaster.product_details = jQuery('#ProductDetailsAdd').val();
-        productMaster.product_image_link = jQuery('#ProductImageAdd').val('');
-
+        productMaster.product_image_link = jQuery('#ProductImageNameAdd').val();
+        productMaster.product_code = jQuery('#ProductCodeAdd').val();
+        productMaster.product_default_cost = jQuery('#ProductDefaultCostAdd').val();
 
         jQuery.ajax({
             type: "POST",
@@ -1948,6 +1981,43 @@ jQuery(document).ready(function () {
         jQuery("#ProdEditCompanyName").val('NA');
         jQuery('#ProductEditDetails').val('');
         jQuery('#ProductEditImage').val('');
+        jQuery('#ProductEditCode').val('');
+        jQuery('#ProductEditDefaultCost').val('');
+
+
+        //IMAGE EDIT SECTION SETUP START - PRODUCT EDIT
+        jQuery('.jcrop-holder div div img').attr('src', '#1'); //Selected Image In Temp Folder - This will be the 
+
+        jQuery('.jcrop-holder img').attr('src', '#2'); //To Remove The Uploaded Image
+        jQuery('.jcrop-holder').css('background', '');
+
+        //************************FILE UPLOAD CLEARING
+        jQuery('#imageUploadHolderProductEdit').val('');
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').text('Max Size: 4 MB');
+
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').css('background', 'white');
+        jQuery('#avatar-upload-productedit-form .upload-file-notice').css('color', 'black');
+
+        jQuery('.upload-percent-bar').width('0%');
+        jQuery('.upload-percent-value').html('0%');
+
+
+        jQuery('#avatar-crop-box-productedit').css('display', 'none');
+        //jQuery('#Preview_pane').css('display', 'none'); // The Preview Panel Will Be Hidden
+        jQuery('.jcrop-holder img').css('display', 'none'); // Image Upload Holder Will Be Hidden
+        jQuery('#Preview_panel_header_productedit').css('display', 'none'); //Cropping portion live panel header
+
+        jQuery('#finalImageProductEdit').attr('src', '#4'); //Cropped Image - Image that will be displayed at Product Insert
+
+        //IMAGE EDIT SECTION SETUP END - PRODUCT EDIT
+
+
+
+
+
+
+
+
 
         var buttonID = jQuery(this).attr("id");
         var id = buttonID.substring(12); //ProductEdit_
@@ -1967,6 +2037,13 @@ jQuery(document).ready(function () {
                 jQuery("#ProdEditCompanyName").val(data.ProdMasterList[0].product_company_name);
                 jQuery("#ProductEditDetails").val(data.ProdMasterList[0].product_details);
                 jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
+                //jQuery('#finalImageProductEdit').css('display', 'block');
+                //jQuery('#finalImageProductEdit').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link); //On Edit Panel Open Here Last Image will be Shown
+                jQuery('#avatar-result-productedit img').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link);
+
+                jQuery("#ProductEditCode").val(data.ProdMasterList[0].product_code);
+                jQuery("#ProductEditDefaultCost").val(Number(data.ProdMasterList[0].product_default_cost).toFixed(2));
+
                 //ajaxStop();
             },
             failure: function (response) {
@@ -1992,6 +2069,8 @@ jQuery(document).ready(function () {
         productMaster.product_company = jQuery("#ProdEditCompanyName").val();
         productMaster.product_details = jQuery("#ProductEditDetails").val();
         productMaster.product_image_link = jQuery("#ProductEditImage").val();
+        productMaster.product_code = jQuery("#ProductEditCode").val();
+        productMaster.product_default_cost = jQuery("#ProductEditDefaultCost").val();
 
         jQuery.ajax({
             type: "POST",
@@ -2095,6 +2174,94 @@ jQuery(document).ready(function () {
     //========================================================================//
 
 });
+
+
+function UploadProductImageAdd() {
+    var img = jQuery('#preview-pane-productadd .preview-container img');
+    jQuery('#avatar-crop-box-productadd button').addClass('disabled');
+    console.log('UploadProductImageAdd()');
+    console.log(img.attr('src'));
+    console.log(img.css('width'));
+    console.log(img.css('height'));
+    console.log(img.css('marginLeft'));
+    console.log(img.css('marginTop'));
+
+    jQuery.ajax({
+        type: "POST",
+        url: "/Masterdata/UploadProductImageAdd",
+        traditional: true,
+        data: {
+            w: img.css('width'),
+            h: img.css('height'),
+            l: img.css('marginLeft'),
+            t: img.css('marginTop'),
+            fileName: img.attr('src'),
+            targetNameId: '#ProductImageNameAdd'
+        }
+    }).done(function (data) {
+        if (data.success === true) {
+            //ORIGINAL CODE
+            jQuery('#avatar-result-productadd img').attr('src', data.avatarFileLocation);
+
+            //UPDATED CODE
+            jQuery(data.ImageHoldeNameId).val(data.ActualSavedFileName);
+
+            jQuery('#avatar-result-productadd').removeClass('hidden');
+
+            if (!keepCropBox) {
+                jQuery('#avatar-crop-box-productadd').addClass('hidden');
+            }
+
+        } else {
+            alert(data.errorMessage)
+        }
+    }).fail(function (e) {
+        alert('Cannot upload avatar at this time');
+    });
+}
+
+function UploadProductImageEdit() {
+    var img = jQuery('#preview-pane-productedit .preview-container img');
+    jQuery('#avatar-crop-box-productedit button').addClass('disabled');
+    console.log('UploadProductImageEdit()');
+    console.log(img.attr('src'));
+    console.log(img.css('width'));
+    console.log(img.css('height'));
+    console.log(img.css('marginLeft'));
+    console.log(img.css('marginTop'));
+
+    jQuery.ajax({
+        type: "POST",
+        url: "/Masterdata/UploadProductImageAdd",
+        traditional: true,
+        data: {
+            w: img.css('width'),
+            h: img.css('height'),
+            l: img.css('marginLeft'),
+            t: img.css('marginTop'),
+            fileName: img.attr('src'),
+            targetNameId: '#ProductEditImage'
+        }
+    }).done(function (data) {
+        if (data.success === true) {
+            //ORIGINAL CODE
+            jQuery('#avatar-result-productedit img').attr('src', data.avatarFileLocation);
+
+            //UPDATED CODE
+            jQuery(data.ImageHoldeNameId).val(data.ActualSavedFileName);
+
+            jQuery('#avatar-result-productedit').removeClass('hidden');
+
+            if (!keepCropBox) {
+                jQuery('#avatar-crop-box-productedit').addClass('hidden');
+            }
+        } else {
+            alert(data.errorMessage)
+        }
+    }).fail(function (e) {
+        alert('Cannot upload avatar at this time');
+    });
+}
 
 //Insert data
 

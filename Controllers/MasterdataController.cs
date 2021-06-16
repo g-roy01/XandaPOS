@@ -4,10 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XandaPOS.Business;
-using XandaPOS.Models;
-using XandaPOS.BusinessData;
+using XandaPOS.ClientLibrary.ImageHelper;
 using XandaPOS.Edmx;
-using System.Data.Entity;
+using XandaPOS.Models.MasterdataModel;
 
 namespace XandaPOS.Controllers
 {
@@ -46,7 +45,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetBrandDataForEdit(int brandID)
         {
             MasterDataBL _brandMaster = new MasterDataBL();
-            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID,"EDIT");
+            BrandMasterVM brandMasterList = _brandMaster.LoadBrandMasterGrid(brandID, "EDIT");
             return Json(new { BrandMasterList = brandMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -71,14 +70,14 @@ namespace XandaPOS.Controllers
         public ActionResult CompanyMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
-            return View(_masterDataBL.LoadCompanyMasterGrid(0,"ALL"));
+            return View(_masterDataBL.LoadCompanyMasterGrid(0, "ALL"));
         }
 
         [HttpPost]
         public JsonResult GetReloadCompanyMaster()
         {
             MasterDataBL _companyMaster = new MasterDataBL();
-            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0,"ALL").mainCompanyData;
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(0, "ALL").mainCompanyData;
             return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -94,7 +93,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetCompanyDataForEdit(int companyID)
         {
             MasterDataBL _companyMaster = new MasterDataBL();
-            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID,"ALL","EDIT").mainCompanyData;
+            List<CompanyMasterData> companyMasterList = _companyMaster.LoadCompanyMasterGrid(companyID, "ALL", "EDIT").mainCompanyData;
             return Json(new { CompanyMasterList = companyMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -257,7 +256,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetHelperDataForEdit(int helperID)
         {
             MasterDataBL _helperMaster = new MasterDataBL();
-            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID,"EDIT");
+            List<MasterTableHelperMasterVM> helperMasterList = _helperMaster.LoadMasterTableHelperMasterGrid(helperID, "EDIT");
             return Json(new { HelperMasterList = helperMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -327,11 +326,21 @@ namespace XandaPOS.Controllers
         #endregion
 
         #region ProductMaster
+
+        #region PRODUCT MAIN METHODS
+
+        [HttpGet]
         public ActionResult ProductMaster()
         {
             MasterDataBL _masterDataBL = new MasterDataBL();
             return View(_masterDataBL.LoadProductMasterGrid(0));
         }
+
+        //[HttpGet]
+        //public ActionResult _ProductMaster()
+        //{
+        //    return PartialView();
+        //}
 
         [HttpPost]
         public JsonResult GetReloadProductMaster()
@@ -353,7 +362,7 @@ namespace XandaPOS.Controllers
         public JsonResult GetProductDataForEdit(int productID)
         {
             MasterDataBL _productMaster = new MasterDataBL();
-            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID,"EDIT").mainProductData;
+            List<ProductMasterData> prodMasterList = _productMaster.LoadProductMasterGrid(productID, "EDIT").mainProductData;
             return Json(new { ProdMasterList = prodMasterList, JsonRequestBehavior.AllowGet });
         }
 
@@ -372,6 +381,66 @@ namespace XandaPOS.Controllers
             string message = productMaster.DeleteProductMaster(productId);
             return Json(new { Message = message, JsonRequestBehavior.AllowGet });
         }
+
+        #endregion
+
+        #region PRODUCT IMAGE MANAGEMENT
+
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductMaster(IEnumerable<HttpPostedFileBase> files)
+        {
+            ImageHelperMain _imageHelper = new ImageHelperMain();
+
+            var serverPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
+            if (files == null || !files.Any())
+                return Json(new { success = false, errorMessage = "No file uploaded." });
+
+            var file = files.FirstOrDefault();  // get ONE only
+            if (file == null || !_imageHelper.IsImage(file))
+                return Json(new { success = false, errorMessage = "File is of wrong format." });
+
+            if (file.ContentLength <= 0)
+                return Json(new { success = false, errorMessage = "File cannot be zero length." });
+
+            var webPath = _imageHelper.GetTempSavedFilePath(file, serverPath);
+
+            return Json(new { success = true, fileName = webPath.Replace("\\", "/") }); // success
+        }
+
+        [HttpPost]
+        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName, string targetNameId)//"#ProductImageNameAdd"
+        {
+            //t - Image Margin Top
+            //l - Image Margin Left
+            //h - Image Height
+            //w - Image Width
+
+            try
+            {
+                ImageHelperMain _imageHelper = new ImageHelperMain();
+                var _tempPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
+                var _destinationPath = HttpContext.Server.MapPath(_imageHelper.AvatarPath);
+
+                string serverSavedNewFile = _imageHelper.SaveImageInServer(t, l, h, w, fileName, _tempPath, _destinationPath);
+
+                string actualSavedFileName = serverSavedNewFile;
+                var var1 = _imageHelper.AvatarPath + "\\";
+                if (serverSavedNewFile.StartsWith(var1, false, System.Globalization.CultureInfo.InvariantCulture))
+                {
+                    actualSavedFileName = string.Concat(@" ", actualSavedFileName);
+                    actualSavedFileName = actualSavedFileName.Replace(@" " + var1, "");
+                }
+                return Json(new { success = true, avatarFileLocation = serverSavedNewFile, ImageHoldeNameId = targetNameId, ActualSavedFileName = actualSavedFileName });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = "Unable to upload file.\nERRORINFO: " + ex.Message });
+            }
+        }
+
+        #endregion
+
+
         #endregion
 
         #region WarehouseMaster

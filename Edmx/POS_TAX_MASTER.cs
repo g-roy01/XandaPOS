@@ -12,16 +12,12 @@ namespace XandaPOS.Edmx
     using System;
     using System.Collections.Generic;
     
-    public partial class POS_PRODUCT_MASTER
+    public partial class POS_TAX_MASTER
     {
-        public int product_id { get; set; }
-        public string product_name { get; set; }
-        public Nullable<int> product_type { get; set; }
-        public Nullable<int> product_group { get; set; }
-        public Nullable<int> product_company { get; set; }
-        public string product_details { get; set; }
-        public string product_image_link { get; set; }
-        public string product_code { get; set; }
-        public decimal product_default_cost { get; set; }
+        public int tax_id { get; set; }
+        public string tax_name { get; set; }
+        public string tax_description { get; set; }
+        public decimal tax_percent { get; set; }
+        public bool tax_active_status { get; set; }
     }
 }
