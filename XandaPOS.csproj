@@ -202,6 +202,40 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Avatars\061520212121011623772261.jpg" />
+    <Content Include="Avatars\061520212236101623776770.jpg" />
+    <Content Include="Avatars\061520212252461623777766.jpg" />
+    <Content Include="Avatars\061620210006581623782218.jpg" />
+    <Content Include="Avatars\061620210047421623784662.jpg" />
+    <Content Include="Avatars\061620210057041623785224.jpg" />
+    <Content Include="Avatars\061620210057561623785276.jpg" />
+    <Content Include="Avatars\061620210105401623785740.jpg" />
+    <Content Include="Avatars\061620210116291623786389.jpg" />
+    <Content Include="Avatars\061620210117491623786469.jpg" />
+    <Content Include="Avatars\061620210118401623786520.jpg" />
+    <Content Include="Avatars\061620210120251623786625.jpg" />
+    <Content Include="Avatars\061620210124511623786891.jpg" />
+    <Content Include="Avatars\061620210126051623786965.jpg" />
+    <Content Include="Avatars\061620210145571623788157.jpg" />
+    <Content Include="Avatars\061620210146121623788172.jpg" />
+    <Content Include="Avatars\061620210146311623788191.jpg" />
+    <Content Include="Avatars\061620210200241623789024.jpg" />
+    <Content Include="Avatars\061620210814261623811466.jpg" />
+    <Content Include="Avatars\061620210820331623811833.jpg" />
+    <Content Include="Avatars\061620210843031623813183.jpg" />
+    <Content Include="Avatars\061620210844151623813255.jpg" />
+    <Content Include="Avatars\061620210851311623813691.jpg" />
+    <Content Include="Avatars\061620210852211623813741.jpg" />
+    <Content Include="Avatars\061620210859161623814156.jpg" />
+    <Content Include="Avatars\061620211225271623826527.jpg" />
+    <Content Include="Avatars\061620211227501623826670.jpg" />
+    <Content Include="Avatars\061620211236271623827187.jpg" />
+    <Content Include="Avatars\061620211245571623827757.jpg" />
+    <Content Include="Avatars\061620211246401623827800.jpg" />
+    <Content Include="Avatars\061620211323301623830010.jpg" />
+    <Content Include="Avatars\061620211337101623830830.jpg" />
+    <Content Include="Avatars\061620211338271623830907.jpg" />
+    <Content Include="Avatars\061620211342581623831178.jpg" />
     <Content Include="ClientScripts\OrdersData.js" />
     <Content Include="Content\assets\api\apexcharts\apexcharts.js" />
     <Content Include="Content\assets\api\apexcharts\scriptcharts.js" />
@@ -1309,6 +1343,11 @@
     <Content Include="Scripts\ProductScripts\site.avatar.productedit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\ProductScripts\site.avatar.productadd.js" />
+    <Content Include="Temp\IMG_20191129_082330.jpg" />
+    <Content Include="Temp\IMG_20191129_092938.jpg" />
+    <Content Include="Temp\IMG_20191129_095044.jpg" />
+    <Content Include="Temp\IMG_20191129_105141.jpg" />
+    <Content Include="Temp\IMG_20191130_094724.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
