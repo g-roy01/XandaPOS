@@ -408,7 +408,7 @@ namespace XandaPOS.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName)
+        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName, string targetNameId)//"#ProductImageNameAdd"
         {
             //t - Image Margin Top
             //l - Image Margin Left
@@ -430,7 +430,7 @@ namespace XandaPOS.Controllers
                     actualSavedFileName = string.Concat(@" ", actualSavedFileName);
                     actualSavedFileName = actualSavedFileName.Replace(@" " + var1, "");
                 }
-                return Json(new { success = true, avatarFileLocation = serverSavedNewFile, ImageHoldeNameId = "#ProductImageNameAdd", ActualSavedFileName = actualSavedFileName });
+                return Json(new { success = true, avatarFileLocation = serverSavedNewFile, ImageHoldeNameId = targetNameId, ActualSavedFileName = actualSavedFileName });
             }
             catch (Exception ex)
             {

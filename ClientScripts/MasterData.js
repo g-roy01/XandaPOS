@@ -18,7 +18,8 @@ function ReloadProductMasterData() {
                     + "<td id='ProductGroupName_" + item.product_id + "'>" + item.product_group_name + "</td >"
                     + "<td id='ProductCompanyName_" + item.product_id + "'>" + item.product_company_name + "</td >"
                     + "<td id='ProductDetails_" + item.product_id + "'>" + item.product_details + "</td >"
-                    + "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    //+ "<td id='ProductImageLink_" + item.product_id + "'>" + item.product_image_link + "</td >"
+                    + "<td id='ProductImageLink_" + item.product_id + "'><img src='/Avatars/" + item.product_image_link + "' height='50' width='50' /></td >"
                     + "<td id='ProductCode_" + item.product_id + "'>" + item.product_code + "</td >"
                     + "<td id='ProductDefaultCost_" + item.product_id + "'>" + Number(item.product_default_cost).toFixed(2) + "</td >"
                     + "<td>"
@@ -2038,6 +2039,8 @@ jQuery(document).ready(function () {
                 jQuery("#ProductEditImage").val(data.ProdMasterList[0].product_image_link);
                 //jQuery('#finalImageProductEdit').css('display', 'block');
                 //jQuery('#finalImageProductEdit').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link); //On Edit Panel Open Here Last Image will be Shown
+                jQuery('#avatar-result-productedit img').attr('src', '/Avatars/' + data.ProdMasterList[0].product_image_link);
+
                 jQuery("#ProductEditCode").val(data.ProdMasterList[0].product_code);
                 jQuery("#ProductEditDefaultCost").val(Number(data.ProdMasterList[0].product_default_cost).toFixed(2));
 
@@ -2192,7 +2195,8 @@ function UploadProductImageAdd() {
             h: img.css('height'),
             l: img.css('marginLeft'),
             t: img.css('marginTop'),
-            fileName: img.attr('src')
+            fileName: img.attr('src'),
+            targetNameId: '#ProductImageNameAdd'
         }
     }).done(function (data) {
         if (data.success === true) {
@@ -2207,6 +2211,7 @@ function UploadProductImageAdd() {
             if (!keepCropBox) {
                 jQuery('#avatar-crop-box-productadd').addClass('hidden');
             }
+
         } else {
             alert(data.errorMessage)
         }
@@ -2234,7 +2239,8 @@ function UploadProductImageEdit() {
             h: img.css('height'),
             l: img.css('marginLeft'),
             t: img.css('marginTop'),
-            fileName: img.attr('src')
+            fileName: img.attr('src'),
+            targetNameId: '#ProductEditImage'
         }
     }).done(function (data) {
         if (data.success === true) {

@@ -22,7 +22,7 @@
 
 #preview-pane-productadd {
     position: relative;
-    top: 150px;
+    top: 190px; /*For Some Images We may need this*/
     width: 100px;
     height: 100px;
     z-index: 1;
@@ -40,7 +40,7 @@
 
 #preview-pane-productedit {
     position: relative;
-    top: 150px;
+    top: 190px;
     width: 100px;
     height: 100px;
     z-index: 1;

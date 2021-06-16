@@ -91,16 +91,25 @@ namespace XandaPOS.ClientLibrary.ImageHelper
                 // ... check for validity of calculations, ...
                 if (bottom < 0 || right < 0)
                 {
+                    //THIS CONDITION OCCURS IF THE THE INITIAL IMAGE UPLOADED HAS A DIFF DIMENSION THAN CURRENT IMAGE
+                    if (bottom < 0)
+                        bottom = 0;
+                    if (right < 0)
+                        right = 0;
+
                     // If you reach this point, your avatar sizes in here and in the CSS file are different.
                     // Check _avatarHeight and _avatarWidth in this file
                     // and height and width for #preview-pane .preview-container in site.avatar.css
-                    throw new ArgumentException("Definitions of dimensions of the cropping window do not match. Talk to the developer who customized the sample code :)");
+
+                    //Commented for testing
+                    //throw new ArgumentException("Definitions of dimensions of the cropping window do not match. Talk to the developer who customized the sample code :)");
                 }
 
                 img.Crop(top, left, bottom, right);
 
                 // ... delete the temporary file,...
-                System.IO.File.Delete(fn);
+                //Commented for Client Presentation - Will delete the temporary file
+                //System.IO.File.Delete(fn);
 
                 // ... and save the new one.
                 newFileName = Path.Combine(_imageHelper.AvatarPath, Path.GetFileName(fn));
