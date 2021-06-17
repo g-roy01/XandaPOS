@@ -65,6 +65,11 @@ namespace XandaPOS.ClientLibrary.ImageHelper
 
         public string SaveImageInServer(string t, string l, string h, string w, string fileName, string sourceTempPath, string destinationPath)
         {
+            //t - Image Margin Top
+            //l - Image Margin Left
+            //h - Image Height
+            //w - Image Width
+
             var newFileName = "";
             try
             {
@@ -146,6 +151,47 @@ namespace XandaPOS.ClientLibrary.ImageHelper
             if (file == null) return false;
             return file.ContentType.Contains("image") ||
                 _imageHelper.ImageFileExtensions.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public string GetCleanCoordinateValue(string coordinate)
+        {
+            try
+            {
+                //if the sting is in decimal format
+                if (coordinate.Contains("."))
+                {
+                    bool isPx = false;
+                    //remove pixel mark
+                    if (coordinate.EndsWith("px"))
+                    {
+                        coordinate = coordinate.Replace("px", "");
+                        isPx = true;
+                    }
+
+                    bool isMinus = false;
+                    //if the value is in -ve
+                    if (coordinate.StartsWith("-"))
+                    {
+                        coordinate = coordinate.Replace("-", "");
+                        isMinus = true;
+                    }
+
+                    coordinate = Math.Floor(Decimal.Parse(coordinate)).ToString();
+
+                    if (isMinus)
+                        coordinate = string.Concat("-", coordinate);
+
+                    if (isPx)
+                        coordinate = string.Concat(coordinate, "px");
+
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return coordinate;
         }
 
         public string GetImageNameFromFilePath(string fileName, string httpContextServerPath)

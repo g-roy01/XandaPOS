@@ -408,20 +408,33 @@ namespace XandaPOS.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName, string targetNameId)//"#ProductImageNameAdd"
+        public ActionResult UploadProductImageAdd(string t, string l, string h, string w, string fileName, string targetNameId = "#")//"#ProductImageNameAdd"
         {
             //t - Image Margin Top
             //l - Image Margin Left
             //h - Image Height
             //w - Image Width
+            //fileName - Actual Image File To Be Worked On
+            //targetNameId - Once Image Is Saved In This Id Image Name Will Be Shown
 
             try
             {
                 ImageHelperMain _imageHelper = new ImageHelperMain();
+
+                //t = t.Replace("px", "");
+                //t = t + ".32"; //Just for Testing
+                //t = string.Concat(t, "px");
+
+                string marginTop = _imageHelper.GetCleanCoordinateValue(t);
+                string marginLeft = _imageHelper.GetCleanCoordinateValue(l);
+                string imageHeight = _imageHelper.GetCleanCoordinateValue(h);
+                string imageWidth = _imageHelper.GetCleanCoordinateValue(w);
+
+                
                 var _tempPath = HttpContext.Server.MapPath(_imageHelper.TempFolder);
                 var _destinationPath = HttpContext.Server.MapPath(_imageHelper.AvatarPath);
 
-                string serverSavedNewFile = _imageHelper.SaveImageInServer(t, l, h, w, fileName, _tempPath, _destinationPath);
+                string serverSavedNewFile = _imageHelper.SaveImageInServer(marginTop, marginLeft, imageHeight, imageWidth, fileName, _tempPath, _destinationPath);
 
                 string actualSavedFileName = serverSavedNewFile;
                 var var1 = _imageHelper.AvatarPath + "\\";

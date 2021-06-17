@@ -485,13 +485,19 @@ jQuery(document).ready(function () {
         var buttonID = jQuery(this).attr("id");
         var id = buttonID.substring(9);
 
-        //jQuery('.modal_pre_loader').show();
+        //jQuery('.se-pre-con_2').css('background-color', 'rgba(0, 0, 0, 0.5)');
+
+        
+        
         jQuery.ajax({
             url: "/Masterdata/GetCustomerDataForEdit",
             data: '{custID : ' + id + '}',
             type: "POST",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
+            beforeSend: function () {
+                jQuery('.se-pre-con_2').show();
+            },
             success: function (data) {
                 jQuery("#CustomerEditId").val(data.CustMasterList[0].cust_id);
                 jQuery("#CustomerEditName").val(data.CustMasterList[0].cust_name);
@@ -499,7 +505,7 @@ jQuery(document).ready(function () {
                 jQuery("#CustomerEditPin").val(data.CustMasterList[0].cust_pin);
                 jQuery("#CustomerEditPhone").val(data.CustMasterList[0].cust_phn);
                 jQuery("#CustomerEditEmail").val(data.CustMasterList[0].cust_email);
-                //ajaxStop();
+                jQuery('.se-pre-con_2').fadeOut("slow");
             },
             failure: function (response) {
                 //jQuery('.modal_pre_loader').hide();

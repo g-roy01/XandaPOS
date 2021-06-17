@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/loginCss")
+
+    @*@Scripts.Render("~/bundles/js")
+        @Scripts.Render("~/bundles/scripts")*@
+
+    @Scripts.Render("~/bundles/loginPackageJS")
+    @Scripts.Render("~/bundles/loginCustomJS")
+
+
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+
+    @*@Scripts.Render("~/bundles/js")
+
+    @Scripts.Render("~/bundles/scripts")
+
+    @Scripts.Render("~/bundles/loginCustomJS")*@
+
+</body>
+</html>

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Business\LoginBL.cs" />
     <Compile Include="Business\MasterDataBL.cs" />
     <Compile Include="Business\OrdersDataBL.cs" />
     <Compile Include="ClientLibrary\ImageHelper\ImageHelperMain.cs" />
@@ -403,7 +404,8 @@
     <Content Include="Content\assets\images\carousel\slide1.jpg" />
     <Content Include="Content\assets\images\carousel\slide2.jpg" />
     <Content Include="Content\assets\images\carousel\slide3.jpg" />
-    <Content Include="Content\assets\images\loadergif.gif" />
+    <Content Include="Content\assets\images\loaders\loadergif.gif" />
+    <Content Include="Content\assets\images\loaders\ajax-loader1.gif" />
     <Content Include="Content\assets\images\misc\bg-login.png" />
     <Content Include="Content\assets\images\misc\bg-login1.png" />
     <Content Include="Content\assets\images\misc\down-arrow.png" />
@@ -571,6 +573,7 @@
     <Content Include="Content\css\ajax-loader.gif" />
     <Content Include="Content\css\blank.gif" />
     <Content Include="Content\css\blue.css" />
+    <Content Include="Content\css\bootstrap.4.0.0.css.bootstrap.css" />
     <Content Include="Content\css\fancybox_loading%402x.gif" />
     <Content Include="Content\css\fancybox_loading.gif" />
     <Content Include="Content\css\fancybox_overlay.png" />
@@ -579,6 +582,7 @@
     <Content Include="Content\css\fonts\slick.svg" />
     <Content Include="Content\css\green.css" />
     <Content Include="Content\css\jquery.Jcrop.css" />
+    <Content Include="Content\css\LoginLayout\login.css" />
     <Content Include="Content\css\navy-blue.css" />
     <Content Include="Content\css\pink.css" />
     <Content Include="Content\css\red.css" />
@@ -1339,6 +1343,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LoginScripts\XandaPosLogin.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\ProductScripts\site.avatar.productedit.js" />
     <Content Include="Scripts\respond.js" />
@@ -1371,17 +1376,20 @@
     <Content Include="Views\Masterdata\ProductMaster.cshtml" />
     <Content Include="Views\Masterdata\WarehouseMaster.cshtml" />
     <Content Include="Views\Masterdata\CustomerMaster.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\LoginMain.cshtml" />
     <None Include="Views\Masterdata\CompanySupplierMaster.cshtml" />
     <Content Include="Views\Masterdata\CompanyVendorMaster.cshtml" />
     <Content Include="Views\Orders\PurchaseOrder.cshtml" />
     <Content Include="Views\Orders\ReceiveOrder.cshtml" />
     <Content Include="Views\Orders\SellOrder.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_layoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\GenericScripts\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

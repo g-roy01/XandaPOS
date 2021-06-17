@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Xanda Pos Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@*<h2>Index</h2>*@
+
+<div class="wrapper fadeInDown">
+    <div id="formContent" style="top: 90px; position: relative">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="@Url.Content("~/Content/images/logo/myphotosign_116706_b.png")" id="icon" alt="User Icon" style="padding-top: 20px; padding-bottom: 10px;" />
+        </div>
+
+        @*<div>
+
+            <form action="https://www.google.com">
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" name="fname" value="John"><br>
+                <label for="lname">Last name:</label><br>
+                <input type="text" id="lname" name="lname" value="Doe"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>*@
+
+
+        <!-- Login Form -->
+        @*@using (Ajax.BeginForm("LoginVerification", "Login",
+        new AjaxOptions() { HttpMethod = "POST" },
+        new { enctype = "multipart/form-data", id = "login_form" }))*@
+        @*@using (Ajax.BeginForm("Index", "Login",
+        new AjaxOptions() { HttpMethod = "POST" },
+        new { enctype = "multipart/form-data", id = "login_form" }))*@
+
+        @*@Html.AntiForgeryToken()*@
+
+    <form id="loginForm" action="/Dashboard/Index">
+        <input type="text" id="loginXandaPos" class="fadeIn second" name="loginId" placeholder="Please Enter Login Id">
+        <input type="password" id="passwordXandaPos" class="fadeIn third" name="loginPass" placeholder="Please Enter Password">
+
+        <input type="submit" class="fadeIn fourth" id="loginSubmit" value="Log In">
+
+        @*<input type="button" class="fadeIn fourth" id="loginSubmit" value="Log In">*@
+        @*<button type="button" id="loginSubmit" class="fadeIn fourth">Log In</button>*@
+    </form>
+
+        <div id="loginmessage" style="display:none;">
+            <label></label>
+        </div>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
+    </div>
+</div>

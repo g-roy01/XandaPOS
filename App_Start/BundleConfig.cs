@@ -44,7 +44,16 @@ namespace XandaPOS
                    "~/ClientScripts/OrdersData.js"
                    ));
 
+            bundles.Add(new ScriptBundle("~/bundles/loginPackageJS").Include(
+                    "~/Content/assets/api/jquery/jquery-3.4.1.js",
+                    "~/Content/assets/api/jqueryvalidate/jquery.validate.min.js",
+                    "~/Content/assets/js/bootstrap.bundle.min.js",
+                    "~/Scripts/jquery.form.js"
+                ));
 
+            bundles.Add(new ScriptBundle("~/bundles/loginCustomJS").Include(
+                    "~/Scripts/LoginScripts/XandaPosLogin.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/ImagehandlerJS").Include(
                       "~/Scripts/jquery.form.js",
@@ -72,6 +81,11 @@ namespace XandaPOS
                       "~/Content/assets/api/datatable/jquery.dataTables.min.css",
                       "~/Content/assets/api/select2/select2.min.css"
                       ));
+
+            bundles.Add(new StyleBundle("~/Content/loginCss").Include(
+                    "~/Content/css/LoginLayout/login.css",
+                    "~/Content/css/bootstrap.4.0.0.css.bootstrap.css"
+                    ));
         }
     }
 }
