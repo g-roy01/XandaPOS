@@ -5,8 +5,8 @@
 function CheckLogin() {
     //alert('1');
 
-    jQuery(document).click('#loginSubmit', function () {
-    //jQuery(document).on('click','#loginSubmit1', function () {
+    //jQuery(document).click('#loginSubmit', function () {
+    jQuery(document).on('click','#loginSubmit', function () {
 
         var id = jQuery('#loginXandaPos').val();
         var pass = jQuery('#passwordXandaPos').val();
@@ -29,8 +29,16 @@ function CheckLogin() {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                window.location = data.Url;
-                //alert('Success');
+                if (data.Result == 'Redirect') {
+                    window.location = data.Url;
+                    //alert('Success');
+                }
+                else {
+                    jQuery('#loginmessage label').css('display', 'block');
+                    jQuery('#loginmessage label').css('color', 'red');
+                    jQuery('#loginmessage label').text(data.Message);
+                }
+
             },
             failure: function (response) {
                 //alert(response.responseText);

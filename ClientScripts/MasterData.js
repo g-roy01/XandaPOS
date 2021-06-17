@@ -398,6 +398,8 @@ function ReloadCustomerMasterData() {
 
                 jQuery(".tableCustomerLoad tbody").append(row);
             });
+            //jQuery(".table-responsive").ajax.reload(); //Added
+            jQuery('#mainTable').DataTable().ajax.reload();
         },
         failure: function (response) {
             //alert(response.responseText);

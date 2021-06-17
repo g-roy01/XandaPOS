@@ -10,8 +10,14 @@ namespace XandaPOS.Business
         public bool LoginVerifier(string id, string pass)
         {
             //Add verification logic here
-
-            return true;
+            if (id.ToLower().Equals("admin") && pass.ToLower().Equals("admin"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
